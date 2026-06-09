@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python3:*)",
+      "Bash(where py:*)",
+      "Bash(ls /c/Python*/python.exe)",
+      "Read(//c/Users/muras/AppData/Local/Programs/**)",
+      "Bash(py --version)",
+      "Bash(py -3 --version)",
+      "Read(//c/Users/muras/anaconda3/**)",
+      "Read(//c/Users/muras/miniconda3/**)",
+      "Read(//c/ProgramData/anaconda3/**)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(pip --version)",
+      "Bash(pip3 --version)",
+      "Bash(winget list:*)",
+      "Bash(winget install:*)",
+      "Bash(\"/c/Users/muras/AppData/Local/Programs/Python/Python311/python.exe\" --version)",
+      "Bash(export PATH=/c/Users/muras/AppData/Local/Programs/Python/Python311:/c/Users/muras/AppData/Local/Programs/Python/Python311/Scripts:$PATH)",
+      "Read(//c//**)"
+    ]
+  }
+}

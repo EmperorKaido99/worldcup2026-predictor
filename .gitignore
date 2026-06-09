@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Backend raw data
+backend/data/raw/*.csv
+backend/data/raw/*.json
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Frontend env
+frontend/.env.local
