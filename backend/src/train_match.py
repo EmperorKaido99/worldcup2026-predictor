@@ -54,7 +54,6 @@ def train():
 
     # Train calibrated logistic regression
     base_model = LogisticRegression(
-        multi_class="multinomial",
         max_iter=1000,
         C=1.0,
         solver="lbfgs",
