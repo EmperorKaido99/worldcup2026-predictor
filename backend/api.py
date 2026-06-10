@@ -35,6 +35,7 @@ DATA_DIR = Path(__file__).parent / "data" / "processed"
 # Lazy-loaded globals
 _model_artifacts = None
 _elo_map = None
+_dynamic_elo = None
 _teams_list = None
 _matches_df = None
 
@@ -74,12 +75,18 @@ def _load_teams():
 
 
 def _load_matches():
-    global _matches_df
+    global _matches_df, _dynamic_elo
     if _matches_df is not None:
         return _matches_df
     matches_path = DATA_DIR / "matches.csv"
     if matches_path.exists():
-        _matches_df = pd.read_csv(matches_path, parse_dates=["date"])
+        _matches_df = pd.read_csv(matches_path, parse_dates=["date"],
+                                   encoding="utf-8-sig", encoding_errors="replace")
+        # Compute dynamic Elo from match history
+        from src.features import get_current_elo
+        _, elo_map = _load_teams()
+        elo_df = pd.read_csv(DATA_DIR / "elo_ratings.csv")
+        _dynamic_elo = get_current_elo(_matches_df, elo_df)
     else:
         _matches_df = pd.DataFrame()
     return _matches_df
@@ -153,11 +160,14 @@ def predict_match(req: PredictMatchRequest):
     if req.home == req.away:
         raise HTTPException(status_code=400, detail="Home and away teams must differ")
 
-    elo_home = elo_map.get(home_name, 1700)
-    elo_away = elo_map.get(away_name, 1700)
-
-    # Compute rolling stats from historical data
+    # Use dynamic Elo (computed from match history) for better accuracy
     matches = _load_matches()
+    if _dynamic_elo:
+        elo_home = round(_dynamic_elo.get(home_name, elo_map.get(home_name, 1700)))
+        elo_away = round(_dynamic_elo.get(away_name, elo_map.get(away_name, 1700)))
+    else:
+        elo_home = elo_map.get(home_name, 1700)
+        elo_away = elo_map.get(away_name, 1700)
 
     def _rolling_rate(team, col_if_home, col_if_away, n=10):
         tm = matches[

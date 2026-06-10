@@ -1,32 +1,44 @@
 """
 Data ingestion for World Cup 2026 Match Predictor.
-Generates historical international match results and Elo ratings.
+Pulls real match data from API-Football, with hardcoded fallback.
 """
 
 import csv
+import json
 import os
+import time
 from pathlib import Path
+from datetime import datetime
+
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DATA_DIR = Path(__file__).parent.parent / "data" / "processed"
+RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
+API_KEY = os.getenv("API_FOOTBALL_KEY", "")
+API_BASE = "https://v3.football.api-sports.io"
 
-# 48 WC2026 participating nations with approximate Elo ratings (early 2026)
-ELO_RATINGS = {
-    "Argentina": 2080, "France": 2045, "Brazil": 2050, "England": 2035,
-    "Spain": 2040, "Germany": 2010, "Portugal": 2025, "Netherlands": 2015,
-    "Belgium": 1990, "Italy": 1985, "Croatia": 1980, "Colombia": 1975,
-    "Uruguay": 1970, "Morocco": 1965, "Japan": 1960, "USA": 1955,
-    "Mexico": 1950, "Switzerland": 1945, "Denmark": 1940, "Austria": 1930,
-    "Senegal": 1925, "South Korea": 1920, "Australia": 1910, "Turkey": 1905,
-    "Serbia": 1900, "Nigeria": 1895, "Iran": 1890, "Ecuador": 1885,
-    "Scotland": 1875, "Canada": 1870, "Cameroon": 1865, "Tunisia": 1860,
-    "Peru": 1855, "Chile": 1850, "Paraguay": 1845, "Mali": 1840,
-    "Egypt": 1835, "Panama": 1830, "Costa Rica": 1825, "Slovenia": 1820,
-    "Albania": 1815, "Saudi Arabia": 1810, "Jamaica": 1800, "South Africa": 1795,
-    "Venezuela": 1790, "Bolivia": 1785, "Honduras": 1780, "Qatar": 1775,
-    "Uzbekistan": 1770, "Iraq": 1765, "New Zealand": 1720, "Indonesia": 1700,
+# Team name normalization (API-Football names → our standard names)
+TEAM_NAME_MAP = {
+    "USA": "USA", "United States": "USA",
+    "Korea Republic": "South Korea", "South Korea": "South Korea",
+    "Korea DPR": "North Korea",
+    "IR Iran": "Iran", "Iran": "Iran",
+    "Saudi Arabia": "Saudi Arabia",
+    "Costa Rica": "Costa Rica",
+    "New Zealand": "New Zealand",
+    "South Africa": "South Africa",
+    "Côte D'Ivoire": "Ivory Coast", "Cote D'Ivoire": "Ivory Coast",
+    "Czechia": "Czech Republic", "Czech Republic": "Czech Republic",
+    "Türkiye": "Turkey", "Turkey": "Turkey",
+    "Bosnia and Herzegovina": "Bosnia",
+    "North Macedonia": "North Macedonia",
+    "Trinidad And Tobago": "Trinidad and Tobago",
 }
 
-# Team ID mapping (FIFA 3-letter codes)
+# FIFA 3-letter codes
 TEAM_IDS = {
     "Argentina": "ARG", "France": "FRA", "Brazil": "BRA", "England": "ENG",
     "Spain": "ESP", "Germany": "GER", "Portugal": "POR", "Netherlands": "NED",
@@ -43,549 +55,323 @@ TEAM_IDS = {
     "Uzbekistan": "UZB", "Iraq": "IRQ", "New Zealand": "NZL", "Indonesia": "IDN",
 }
 
-# Real historical international match results (2015-2024)
-# Format: (date, home, away, home_score, away_score, tournament, neutral)
-HISTORICAL_MATCHES = [
-    # 2018 World Cup (Russia) - all neutral except Russia home
-    ("2018-06-14", "Russia", "Saudi Arabia", 5, 0, "World Cup 2018", False),
-    ("2018-06-15", "Egypt", "Uruguay", 0, 1, "World Cup 2018", True),
-    ("2018-06-15", "Morocco", "Iran", 0, 1, "World Cup 2018", True),
-    ("2018-06-15", "Portugal", "Spain", 3, 3, "World Cup 2018", True),
-    ("2018-06-16", "France", "Australia", 2, 1, "World Cup 2018", True),
-    ("2018-06-16", "Argentina", "Iceland", 1, 1, "World Cup 2018", True),
-    ("2018-06-16", "Peru", "Denmark", 0, 1, "World Cup 2018", True),
-    ("2018-06-16", "Croatia", "Nigeria", 2, 0, "World Cup 2018", True),
-    ("2018-06-17", "Costa Rica", "Serbia", 0, 1, "World Cup 2018", True),
-    ("2018-06-17", "Germany", "Mexico", 0, 1, "World Cup 2018", True),
-    ("2018-06-17", "Brazil", "Switzerland", 1, 1, "World Cup 2018", True),
-    ("2018-06-18", "Sweden", "South Korea", 1, 0, "World Cup 2018", True),
-    ("2018-06-18", "Belgium", "Panama", 3, 0, "World Cup 2018", True),
-    ("2018-06-18", "Tunisia", "England", 1, 2, "World Cup 2018", True),
-    ("2018-06-19", "Colombia", "Japan", 1, 2, "World Cup 2018", True),
-    ("2018-06-19", "Poland", "Senegal", 1, 2, "World Cup 2018", True),
-    ("2018-06-20", "Portugal", "Morocco", 1, 0, "World Cup 2018", True),
-    ("2018-06-20", "Uruguay", "Saudi Arabia", 1, 0, "World Cup 2018", True),
-    ("2018-06-21", "Denmark", "Australia", 1, 1, "World Cup 2018", True),
-    ("2018-06-21", "France", "Peru", 1, 0, "World Cup 2018", True),
-    ("2018-06-21", "Argentina", "Croatia", 0, 3, "World Cup 2018", True),
-    ("2018-06-22", "Brazil", "Costa Rica", 2, 0, "World Cup 2018", True),
-    ("2018-06-22", "Nigeria", "Iceland", 2, 0, "World Cup 2018", True),
-    ("2018-06-22", "Serbia", "Switzerland", 1, 2, "World Cup 2018", True),
-    ("2018-06-23", "Belgium", "Tunisia", 5, 2, "World Cup 2018", True),
-    ("2018-06-23", "South Korea", "Mexico", 1, 2, "World Cup 2018", True),
-    ("2018-06-23", "Germany", "Sweden", 2, 1, "World Cup 2018", True),
-    ("2018-06-24", "England", "Panama", 6, 1, "World Cup 2018", True),
-    ("2018-06-24", "Japan", "Senegal", 2, 2, "World Cup 2018", True),
-    ("2018-06-25", "Uruguay", "Russia", 3, 0, "World Cup 2018", True),
-    ("2018-06-25", "Saudi Arabia", "Egypt", 2, 1, "World Cup 2018", True),
-    ("2018-06-25", "Spain", "Morocco", 2, 2, "World Cup 2018", True),
-    ("2018-06-25", "Iran", "Portugal", 1, 1, "World Cup 2018", True),
-    ("2018-06-26", "Australia", "Peru", 0, 2, "World Cup 2018", True),
-    ("2018-06-26", "Denmark", "France", 0, 0, "World Cup 2018", True),
-    ("2018-06-26", "Nigeria", "Argentina", 1, 2, "World Cup 2018", True),
-    ("2018-06-26", "Iceland", "Croatia", 1, 2, "World Cup 2018", True),
-    ("2018-06-27", "South Korea", "Germany", 2, 0, "World Cup 2018", True),
-    ("2018-06-27", "Mexico", "Sweden", 0, 3, "World Cup 2018", True),
-    ("2018-06-27", "Serbia", "Brazil", 0, 2, "World Cup 2018", True),
-    ("2018-06-27", "Switzerland", "Costa Rica", 2, 2, "World Cup 2018", True),
-    ("2018-06-28", "Japan", "Poland", 0, 1, "World Cup 2018", True),
-    ("2018-06-28", "Senegal", "Colombia", 0, 1, "World Cup 2018", True),
-    ("2018-06-28", "England", "Belgium", 0, 1, "World Cup 2018", True),
-    ("2018-06-28", "Panama", "Tunisia", 1, 2, "World Cup 2018", True),
-    # 2018 WC Knockouts
-    ("2018-06-30", "France", "Argentina", 4, 3, "World Cup 2018", True),
-    ("2018-06-30", "Uruguay", "Portugal", 2, 1, "World Cup 2018", True),
-    ("2018-07-01", "Spain", "Russia", 1, 1, "World Cup 2018", True),
-    ("2018-07-01", "Croatia", "Denmark", 1, 1, "World Cup 2018", True),
-    ("2018-07-02", "Brazil", "Mexico", 2, 0, "World Cup 2018", True),
-    ("2018-07-02", "Belgium", "Japan", 3, 2, "World Cup 2018", True),
-    ("2018-07-03", "Sweden", "Switzerland", 1, 0, "World Cup 2018", True),
-    ("2018-07-03", "Colombia", "England", 1, 1, "World Cup 2018", True),
-    ("2018-07-06", "France", "Uruguay", 2, 0, "World Cup 2018", True),
-    ("2018-07-06", "Brazil", "Belgium", 1, 2, "World Cup 2018", True),
-    ("2018-07-07", "Sweden", "England", 0, 2, "World Cup 2018", True),
-    ("2018-07-07", "Russia", "Croatia", 2, 2, "World Cup 2018", True),
-    ("2018-07-10", "France", "Belgium", 1, 0, "World Cup 2018", True),
-    ("2018-07-11", "Croatia", "England", 2, 1, "World Cup 2018", True),
-    ("2018-07-14", "Belgium", "England", 2, 0, "World Cup 2018", True),
-    ("2018-07-15", "France", "Croatia", 4, 2, "World Cup 2018", True),
+# WC2026 participating nations
+WC2026_TEAMS = set(TEAM_IDS.keys())
 
-    # 2022 World Cup (Qatar) - all neutral
-    ("2022-11-20", "Qatar", "Ecuador", 0, 2, "World Cup 2022", False),
-    ("2022-11-21", "England", "Iran", 6, 2, "World Cup 2022", True),
-    ("2022-11-21", "Senegal", "Netherlands", 0, 2, "World Cup 2022", True),
-    ("2022-11-21", "USA", "Wales", 1, 1, "World Cup 2022", True),
-    ("2022-11-22", "Argentina", "Saudi Arabia", 1, 2, "World Cup 2022", True),
-    ("2022-11-22", "Denmark", "Tunisia", 0, 0, "World Cup 2022", True),
-    ("2022-11-22", "Mexico", "Poland", 0, 0, "World Cup 2022", True),
-    ("2022-11-22", "France", "Australia", 4, 1, "World Cup 2022", True),
-    ("2022-11-23", "Morocco", "Croatia", 0, 0, "World Cup 2022", True),
-    ("2022-11-23", "Germany", "Japan", 1, 2, "World Cup 2022", True),
-    ("2022-11-23", "Spain", "Costa Rica", 7, 0, "World Cup 2022", True),
-    ("2022-11-23", "Belgium", "Canada", 1, 0, "World Cup 2022", True),
-    ("2022-11-24", "Switzerland", "Cameroon", 1, 0, "World Cup 2022", True),
-    ("2022-11-24", "Uruguay", "South Korea", 0, 0, "World Cup 2022", True),
-    ("2022-11-24", "Portugal", "Ghana", 3, 2, "World Cup 2022", True),
-    ("2022-11-24", "Brazil", "Serbia", 2, 0, "World Cup 2022", True),
-    ("2022-11-25", "Wales", "Iran", 0, 2, "World Cup 2022", True),
-    ("2022-11-25", "Qatar", "Senegal", 1, 3, "World Cup 2022", True),
-    ("2022-11-25", "Netherlands", "Ecuador", 1, 1, "World Cup 2022", True),
-    ("2022-11-25", "England", "USA", 0, 0, "World Cup 2022", True),
-    ("2022-11-26", "Tunisia", "Australia", 0, 1, "World Cup 2022", True),
-    ("2022-11-26", "Poland", "Saudi Arabia", 2, 0, "World Cup 2022", True),
-    ("2022-11-26", "France", "Denmark", 2, 1, "World Cup 2022", True),
-    ("2022-11-26", "Argentina", "Mexico", 2, 0, "World Cup 2022", True),
-    ("2022-11-27", "Japan", "Costa Rica", 0, 1, "World Cup 2022", True),
-    ("2022-11-27", "Belgium", "Morocco", 0, 2, "World Cup 2022", True),
-    ("2022-11-27", "Croatia", "Canada", 4, 1, "World Cup 2022", True),
-    ("2022-11-27", "Spain", "Germany", 1, 1, "World Cup 2022", True),
-    ("2022-11-28", "Cameroon", "Serbia", 3, 3, "World Cup 2022", True),
-    ("2022-11-28", "South Korea", "Ghana", 2, 3, "World Cup 2022", True),
-    ("2022-11-28", "Brazil", "Switzerland", 1, 0, "World Cup 2022", True),
-    ("2022-11-28", "Portugal", "Uruguay", 2, 0, "World Cup 2022", True),
-    ("2022-11-29", "Ecuador", "Senegal", 1, 2, "World Cup 2022", True),
-    ("2022-11-29", "Netherlands", "Qatar", 2, 0, "World Cup 2022", True),
-    ("2022-11-29", "Iran", "USA", 0, 1, "World Cup 2022", True),
-    ("2022-11-29", "Wales", "England", 0, 3, "World Cup 2022", True),
-    ("2022-11-30", "Tunisia", "France", 1, 0, "World Cup 2022", True),
-    ("2022-11-30", "Australia", "Denmark", 1, 0, "World Cup 2022", True),
-    ("2022-11-30", "Poland", "Argentina", 0, 2, "World Cup 2022", True),
-    ("2022-11-30", "Saudi Arabia", "Mexico", 1, 2, "World Cup 2022", True),
-    ("2022-12-01", "Croatia", "Belgium", 0, 0, "World Cup 2022", True),
-    ("2022-12-01", "Canada", "Morocco", 1, 2, "World Cup 2022", True),
-    ("2022-12-01", "Japan", "Spain", 2, 1, "World Cup 2022", True),
-    ("2022-12-01", "Costa Rica", "Germany", 2, 4, "World Cup 2022", True),
-    ("2022-12-02", "South Korea", "Portugal", 2, 1, "World Cup 2022", True),
-    ("2022-12-02", "Ghana", "Uruguay", 0, 2, "World Cup 2022", True),
-    ("2022-12-02", "Serbia", "Switzerland", 2, 3, "World Cup 2022", True),
-    ("2022-12-02", "Cameroon", "Brazil", 1, 0, "World Cup 2022", True),
-    # 2022 WC Knockouts
-    ("2022-12-03", "Netherlands", "USA", 3, 1, "World Cup 2022", True),
-    ("2022-12-03", "Argentina", "Australia", 2, 1, "World Cup 2022", True),
-    ("2022-12-04", "France", "Poland", 3, 1, "World Cup 2022", True),
-    ("2022-12-04", "England", "Senegal", 3, 0, "World Cup 2022", True),
-    ("2022-12-05", "Japan", "Croatia", 1, 1, "World Cup 2022", True),
-    ("2022-12-05", "Brazil", "South Korea", 4, 1, "World Cup 2022", True),
-    ("2022-12-06", "Morocco", "Spain", 0, 0, "World Cup 2022", True),
-    ("2022-12-06", "Portugal", "Switzerland", 6, 1, "World Cup 2022", True),
-    ("2022-12-09", "Croatia", "Brazil", 1, 1, "World Cup 2022", True),
-    ("2022-12-09", "Netherlands", "Argentina", 2, 2, "World Cup 2022", True),
-    ("2022-12-10", "Morocco", "Portugal", 1, 0, "World Cup 2022", True),
-    ("2022-12-10", "England", "France", 1, 2, "World Cup 2022", True),
-    ("2022-12-13", "Argentina", "Croatia", 3, 0, "World Cup 2022", True),
-    ("2022-12-14", "France", "Morocco", 2, 0, "World Cup 2022", True),
-    ("2022-12-17", "Croatia", "Morocco", 2, 1, "World Cup 2022", True),
-    ("2022-12-18", "Argentina", "France", 3, 3, "World Cup 2022", True),
-
-    # Copa America 2019 (Brazil host)
-    ("2019-06-14", "Brazil", "Bolivia", 3, 0, "Copa America 2019", False),
-    ("2019-06-15", "Argentina", "Colombia", 0, 2, "Copa America 2019", True),
-    ("2019-06-15", "Paraguay", "Qatar", 2, 2, "Copa America 2019", True),
-    ("2019-06-16", "Uruguay", "Ecuador", 4, 0, "Copa America 2019", True),
-    ("2019-06-16", "Venezuela", "Peru", 0, 0, "Copa America 2019", True),
-    ("2019-06-17", "Japan", "Chile", 0, 4, "Copa America 2019", True),
-    ("2019-06-18", "Colombia", "Qatar", 1, 0, "Copa America 2019", True),
-    ("2019-06-18", "Argentina", "Paraguay", 1, 1, "Copa America 2019", True),
-    ("2019-06-19", "Brazil", "Venezuela", 0, 0, "Copa America 2019", False),
-    ("2019-06-19", "Bolivia", "Peru", 1, 3, "Copa America 2019", True),
-    ("2019-06-21", "Uruguay", "Japan", 2, 2, "Copa America 2019", True),
-    ("2019-06-21", "Ecuador", "Chile", 1, 2, "Copa America 2019", True),
-    ("2019-06-22", "Colombia", "Paraguay", 1, 0, "Copa America 2019", True),
-    ("2019-06-22", "Argentina", "Qatar", 2, 0, "Copa America 2019", True),
-    ("2019-06-23", "Brazil", "Peru", 5, 0, "Copa America 2019", False),
-    ("2019-06-24", "Chile", "Uruguay", 0, 1, "Copa America 2019", True),
-    ("2019-06-24", "Ecuador", "Japan", 1, 1, "Copa America 2019", True),
-    ("2019-06-27", "Brazil", "Paraguay", 0, 0, "Copa America 2019", False),
-    ("2019-06-28", "Argentina", "Venezuela", 2, 0, "Copa America 2019", True),
-    ("2019-06-28", "Colombia", "Chile", 0, 0, "Copa America 2019", True),
-    ("2019-06-29", "Uruguay", "Peru", 0, 0, "Copa America 2019", True),
-    ("2019-07-02", "Brazil", "Argentina", 2, 0, "Copa America 2019", False),
-    ("2019-07-03", "Chile", "Peru", 0, 3, "Copa America 2019", True),
-    ("2019-07-06", "Argentina", "Chile", 2, 1, "Copa America 2019", True),
-    ("2019-07-07", "Brazil", "Peru", 3, 1, "Copa America 2019", False),
-
-    # Copa America 2021 (Brazil host)
-    ("2021-06-13", "Brazil", "Venezuela", 3, 0, "Copa America 2021", False),
-    ("2021-06-14", "Argentina", "Chile", 1, 1, "Copa America 2021", True),
-    ("2021-06-14", "Colombia", "Ecuador", 1, 0, "Copa America 2021", True),
-    ("2021-06-14", "Paraguay", "Bolivia", 3, 1, "Copa America 2021", True),
-    ("2021-06-17", "Brazil", "Peru", 4, 0, "Copa America 2021", False),
-    ("2021-06-17", "Colombia", "Venezuela", 0, 0, "Copa America 2021", True),
-    ("2021-06-18", "Argentina", "Uruguay", 1, 0, "Copa America 2021", True),
-    ("2021-06-18", "Chile", "Bolivia", 1, 0, "Copa America 2021", True),
-    ("2021-06-20", "Uruguay", "Chile", 1, 1, "Copa America 2021", True),
-    ("2021-06-21", "Argentina", "Paraguay", 1, 0, "Copa America 2021", True),
-    ("2021-06-23", "Brazil", "Colombia", 2, 1, "Copa America 2021", False),
-    ("2021-06-24", "Ecuador", "Peru", 2, 2, "Copa America 2021", True),
-    ("2021-06-24", "Uruguay", "Paraguay", 1, 0, "Copa America 2021", True),
-    ("2021-06-25", "Bolivia", "Argentina", 1, 4, "Copa America 2021", True),
-    ("2021-06-27", "Brazil", "Ecuador", 1, 1, "Copa America 2021", False),
-    ("2021-06-28", "Uruguay", "Bolivia", 2, 0, "Copa America 2021", True),
-    ("2021-07-02", "Brazil", "Chile", 1, 0, "Copa America 2021", False),
-    ("2021-07-02", "Peru", "Paraguay", 3, 3, "Copa America 2021", True),
-    ("2021-07-03", "Argentina", "Ecuador", 3, 0, "Copa America 2021", True),
-    ("2021-07-03", "Uruguay", "Colombia", 0, 0, "Copa America 2021", True),
-    ("2021-07-05", "Brazil", "Peru", 1, 0, "Copa America 2021", False),
-    ("2021-07-06", "Argentina", "Colombia", 1, 1, "Copa America 2021", True),
-    ("2021-07-09", "Argentina", "Brazil", 1, 0, "Copa America 2021", True),
-
-    # Euro 2020 (2021, multi-host) - select matches
-    ("2021-06-11", "Turkey", "Italy", 0, 3, "Euro 2020", True),
-    ("2021-06-12", "Denmark", "Finland", 0, 1, "Euro 2020", False),
-    ("2021-06-12", "Belgium", "Russia", 3, 0, "Euro 2020", True),
-    ("2021-06-12", "England", "Croatia", 1, 0, "Euro 2020", False),
-    ("2021-06-13", "Austria", "North Macedonia", 3, 1, "Euro 2020", True),
-    ("2021-06-13", "Netherlands", "Ukraine", 3, 2, "Euro 2020", False),
-    ("2021-06-13", "Scotland", "Czech Republic", 0, 2, "Euro 2020", False),
-    ("2021-06-14", "Spain", "Sweden", 0, 0, "Euro 2020", False),
-    ("2021-06-14", "Poland", "Slovakia", 1, 2, "Euro 2020", True),
-    ("2021-06-15", "France", "Germany", 1, 0, "Euro 2020", True),
-    ("2021-06-15", "Portugal", "Hungary", 3, 0, "Euro 2020", True),
-    ("2021-06-16", "Italy", "Switzerland", 3, 0, "Euro 2020", True),
-    ("2021-06-16", "Turkey", "Wales", 0, 2, "Euro 2020", True),
-    ("2021-06-17", "Denmark", "Belgium", 1, 2, "Euro 2020", False),
-    ("2021-06-17", "Netherlands", "Austria", 2, 0, "Euro 2020", False),
-    ("2021-06-18", "England", "Scotland", 0, 0, "Euro 2020", False),
-    ("2021-06-18", "Croatia", "Czech Republic", 1, 1, "Euro 2020", False),
-    ("2021-06-19", "Portugal", "Germany", 2, 4, "Euro 2020", True),
-    ("2021-06-19", "France", "Hungary", 1, 1, "Euro 2020", True),
-    ("2021-06-19", "Spain", "Poland", 1, 1, "Euro 2020", False),
-    ("2021-06-20", "Italy", "Wales", 1, 0, "Euro 2020", True),
-    ("2021-06-21", "England", "Czech Republic", 1, 0, "Euro 2020", False),
-    ("2021-06-21", "Croatia", "Scotland", 3, 1, "Euro 2020", False),
-    ("2021-06-22", "Portugal", "France", 2, 2, "Euro 2020", True),
-    ("2021-06-22", "Germany", "Hungary", 2, 2, "Euro 2020", True),
-    ("2021-06-23", "Sweden", "Poland", 3, 2, "Euro 2020", True),
-    ("2021-06-23", "Spain", "Slovakia", 5, 0, "Euro 2020", False),
-    ("2021-06-26", "Italy", "Austria", 2, 1, "Euro 2020", True),
-    ("2021-06-26", "Wales", "Denmark", 0, 4, "Euro 2020", True),
-    ("2021-06-27", "Netherlands", "Czech Republic", 0, 2, "Euro 2020", True),
-    ("2021-06-27", "Belgium", "Portugal", 1, 0, "Euro 2020", True),
-    ("2021-06-28", "Croatia", "Spain", 3, 5, "Euro 2020", True),
-    ("2021-06-28", "France", "Switzerland", 3, 3, "Euro 2020", True),
-    ("2021-06-29", "England", "Germany", 2, 0, "Euro 2020", False),
-    ("2021-06-29", "Sweden", "Ukraine", 1, 2, "Euro 2020", True),
-    ("2021-07-02", "Switzerland", "Spain", 1, 1, "Euro 2020", True),
-    ("2021-07-02", "Belgium", "Italy", 1, 2, "Euro 2020", True),
-    ("2021-07-03", "Czech Republic", "Denmark", 1, 2, "Euro 2020", True),
-    ("2021-07-03", "Ukraine", "England", 0, 4, "Euro 2020", True),
-    ("2021-07-06", "Italy", "Spain", 1, 1, "Euro 2020", True),
-    ("2021-07-07", "England", "Denmark", 2, 1, "Euro 2020", True),
-    ("2021-07-11", "Italy", "England", 1, 1, "Euro 2020", True),
-
-    # Euro 2024 (Germany host) - select matches
-    ("2024-06-14", "Germany", "Scotland", 5, 1, "Euro 2024", False),
-    ("2024-06-15", "Spain", "Croatia", 3, 0, "Euro 2024", True),
-    ("2024-06-15", "Italy", "Albania", 2, 1, "Euro 2024", True),
-    ("2024-06-15", "Hungary", "Switzerland", 1, 3, "Euro 2024", True),
-    ("2024-06-16", "Serbia", "England", 0, 1, "Euro 2024", True),
-    ("2024-06-16", "Slovenia", "Denmark", 1, 1, "Euro 2024", True),
-    ("2024-06-16", "Poland", "Netherlands", 1, 2, "Euro 2024", True),
-    ("2024-06-17", "Austria", "France", 0, 1, "Euro 2024", True),
-    ("2024-06-17", "Turkey", "Georgia", 3, 1, "Euro 2024", True),
-    ("2024-06-17", "Romania", "Ukraine", 3, 0, "Euro 2024", True),
-    ("2024-06-17", "Belgium", "Slovakia", 0, 1, "Euro 2024", True),
-    ("2024-06-19", "Germany", "Hungary", 2, 0, "Euro 2024", False),
-    ("2024-06-19", "Scotland", "Switzerland", 1, 1, "Euro 2024", True),
-    ("2024-06-19", "Croatia", "Albania", 2, 2, "Euro 2024", True),
-    ("2024-06-19", "Spain", "Italy", 1, 0, "Euro 2024", True),
-    ("2024-06-20", "Slovenia", "Serbia", 1, 1, "Euro 2024", True),
-    ("2024-06-20", "Denmark", "England", 1, 1, "Euro 2024", True),
-    ("2024-06-21", "Netherlands", "France", 0, 0, "Euro 2024", True),
-    ("2024-06-21", "Poland", "Austria", 1, 3, "Euro 2024", True),
-    ("2024-06-22", "Turkey", "Portugal", 0, 3, "Euro 2024", True),
-    ("2024-06-22", "Belgium", "Romania", 2, 0, "Euro 2024", True),
-    ("2024-06-25", "Netherlands", "Austria", 2, 3, "Euro 2024", True),
-    ("2024-06-25", "France", "Poland", 1, 1, "Euro 2024", True),
-    ("2024-06-25", "England", "Slovenia", 0, 0, "Euro 2024", True),
-    ("2024-06-25", "Denmark", "Serbia", 0, 0, "Euro 2024", True),
-    ("2024-06-26", "Albania", "Spain", 0, 1, "Euro 2024", True),
-    ("2024-06-26", "Croatia", "Italy", 1, 1, "Euro 2024", True),
-    ("2024-06-26", "Scotland", "Hungary", 0, 1, "Euro 2024", True),
-    ("2024-06-26", "Switzerland", "Germany", 1, 1, "Euro 2024", True),
-    ("2024-06-29", "Switzerland", "Italy", 2, 0, "Euro 2024", True),
-    ("2024-06-29", "Germany", "Denmark", 2, 0, "Euro 2024", True),
-    ("2024-06-30", "England", "Slovakia", 2, 1, "Euro 2024", True),
-    ("2024-06-30", "Spain", "Georgia", 4, 1, "Euro 2024", True),
-    ("2024-07-01", "France", "Belgium", 1, 0, "Euro 2024", True),
-    ("2024-07-01", "Portugal", "Slovenia", 0, 0, "Euro 2024", True),
-    ("2024-07-02", "Romania", "Netherlands", 0, 3, "Euro 2024", True),
-    ("2024-07-02", "Austria", "Turkey", 1, 2, "Euro 2024", True),
-    ("2024-07-05", "Spain", "Germany", 2, 1, "Euro 2024", True),
-    ("2024-07-05", "Portugal", "France", 0, 0, "Euro 2024", True),
-    ("2024-07-06", "England", "Switzerland", 1, 1, "Euro 2024", True),
-    ("2024-07-06", "Netherlands", "Turkey", 2, 1, "Euro 2024", True),
-    ("2024-07-09", "Spain", "France", 2, 1, "Euro 2024", True),
-    ("2024-07-10", "Netherlands", "England", 1, 2, "Euro 2024", True),
-    ("2024-07-14", "Spain", "England", 2, 1, "Euro 2024", True),
-
-    # AFCON / Africa qualifiers / friendlies
-    ("2022-01-09", "Cameroon", "Burkina Faso", 2, 1, "AFCON 2022", False),
-    ("2022-01-11", "Senegal", "Zimbabwe", 1, 0, "AFCON 2022", True),
-    ("2022-01-11", "Morocco", "Ghana", 1, 0, "AFCON 2022", True),
-    ("2022-01-13", "Nigeria", "Egypt", 1, 0, "AFCON 2022", True),
-    ("2022-01-14", "Tunisia", "Mali", 0, 1, "AFCON 2022", True),
-    ("2022-01-18", "Cameroon", "Ethiopia", 4, 1, "AFCON 2022", False),
-    ("2022-01-19", "Senegal", "Guinea", 0, 0, "AFCON 2022", True),
-    ("2022-01-20", "Morocco", "Comoros", 2, 0, "AFCON 2022", True),
-    ("2022-01-26", "Cameroon", "Gambia", 0, 0, "AFCON 2022", False),
-    ("2022-01-27", "Senegal", "Burkina Faso", 3, 1, "AFCON 2022", True),
-    ("2022-01-29", "Morocco", "Egypt", 2, 1, "AFCON 2022", True),
-    ("2022-01-30", "Cameroon", "Egypt", 0, 0, "AFCON 2022", False),
-    ("2022-02-02", "Senegal", "Burkina Faso", 3, 1, "AFCON 2022", True),
-    ("2022-02-05", "Nigeria", "Tunisia", 0, 1, "AFCON 2022", True),
-    ("2022-02-06", "Senegal", "Egypt", 0, 0, "AFCON 2022", True),
-
-    # CONCACAF Gold Cup 2023
-    ("2023-06-24", "USA", "Nicaragua", 3, 0, "Gold Cup 2023", False),
-    ("2023-06-25", "Mexico", "Honduras", 4, 0, "Gold Cup 2023", True),
-    ("2023-06-25", "Panama", "Costa Rica", 0, 0, "Gold Cup 2023", True),
-    ("2023-06-25", "Jamaica", "Trinidad and Tobago", 1, 0, "Gold Cup 2023", True),
-    ("2023-06-28", "USA", "Jamaica", 1, 1, "Gold Cup 2023", False),
-    ("2023-06-29", "Mexico", "Qatar", 1, 0, "Gold Cup 2023", True),
-    ("2023-07-02", "USA", "Canada", 2, 0, "Gold Cup 2023", False),
-    ("2023-07-02", "Mexico", "Costa Rica", 3, 0, "Gold Cup 2023", True),
-    ("2023-07-09", "USA", "Panama", 1, 0, "Gold Cup 2023", False),
-    ("2023-07-09", "Mexico", "Jamaica", 3, 0, "Gold Cup 2023", True),
-    ("2023-07-12", "USA", "Mexico", 2, 0, "Gold Cup 2023", False),
-    ("2023-07-16", "Mexico", "Panama", 1, 0, "Gold Cup 2023", True),
-
-    # Copa America 2024 (USA host)
-    ("2024-06-20", "Argentina", "Canada", 2, 0, "Copa America 2024", True),
-    ("2024-06-21", "Peru", "Chile", 0, 0, "Copa America 2024", True),
-    ("2024-06-22", "Ecuador", "Venezuela", 1, 2, "Copa America 2024", True),
-    ("2024-06-22", "Mexico", "Jamaica", 1, 0, "Copa America 2024", True),
-    ("2024-06-23", "USA", "Bolivia", 2, 0, "Copa America 2024", False),
-    ("2024-06-23", "Uruguay", "Panama", 3, 1, "Copa America 2024", True),
-    ("2024-06-24", "Colombia", "Paraguay", 2, 1, "Copa America 2024", True),
-    ("2024-06-24", "Brazil", "Costa Rica", 0, 0, "Copa America 2024", True),
-    ("2024-06-25", "Argentina", "Chile", 1, 0, "Copa America 2024", True),
-    ("2024-06-25", "Peru", "Canada", 0, 1, "Copa America 2024", True),
-    ("2024-06-26", "Venezuela", "Mexico", 1, 0, "Copa America 2024", True),
-    ("2024-06-26", "Ecuador", "Jamaica", 3, 1, "Copa America 2024", True),
-    ("2024-06-27", "USA", "Panama", 2, 1, "Copa America 2024", False),
-    ("2024-06-27", "Uruguay", "Bolivia", 5, 0, "Copa America 2024", True),
-    ("2024-06-28", "Colombia", "Costa Rica", 3, 0, "Copa America 2024", True),
-    ("2024-06-28", "Brazil", "Paraguay", 4, 1, "Copa America 2024", True),
-    ("2024-06-29", "Argentina", "Peru", 2, 0, "Copa America 2024", True),
-    ("2024-06-29", "Canada", "Chile", 0, 0, "Copa America 2024", True),
-    ("2024-06-30", "Mexico", "Ecuador", 0, 0, "Copa America 2024", True),
-    ("2024-06-30", "Jamaica", "Venezuela", 0, 3, "Copa America 2024", True),
-    ("2024-07-01", "USA", "Uruguay", 0, 1, "Copa America 2024", False),
-    ("2024-07-01", "Panama", "Bolivia", 3, 1, "Copa America 2024", True),
-    ("2024-07-02", "Brazil", "Colombia", 1, 1, "Copa America 2024", True),
-    ("2024-07-02", "Paraguay", "Costa Rica", 2, 1, "Copa America 2024", True),
-    ("2024-07-04", "Argentina", "Ecuador", 1, 1, "Copa America 2024", True),
-    ("2024-07-05", "Uruguay", "Brazil", 0, 0, "Copa America 2024", True),
-    ("2024-07-06", "Venezuela", "Canada", 1, 1, "Copa America 2024", True),
-    ("2024-07-06", "Colombia", "Panama", 5, 0, "Copa America 2024", True),
-    ("2024-07-09", "Argentina", "Canada", 2, 0, "Copa America 2024", True),
-    ("2024-07-10", "Uruguay", "Colombia", 0, 1, "Copa America 2024", True),
-    ("2024-07-13", "Canada", "Uruguay", 2, 2, "Copa America 2024", True),
-    ("2024-07-14", "Argentina", "Colombia", 1, 0, "Copa America 2024", True),
-
-    # Asian Cup 2023
-    ("2023-01-12", "Qatar", "Lebanon", 3, 0, "Asian Cup 2023", False),
-    ("2023-01-13", "Australia", "India", 2, 0, "Asian Cup 2023", True),
-    ("2023-01-14", "Iran", "Palestine", 4, 1, "Asian Cup 2023", True),
-    ("2023-01-14", "Japan", "Vietnam", 4, 2, "Asian Cup 2023", True),
-    ("2023-01-15", "Saudi Arabia", "Oman", 2, 1, "Asian Cup 2023", True),
-    ("2023-01-15", "South Korea", "Bahrain", 3, 1, "Asian Cup 2023", True),
-    ("2023-01-16", "Uzbekistan", "Syria", 1, 0, "Asian Cup 2023", True),
-    ("2023-01-16", "Iraq", "Indonesia", 3, 1, "Asian Cup 2023", True),
-    ("2023-01-22", "Australia", "Uzbekistan", 0, 1, "Asian Cup 2023", True),
-    ("2023-01-24", "Japan", "Indonesia", 3, 1, "Asian Cup 2023", True),
-    ("2023-01-25", "South Korea", "Malaysia", 3, 3, "Asian Cup 2023", True),
-    ("2023-01-29", "Australia", "Indonesia", 4, 0, "Asian Cup 2023", True),
-    ("2023-02-01", "Iran", "Japan", 1, 2, "Asian Cup 2023", True),
-    ("2023-02-02", "Australia", "South Korea", 1, 2, "Asian Cup 2023", True),
-    ("2023-02-03", "Qatar", "Uzbekistan", 3, 2, "Asian Cup 2023", True),
-    ("2023-02-06", "Iran", "Qatar", 2, 3, "Asian Cup 2023", True),
-    ("2023-02-06", "South Korea", "Jordan", 0, 2, "Asian Cup 2023", True),
-    ("2023-02-10", "Qatar", "Jordan", 3, 1, "Asian Cup 2023", True),
-
-    # WC 2026 Qualifiers & recent internationals (select)
-    ("2023-09-07", "Brazil", "Bolivia", 5, 1, "WCQ South America", False),
-    ("2023-09-12", "Argentina", "Bolivia", 3, 0, "WCQ South America", False),
-    ("2023-09-12", "Uruguay", "Chile", 1, 0, "WCQ South America", False),
-    ("2023-09-12", "Colombia", "Venezuela", 1, 0, "WCQ South America", False),
-    ("2023-10-12", "Argentina", "Paraguay", 1, 0, "WCQ South America", False),
-    ("2023-10-12", "Brazil", "Venezuela", 1, 0, "WCQ South America", False),
-    ("2023-10-12", "Uruguay", "Peru", 1, 0, "WCQ South America", False),
-    ("2023-10-17", "Peru", "Argentina", 0, 2, "WCQ South America", False),
-    ("2023-10-17", "Chile", "Colombia", 0, 0, "WCQ South America", False),
-    ("2023-10-17", "Paraguay", "Brazil", 1, 0, "WCQ South America", False),
-    ("2023-11-16", "Brazil", "Argentina", 0, 1, "WCQ South America", False),
-    ("2023-11-21", "Argentina", "Uruguay", 1, 0, "WCQ South America", False),
-    ("2023-11-21", "Colombia", "Brazil", 2, 1, "WCQ South America", False),
-    ("2024-03-21", "Uruguay", "Brazil", 2, 0, "WCQ South America", False),
-    ("2024-03-26", "Argentina", "Costa Rica", 3, 0, "Friendly", True),
-    ("2024-03-26", "France", "Germany", 0, 2, "Friendly", False),
-    ("2024-03-23", "England", "Brazil", 0, 1, "Friendly", False),
-    ("2024-06-05", "USA", "Colombia", 1, 5, "Friendly", False),
-    ("2024-06-08", "Brazil", "Mexico", 3, 2, "Friendly", True),
-    ("2024-09-05", "Argentina", "Chile", 3, 0, "WCQ South America", False),
-    ("2024-09-10", "Colombia", "Argentina", 2, 1, "WCQ South America", False),
-    ("2024-09-10", "Brazil", "Ecuador", 1, 0, "WCQ South America", False),
-    ("2024-10-10", "Argentina", "Venezuela", 1, 1, "WCQ South America", False),
-    ("2024-10-10", "Chile", "Brazil", 1, 2, "WCQ South America", False),
-    ("2024-10-15", "Argentina", "Bolivia", 6, 0, "WCQ South America", False),
-    ("2024-10-15", "Brazil", "Peru", 4, 0, "WCQ South America", False),
-    ("2024-11-14", "Paraguay", "Argentina", 2, 1, "WCQ South America", False),
-    ("2024-11-14", "Uruguay", "Colombia", 3, 2, "WCQ South America", False),
-    ("2024-11-19", "Argentina", "Peru", 1, 0, "WCQ South America", False),
-
-    # More recent friendlies and qualifiers
-    ("2024-03-23", "Germany", "France", 2, 0, "Friendly", False),
-    ("2024-03-23", "Spain", "Colombia", 0, 0, "Friendly", False),
-    ("2024-03-26", "Germany", "Netherlands", 2, 1, "Friendly", False),
-    ("2024-03-26", "Spain", "Brazil", 3, 3, "Friendly", False),
-    ("2024-06-05", "Germany", "Ukraine", 0, 0, "Friendly", False),
-    ("2024-06-08", "Germany", "Greece", 2, 1, "Friendly", False),
-    ("2024-09-07", "Germany", "Hungary", 5, 0, "Nations League", False),
-    ("2024-09-07", "France", "Italy", 1, 3, "Nations League", False),
-    ("2024-09-07", "Netherlands", "Bosnia", 5, 2, "Nations League", False),
-    ("2024-09-07", "Portugal", "Croatia", 2, 1, "Nations League", False),
-    ("2024-09-07", "Spain", "Serbia", 0, 0, "Nations League", False),
-    ("2024-09-10", "Netherlands", "Germany", 2, 2, "Nations League", True),
-    ("2024-09-10", "Italy", "Israel", 2, 1, "Nations League", True),
-    ("2024-09-10", "Belgium", "France", 2, 0, "Nations League", False),
-    ("2024-09-10", "Croatia", "Poland", 1, 0, "Nations League", False),
-    ("2024-09-10", "Denmark", "Serbia", 2, 0, "Nations League", False),
-    ("2024-09-10", "Scotland", "Portugal", 0, 3, "Nations League", False),
-    ("2024-10-10", "France", "Israel", 4, 1, "Nations League", False),
-    ("2024-10-10", "Spain", "Denmark", 1, 0, "Nations League", False),
-    ("2024-10-10", "Germany", "Netherlands", 1, 0, "Nations League", False),
-    ("2024-10-10", "Belgium", "Italy", 0, 1, "Nations League", False),
-    ("2024-10-14", "France", "Belgium", 2, 1, "Nations League", False),
-    ("2024-10-14", "Spain", "Serbia", 3, 0, "Nations League", False),
-    ("2024-10-14", "Germany", "Bosnia", 2, 1, "Nations League", False),
-    ("2024-10-14", "Italy", "Israel", 4, 1, "Nations League", True),
-    ("2024-10-14", "Croatia", "Scotland", 2, 1, "Nations League", False),
-    ("2024-10-14", "Portugal", "Poland", 3, 1, "Nations League", False),
-    ("2024-11-14", "France", "Israel", 0, 0, "Nations League", False),
-    ("2024-11-14", "Spain", "Denmark", 3, 0, "Nations League", False),
-    ("2024-11-14", "Germany", "Bosnia", 7, 0, "Nations League", False),
-    ("2024-11-14", "Italy", "Belgium", 1, 0, "Nations League", False),
-    ("2024-11-14", "Portugal", "Poland", 5, 1, "Nations League", False),
-    ("2024-11-14", "Croatia", "Scotland", 1, 1, "Nations League", False),
-    ("2024-11-17", "Croatia", "Portugal", 1, 1, "Nations League", False),
-    ("2024-11-17", "Italy", "France", 1, 3, "Nations League", False),
-    ("2024-11-17", "Netherlands", "Hungary", 4, 0, "Nations League", False),
-    ("2024-11-17", "Germany", "Hungary", 1, 0, "Nations League", True),
-    ("2024-11-17", "Serbia", "Denmark", 0, 0, "Nations League", False),
-    ("2024-11-17", "Scotland", "Poland", 1, 2, "Nations League", False),
-    ("2024-11-17", "Spain", "Switzerland", 3, 2, "Nations League", False),
-
-    # Additional international friendlies and qualifiers for depth
-    ("2019-09-05", "France", "Albania", 4, 1, "Euro Qualifier", False),
-    ("2019-09-10", "England", "Kosovo", 5, 3, "Euro Qualifier", False),
-    ("2019-10-14", "England", "Czech Republic", 2, 1, "Euro Qualifier", False),
-    ("2019-11-14", "England", "Montenegro", 7, 0, "Euro Qualifier", False),
-    ("2019-11-17", "England", "Kosovo", 4, 0, "Euro Qualifier", False),
-    ("2019-11-18", "Germany", "Northern Ireland", 6, 1, "Euro Qualifier", False),
-    ("2019-11-18", "Netherlands", "Estonia", 5, 0, "Euro Qualifier", False),
-    ("2019-11-18", "Spain", "Romania", 5, 0, "Euro Qualifier", False),
-    ("2019-11-18", "Belgium", "Cyprus", 6, 1, "Euro Qualifier", False),
-    ("2020-10-11", "France", "Portugal", 0, 0, "Nations League", False),
-    ("2020-10-14", "England", "Denmark", 0, 1, "Nations League", False),
-    ("2020-11-14", "Spain", "Netherlands", 1, 1, "Nations League", False),
-    ("2020-11-17", "France", "Sweden", 4, 2, "Nations League", False),
-    ("2020-11-17", "Portugal", "Croatia", 3, 2, "Nations League", False),
-    ("2020-11-18", "Belgium", "England", 2, 0, "Nations League", False),
-    ("2020-11-18", "Spain", "Germany", 6, 0, "Nations League", False),
-    ("2022-06-02", "Italy", "Argentina", 0, 3, "Finalissima", True),
-    ("2022-06-04", "England", "Hungary", 0, 1, "Nations League", False),
-    ("2022-06-07", "England", "Germany", 1, 1, "Nations League", False),
-    ("2022-06-10", "Germany", "Italy", 5, 2, "Nations League", False),
-    ("2022-06-10", "Belgium", "Poland", 6, 1, "Nations League", False),
-    ("2022-06-14", "Germany", "England", 1, 1, "Nations League", False),
-    ("2022-09-22", "Italy", "England", 1, 0, "Nations League", False),
-    ("2022-09-25", "England", "Germany", 3, 3, "Nations League", False),
-    ("2022-09-26", "Portugal", "Spain", 0, 1, "Nations League", False),
-    ("2022-09-26", "Netherlands", "Belgium", 1, 0, "Nations League", False),
-    ("2023-03-23", "Italy", "England", 1, 2, "Euro Qualifier", False),
-    ("2023-03-23", "France", "Netherlands", 4, 0, "Euro Qualifier", False),
-    ("2023-03-26", "England", "Ukraine", 2, 0, "Euro Qualifier", False),
-    ("2023-03-27", "Netherlands", "France", 2, 1, "Euro Qualifier", False),
-    ("2023-06-12", "France", "Greece", 1, 0, "Euro Qualifier", False),
-    ("2023-06-14", "Netherlands", "Croatia", 2, 2, "Nations League SF", True),
-    ("2023-06-14", "Spain", "Italy", 2, 1, "Nations League SF", True),
-    ("2023-06-15", "Netherlands", "Croatia", 2, 4, "Nations League SF", True),
-    ("2023-06-18", "Croatia", "Spain", 0, 0, "Nations League Final", True),
-    ("2023-09-07", "England", "Scotland", 3, 1, "Friendly", False),
-    ("2023-09-09", "France", "Ireland", 2, 0, "Euro Qualifier", False),
-    ("2023-10-14", "England", "Italy", 3, 1, "Euro Qualifier", False),
-    ("2023-10-17", "Italy", "England", 1, 0, "Euro Qualifier", False),
-    ("2023-11-18", "England", "Scotland", 2, 1, "Friendly", False),
-    ("2023-11-20", "France", "Germany", 2, 0, "Friendly", False),
-    ("2024-03-23", "England", "Belgium", 2, 2, "Friendly", False),
-
-    # Africa (WC Qualifiers, AFCON)
-    ("2023-11-16", "Nigeria", "South Africa", 2, 1, "AFCON Qualifier", False),
-    ("2023-11-21", "South Africa", "Nigeria", 1, 1, "AFCON Qualifier", False),
-    ("2024-01-13", "Nigeria", "Equatorial Guinea", 1, 0, "AFCON 2024", True),
-    ("2024-01-14", "Egypt", "Mozambique", 2, 2, "AFCON 2024", True),
-    ("2024-01-15", "Morocco", "Tanzania", 3, 0, "AFCON 2024", True),
-    ("2024-01-15", "Senegal", "Gambia", 3, 0, "AFCON 2024", True),
-    ("2024-01-17", "Cameroon", "Guinea", 1, 1, "AFCON 2024", True),
-    ("2024-01-17", "Tunisia", "Mali", 1, 1, "AFCON 2024", True),
-    ("2024-01-22", "Nigeria", "Cameroon", 2, 0, "AFCON 2024", True),
-    ("2024-01-23", "Egypt", "Morocco", 2, 2, "AFCON 2024", True),
-    ("2024-01-23", "Senegal", "Cameroon", 1, 0, "AFCON 2024", True),
-    ("2024-01-27", "Nigeria", "Angola", 1, 0, "AFCON 2024", True),
-    ("2024-01-27", "South Africa", "Morocco", 2, 0, "AFCON 2024", True),
-    ("2024-02-07", "Nigeria", "South Africa", 1, 1, "AFCON 2024", True),
-    ("2024-02-11", "Nigeria", "Ivory Coast", 1, 2, "AFCON 2024", True),
-
-    # Asia WCQ
-    ("2024-03-21", "Japan", "North Korea", 1, 0, "WCQ Asia", False),
-    ("2024-03-26", "Japan", "North Korea", 2, 0, "WCQ Asia", True),
-    ("2024-06-06", "Japan", "Myanmar", 5, 0, "WCQ Asia", True),
-    ("2024-06-11", "Japan", "Syria", 5, 0, "WCQ Asia", True),
-    ("2024-09-05", "Japan", "China", 7, 0, "WCQ Asia", False),
-    ("2024-09-10", "Saudi Arabia", "Japan", 0, 2, "WCQ Asia", False),
-    ("2024-10-10", "Japan", "Australia", 1, 1, "WCQ Asia", False),
-    ("2024-10-15", "Saudi Arabia", "Australia", 0, 0, "WCQ Asia", False),
-    ("2024-10-15", "South Korea", "Iraq", 3, 2, "WCQ Asia", False),
-    ("2024-11-14", "Indonesia", "Japan", 0, 4, "WCQ Asia", False),
-    ("2024-11-14", "Iran", "Qatar", 3, 0, "WCQ Asia", False),
-    ("2024-11-14", "South Korea", "Kuwait", 3, 0, "WCQ Asia", False),
-    ("2024-11-19", "Japan", "Indonesia", 4, 0, "WCQ Asia", False),
-    ("2024-11-19", "Australia", "Saudi Arabia", 0, 1, "WCQ Asia", False),
-    ("2024-11-19", "South Korea", "Palestine", 3, 0, "WCQ Asia", False),
+# API-Football league IDs and seasons to fetch
+COMPETITIONS = [
+    # (league_id, season, description)
+    (1, 2018, "World Cup 2018"),
+    (1, 2022, "World Cup 2022"),
+    (1, 2026, "World Cup 2026"),
+    (4, 2020, "Euro 2020"),
+    (4, 2024, "Euro 2024"),
+    (9, 2019, "Copa America 2019"),
+    (9, 2021, "Copa America 2021"),
+    (9, 2024, "Copa America 2024"),
+    (6, 2023, "AFCON 2023"),
+    (6, 2024, "AFCON 2024"),
+    (29, 2023, "WCQ South America 2026"),
+    (32, 2023, "WCQ CONCACAF 2026"),
+    (5, 2024, "UEFA Nations League 2024-25"),
+    (5, 2022, "UEFA Nations League 2022-23"),
+    (30, 2023, "WCQ Africa 2026"),
+    (31, 2023, "WCQ Asia 2026"),
+    (15, 2023, "AFC Asian Cup 2023"),
+    (22, 2023, "CONCACAF Gold Cup 2023"),
+    (10, 2024, "Friendlies 2024"),
+    (10, 2023, "Friendlies 2023"),
 ]
+
+
+def normalize_team_name(name: str) -> str:
+    return TEAM_NAME_MAP.get(name, name)
 
 
 def get_team_id(name: str) -> str:
     return TEAM_IDS.get(name, name[:3].upper())
 
 
+def api_fetch(endpoint: str, params: dict) -> dict:
+    """Fetch from API-Football with rate limiting."""
+    headers = {"x-apisports-key": API_KEY}
+    url = f"{API_BASE}/{endpoint}"
+    resp = requests.get(url, headers=headers, params=params, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
+    if data.get("errors"):
+        print(f"  API errors: {data['errors']}")
+    return data
+
+
+def fetch_fixtures(league_id: int, season: int, description: str) -> list:
+    """Fetch fixtures for a competition, with JSON caching."""
+    cache_file = RAW_DIR / f"fixtures_{league_id}_{season}.json"
+
+    # Use cache if less than 24 hours old
+    if cache_file.exists():
+        age_hours = (time.time() - cache_file.stat().st_mtime) / 3600
+        if age_hours < 24:
+            print(f"  Using cached data for {description}")
+            with open(cache_file) as f:
+                return json.load(f)
+
+    print(f"  Fetching from API: {description} (league={league_id}, season={season})")
+    try:
+        data = api_fetch("fixtures", {"league": league_id, "season": season})
+        fixtures = data.get("response", [])
+        # Cache the response
+        with open(cache_file, "w") as f:
+            json.dump(fixtures, f)
+        # Rate limit: API-Football free tier
+        time.sleep(6.5)  # ~10 req/min safe margin
+        return fixtures
+    except Exception as e:
+        print(f"  ERROR fetching {description}: {e}")
+        # Return cached data if available even if stale
+        if cache_file.exists():
+            print(f"  Falling back to stale cache")
+            with open(cache_file) as f:
+                return json.load(f)
+        return []
+
+
+def parse_fixtures(fixtures: list) -> list:
+    """Parse API-Football fixtures into match records."""
+    matches = []
+    for fix in fixtures:
+        fixture = fix.get("fixture", {})
+        teams = fix.get("teams", {})
+        goals = fix.get("goals", {})
+        league = fix.get("league", {})
+
+        # Skip matches that haven't been played yet
+        status = fixture.get("status", {}).get("short", "")
+        if status not in ("FT", "AET", "PEN"):
+            continue
+
+        home_name = normalize_team_name(teams.get("home", {}).get("name", ""))
+        away_name = normalize_team_name(teams.get("away", {}).get("name", ""))
+        home_score = goals.get("home")
+        away_score = goals.get("away")
+
+        if home_score is None or away_score is None:
+            continue
+
+        # Determine venue neutrality
+        venue = fixture.get("venue", {})
+        # International tournaments are mostly neutral except host nation
+        tournament = league.get("name", "")
+        is_neutral = True
+        # Home qualifiers/friendlies are not neutral
+        if "qualification" in tournament.lower() or "friendl" in tournament.lower():
+            is_neutral = False
+        if "nations league" in tournament.lower():
+            is_neutral = False
+
+        date_str = fixture.get("date", "")[:10]  # YYYY-MM-DD
+
+        matches.append({
+            "date": date_str,
+            "home_team": home_name,
+            "away_team": away_name,
+            "home_score": int(home_score),
+            "away_score": int(away_score),
+            "tournament": league.get("name", "Unknown"),
+            "neutral_venue": is_neutral,
+        })
+
+    return matches
+
+
+def fetch_team_rankings() -> dict:
+    """Fetch FIFA rankings from API-Football to use as Elo proxy."""
+    cache_file = RAW_DIR / "rankings.json"
+
+    if cache_file.exists():
+        age_hours = (time.time() - cache_file.stat().st_mtime) / 3600
+        if age_hours < 24:
+            print("  Using cached rankings")
+            with open(cache_file) as f:
+                return json.load(f)
+
+    print("  Fetching FIFA rankings from API...")
+    try:
+        data = api_fetch("rankings", {})
+        rankings = data.get("response", [])
+        with open(cache_file, "w") as f:
+            json.dump(rankings, f)
+        time.sleep(6.5)
+        return rankings
+    except Exception as e:
+        print(f"  ERROR fetching rankings: {e}")
+        if cache_file.exists():
+            with open(cache_file) as f:
+                return json.load(f)
+        return []
+
+
+def rankings_to_elo(rankings: list) -> dict:
+    """Convert FIFA rankings to approximate Elo ratings.
+    FIFA ranking points roughly map to Elo with an offset."""
+    elo_map = {}
+    for entry in rankings:
+        team_name = normalize_team_name(entry.get("team", {}).get("name", ""))
+        rank = entry.get("rank", 100)
+        points = entry.get("points", 1000)
+        # Convert FIFA points to Elo-like scale (FIFA points are ~1000-1800 range)
+        # Elo is ~1400-2100 range. Simple linear mapping.
+        elo = int(points * 1.15 + 200)
+        elo = max(1500, min(2150, elo))
+        elo_map[team_name] = elo
+    return elo_map
+
+
+# ---- Fallback hardcoded data (used when API is unavailable) ----
+
+FALLBACK_ELO = {
+    "Argentina": 2080, "France": 2045, "Brazil": 2050, "England": 2035,
+    "Spain": 2040, "Germany": 2010, "Portugal": 2025, "Netherlands": 2015,
+    "Belgium": 1990, "Italy": 1985, "Croatia": 1980, "Colombia": 1975,
+    "Uruguay": 1970, "Morocco": 1965, "Japan": 1960, "USA": 1955,
+    "Mexico": 1950, "Switzerland": 1945, "Denmark": 1940, "Austria": 1930,
+    "Senegal": 1925, "South Korea": 1920, "Australia": 1910, "Turkey": 1905,
+    "Serbia": 1900, "Nigeria": 1895, "Iran": 1890, "Ecuador": 1885,
+    "Scotland": 1875, "Canada": 1870, "Cameroon": 1865, "Tunisia": 1860,
+    "Peru": 1855, "Chile": 1850, "Paraguay": 1845, "Mali": 1840,
+    "Egypt": 1835, "Panama": 1830, "Costa Rica": 1825, "Slovenia": 1820,
+    "Albania": 1815, "Saudi Arabia": 1810, "Jamaica": 1800, "South Africa": 1795,
+    "Venezuela": 1790, "Bolivia": 1785, "Honduras": 1780, "Qatar": 1775,
+    "Uzbekistan": 1770, "Iraq": 1765, "New Zealand": 1720, "Indonesia": 1700,
+}
+
+FALLBACK_MATCHES = [
+    # 2018 World Cup
+    ("2018-06-14", "Russia", "Saudi Arabia", 5, 0, "World Cup 2018", False),
+    ("2018-06-15", "Egypt", "Uruguay", 0, 1, "World Cup 2018", True),
+    ("2018-06-15", "Morocco", "Iran", 0, 1, "World Cup 2018", True),
+    ("2018-06-15", "Portugal", "Spain", 3, 3, "World Cup 2018", True),
+    ("2018-06-16", "France", "Australia", 2, 1, "World Cup 2018", True),
+    ("2018-06-16", "Argentina", "Iceland", 1, 1, "World Cup 2018", True),
+    ("2018-06-17", "Germany", "Mexico", 0, 1, "World Cup 2018", True),
+    ("2018-06-17", "Brazil", "Switzerland", 1, 1, "World Cup 2018", True),
+    ("2018-06-18", "Belgium", "Panama", 3, 0, "World Cup 2018", True),
+    ("2018-06-18", "Tunisia", "England", 1, 2, "World Cup 2018", True),
+    ("2018-06-19", "Colombia", "Japan", 1, 2, "World Cup 2018", True),
+    ("2018-06-21", "France", "Peru", 1, 0, "World Cup 2018", True),
+    ("2018-06-21", "Argentina", "Croatia", 0, 3, "World Cup 2018", True),
+    ("2018-06-22", "Brazil", "Costa Rica", 2, 0, "World Cup 2018", True),
+    ("2018-06-23", "Belgium", "Tunisia", 5, 2, "World Cup 2018", True),
+    ("2018-06-24", "England", "Panama", 6, 1, "World Cup 2018", True),
+    ("2018-06-27", "South Korea", "Germany", 2, 0, "World Cup 2018", True),
+    ("2018-06-30", "France", "Argentina", 4, 3, "World Cup 2018", True),
+    ("2018-07-02", "Brazil", "Mexico", 2, 0, "World Cup 2018", True),
+    ("2018-07-06", "France", "Uruguay", 2, 0, "World Cup 2018", True),
+    ("2018-07-06", "Brazil", "Belgium", 1, 2, "World Cup 2018", True),
+    ("2018-07-10", "France", "Belgium", 1, 0, "World Cup 2018", True),
+    ("2018-07-15", "France", "Croatia", 4, 2, "World Cup 2018", True),
+    # 2022 World Cup (select)
+    ("2022-11-22", "Argentina", "Saudi Arabia", 1, 2, "World Cup 2022", True),
+    ("2022-11-22", "France", "Australia", 4, 1, "World Cup 2022", True),
+    ("2022-11-23", "Germany", "Japan", 1, 2, "World Cup 2022", True),
+    ("2022-11-23", "Spain", "Costa Rica", 7, 0, "World Cup 2022", True),
+    ("2022-11-24", "Brazil", "Serbia", 2, 0, "World Cup 2022", True),
+    ("2022-11-26", "Argentina", "Mexico", 2, 0, "World Cup 2022", True),
+    ("2022-11-26", "France", "Denmark", 2, 1, "World Cup 2022", True),
+    ("2022-11-27", "Belgium", "Morocco", 0, 2, "World Cup 2022", True),
+    ("2022-11-27", "Spain", "Germany", 1, 1, "World Cup 2022", True),
+    ("2022-12-01", "Japan", "Spain", 2, 1, "World Cup 2022", True),
+    ("2022-12-03", "Netherlands", "USA", 3, 1, "World Cup 2022", True),
+    ("2022-12-05", "Brazil", "South Korea", 4, 1, "World Cup 2022", True),
+    ("2022-12-09", "Croatia", "Brazil", 1, 1, "World Cup 2022", True),
+    ("2022-12-10", "Morocco", "Portugal", 1, 0, "World Cup 2022", True),
+    ("2022-12-10", "England", "France", 1, 2, "World Cup 2022", True),
+    ("2022-12-13", "Argentina", "Croatia", 3, 0, "World Cup 2022", True),
+    ("2022-12-18", "Argentina", "France", 3, 3, "World Cup 2022", True),
+]
+
+
 def main():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+
+    all_matches = []
+    elo_map = dict(FALLBACK_ELO)  # Start with fallback
+
+    if API_KEY:
+        print("=" * 50)
+        print("FETCHING LIVE DATA FROM API-FOOTBALL")
+        print("=" * 50)
+
+        # Fetch rankings for Elo
+        print("\n[1/2] Fetching FIFA rankings...")
+        rankings = fetch_team_rankings()
+        if rankings:
+            api_elo = rankings_to_elo(rankings)
+            # Merge with fallback (API data takes priority)
+            for team in WC2026_TEAMS:
+                if team in api_elo:
+                    elo_map[team] = api_elo[team]
+            print(f"  Updated Elo for {len(api_elo)} teams from FIFA rankings")
+
+        # Fetch match fixtures
+        print(f"\n[2/2] Fetching match data from {len(COMPETITIONS)} competitions...")
+        for league_id, season, desc in COMPETITIONS:
+            fixtures = fetch_fixtures(league_id, season, desc)
+            parsed = parse_fixtures(fixtures)
+            all_matches.extend(parsed)
+            print(f"  {desc}: {len(parsed)} finished matches")
+
+        print(f"\nTotal matches from API: {len(all_matches)}")
+    else:
+        print("No API_FOOTBALL_KEY found — using fallback hardcoded data")
+        for date, home, away, hs, aws, tourn, neutral in FALLBACK_MATCHES:
+            all_matches.append({
+                "date": date, "home_team": home, "away_team": away,
+                "home_score": hs, "away_score": aws,
+                "tournament": tourn, "neutral_venue": neutral,
+            })
+
+    # Filter to matches involving WC2026 teams, deduplicate
+    seen = set()
+    filtered = []
+    for m in all_matches:
+        home = m["home_team"]
+        away = m["away_team"]
+        if home not in WC2026_TEAMS and away not in WC2026_TEAMS:
+            continue
+        key = (m["date"], home, away)
+        if key in seen:
+            continue
+        seen.add(key)
+        filtered.append(m)
+
+    # Sort by date
+    filtered.sort(key=lambda x: x["date"])
 
     # Save Elo ratings
     elo_path = DATA_DIR / "elo_ratings.csv"
-    with open(elo_path, "w", newline="") as f:
+    with open(elo_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["team", "team_id", "elo_rating"])
-        for team, elo in sorted(ELO_RATINGS.items()):
-            writer.writerow([team, get_team_id(team), elo])
-    print(f"Saved Elo ratings for {len(ELO_RATINGS)} teams to {elo_path}")
+        for team in sorted(elo_map.keys()):
+            if team in WC2026_TEAMS:
+                writer.writerow([team, get_team_id(team), elo_map[team]])
+    print(f"\nSaved Elo ratings for {sum(1 for t in elo_map if t in WC2026_TEAMS)} WC2026 teams to {elo_path}")
 
-    # Save match results (filter to only include WC2026 participating nations)
-    wc_teams = set(ELO_RATINGS.keys())
+    # Save matches
     matches_path = DATA_DIR / "matches.csv"
-    kept = 0
-    with open(matches_path, "w", newline="") as f:
+    with open(matches_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["date", "home_team", "away_team", "home_score", "away_score",
                           "tournament", "neutral_venue"])
-        for date, home, away, hs, aws, tourn, neutral in HISTORICAL_MATCHES:
-            if home in wc_teams or away in wc_teams:
-                writer.writerow([date, home, away, hs, aws, tourn, neutral])
-                kept += 1
-    print(f"Saved {kept} matches to {matches_path}")
+        for m in filtered:
+            writer.writerow([
+                m["date"], m["home_team"], m["away_team"],
+                m["home_score"], m["away_score"],
+                m["tournament"], m["neutral_venue"],
+            ])
+    print(f"Saved {len(filtered)} matches to {matches_path}")
 
 
 if __name__ == "__main__":
