@@ -1,6 +1,9 @@
 """
 Data ingestion for World Cup 2026 Match Predictor.
-Pulls real match data from API-Football, with hardcoded fallback.
+Pulls real match data from multiple sources:
+  1. API-Football (primary, requires key)
+  2. football-data.org (free tier, requires key)
+  3. Open international results dataset (no key needed)
 """
 
 import csv
@@ -19,6 +22,8 @@ DATA_DIR = Path(__file__).parent.parent / "data" / "processed"
 RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
 API_KEY = os.getenv("API_FOOTBALL_KEY", "")
 API_BASE = "https://v3.football.api-sports.io"
+FOOTBALLDATA_KEY = os.getenv("FOOTBALLDATA_KEY", "")
+FOOTBALLDATA_BASE = "https://api.football-data.org/v4"
 
 # Team name normalization (API-Football names → our standard names)
 TEAM_NAME_MAP = {
@@ -227,6 +232,200 @@ def rankings_to_elo(rankings: list) -> dict:
     return elo_map
 
 
+# ---- football-data.org integration ----
+
+# football-data.org competition codes for international matches
+FOOTBALLDATA_COMPETITIONS = [
+    ("WC", 2018, "World Cup 2018"),
+    ("WC", 2022, "World Cup 2022"),
+    ("EC", 2020, "Euro 2020"),
+    ("EC", 2024, "Euro 2024"),
+    ("CLI", 2024, "Copa Libertadores/Intl 2024"),
+]
+
+
+def footballdata_fetch(endpoint: str) -> dict:
+    """Fetch from football-data.org with rate limiting."""
+    headers = {"X-Auth-Token": FOOTBALLDATA_KEY} if FOOTBALLDATA_KEY else {}
+    url = f"{FOOTBALLDATA_BASE}/{endpoint}"
+    resp = requests.get(url, headers=headers, timeout=30)
+    if resp.status_code == 429:
+        print("  football-data.org rate limited, waiting 60s...")
+        time.sleep(60)
+        resp = requests.get(url, headers=headers, timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
+# football-data.org team name normalization
+FOOTBALLDATA_TEAM_MAP = {
+    "Korea Republic": "South Korea",
+    "Türkiye": "Turkey",
+    "IR Iran": "Iran",
+    "Côte d'Ivoire": "Ivory Coast",
+    "Czechia": "Czech Republic",
+    "Bosnia-Herzegovina": "Bosnia",
+    "Trinidad & Tobago": "Trinidad and Tobago",
+}
+
+
+def fetch_footballdata_matches(competition: str, season: int, description: str) -> list:
+    """Fetch matches from football-data.org for a competition/season."""
+    cache_file = RAW_DIR / f"footballdata_{competition}_{season}.json"
+
+    if cache_file.exists():
+        age_hours = (time.time() - cache_file.stat().st_mtime) / 3600
+        if age_hours < 24:
+            print(f"  Using cached football-data.org data for {description}")
+            with open(cache_file) as f:
+                return json.load(f)
+
+    print(f"  Fetching from football-data.org: {description}")
+    try:
+        data = footballdata_fetch(f"competitions/{competition}/matches?season={season}&status=FINISHED")
+        matches_raw = data.get("matches", [])
+        with open(cache_file, "w") as f:
+            json.dump(matches_raw, f)
+        time.sleep(6)  # free tier: 10 req/min
+        return matches_raw
+    except Exception as e:
+        print(f"  ERROR fetching {description} from football-data.org: {e}")
+        if cache_file.exists():
+            with open(cache_file) as f:
+                return json.load(f)
+        return []
+
+
+def parse_footballdata_matches(matches_raw: list) -> list:
+    """Parse football-data.org matches into our standard format."""
+    matches = []
+    for m in matches_raw:
+        if m.get("status") != "FINISHED":
+            continue
+
+        home_name = m.get("homeTeam", {}).get("name", "")
+        away_name = m.get("awayTeam", {}).get("name", "")
+        home_name = FOOTBALLDATA_TEAM_MAP.get(home_name, home_name)
+        away_name = FOOTBALLDATA_TEAM_MAP.get(away_name, away_name)
+
+        score = m.get("score", {})
+        ft = score.get("fullTime", {})
+        home_score = ft.get("home")
+        away_score = ft.get("away")
+        if home_score is None or away_score is None:
+            continue
+
+        # Determine venue: tournament matches are generally neutral
+        competition = m.get("competition", {}).get("name", "")
+        stage = m.get("stage", "")
+        is_neutral = "GROUP" in stage or "FINAL" in stage or "ROUND" in stage
+
+        date_str = m.get("utcDate", "")[:10]
+
+        matches.append({
+            "date": date_str,
+            "home_team": home_name,
+            "away_team": away_name,
+            "home_score": int(home_score),
+            "away_score": int(away_score),
+            "tournament": competition,
+            "neutral_venue": is_neutral,
+        })
+
+    return matches
+
+
+# ---- Open international results (CSV from GitHub) ----
+
+OPEN_RESULTS_URL = "https://raw.githubusercontent.com/martj42/international_results/master/results.csv"
+
+
+def fetch_open_results() -> list:
+    """Fetch open international football results dataset.
+    Source: github.com/martj42/international_results — public domain,
+    covers 1872–present with 45k+ matches.
+    We filter to 2018+ and WC2026 teams only.
+    """
+    cache_file = RAW_DIR / "open_international_results.csv"
+
+    if cache_file.exists():
+        age_hours = (time.time() - cache_file.stat().st_mtime) / 168  # refresh weekly
+        if age_hours < 1:
+            print("  Using cached open international results")
+            return parse_open_results(cache_file)
+
+    print("  Fetching open international results dataset...")
+    try:
+        resp = requests.get(OPEN_RESULTS_URL, timeout=60)
+        resp.raise_for_status()
+        with open(cache_file, "w", encoding="utf-8") as f:
+            f.write(resp.text)
+        return parse_open_results(cache_file)
+    except Exception as e:
+        print(f"  ERROR fetching open results: {e}")
+        if cache_file.exists():
+            return parse_open_results(cache_file)
+        return []
+
+
+# Team name normalization for the open results dataset
+OPEN_RESULTS_TEAM_MAP = {
+    "United States": "USA",
+    "Korea Republic": "South Korea",
+    "IR Iran": "Iran",
+    "Côte d'Ivoire": "Ivory Coast",
+    "Türkiye": "Turkey",
+    "Czechia": "Czech Republic",
+    "Czech Republic": "Czech Republic",
+    "Bosnia and Herzegovina": "Bosnia",
+    "Trinidad and Tobago": "Trinidad and Tobago",
+    "Korea DPR": "North Korea",
+    "Chinese Taipei": "Taiwan",
+    "Eswatini": "Swaziland",
+}
+
+
+def parse_open_results(csv_path: Path) -> list:
+    """Parse the open international results CSV (2018+ only)."""
+    import pandas as pd
+    try:
+        df = pd.read_csv(csv_path)
+    except Exception as e:
+        print(f"  ERROR parsing open results CSV: {e}")
+        return []
+
+    # Filter to 2018+
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df[df["date"] >= "2018-01-01"].copy()
+
+    matches = []
+    for _, row in df.iterrows():
+        home = OPEN_RESULTS_TEAM_MAP.get(row["home_team"], row["home_team"])
+        away = OPEN_RESULTS_TEAM_MAP.get(row["away_team"], row["away_team"])
+        try:
+            home_score = int(row["home_score"])
+            away_score = int(row["away_score"])
+        except (ValueError, TypeError):
+            continue
+
+        tournament = str(row.get("tournament", "Unknown"))
+        is_neutral = row.get("neutral", False)
+        if isinstance(is_neutral, str):
+            is_neutral = is_neutral.lower() == "true"
+
+        matches.append({
+            "date": row["date"].strftime("%Y-%m-%d"),
+            "home_team": home,
+            "away_team": away,
+            "home_score": home_score,
+            "away_score": away_score,
+            "tournament": tournament,
+            "neutral_venue": bool(is_neutral),
+        })
+
+    return matches
+
+
 # ---- Fallback hardcoded data (used when API is unavailable) ----
 
 FALLBACK_ELO = {
@@ -297,40 +496,83 @@ def main():
 
     all_matches = []
     elo_map = dict(FALLBACK_ELO)  # Start with fallback
+    sources_used = []
 
+    # ---- Source 1: API-Football (primary, requires key) ----
     if API_KEY:
         print("=" * 50)
-        print("FETCHING LIVE DATA FROM API-FOOTBALL")
+        print("SOURCE 1: API-FOOTBALL")
         print("=" * 50)
 
         # Fetch rankings for Elo
-        print("\n[1/2] Fetching FIFA rankings...")
+        print("\n  Fetching FIFA rankings...")
         rankings = fetch_team_rankings()
         if rankings:
             api_elo = rankings_to_elo(rankings)
-            # Merge with fallback (API data takes priority)
             for team in WC2026_TEAMS:
                 if team in api_elo:
                     elo_map[team] = api_elo[team]
             print(f"  Updated Elo for {len(api_elo)} teams from FIFA rankings")
 
-        # Fetch match fixtures
-        print(f"\n[2/2] Fetching match data from {len(COMPETITIONS)} competitions...")
+        print(f"\n  Fetching match data from {len(COMPETITIONS)} competitions...")
+        api_count = 0
         for league_id, season, desc in COMPETITIONS:
             fixtures = fetch_fixtures(league_id, season, desc)
             parsed = parse_fixtures(fixtures)
             all_matches.extend(parsed)
+            api_count += len(parsed)
             print(f"  {desc}: {len(parsed)} finished matches")
 
-        print(f"\nTotal matches from API: {len(all_matches)}")
+        print(f"  API-Football total: {api_count} matches")
+        sources_used.append(f"API-Football ({api_count} matches)")
     else:
-        print("No API_FOOTBALL_KEY found — using fallback hardcoded data")
+        print("No API_FOOTBALL_KEY — skipping API-Football")
+
+    # ---- Source 2: football-data.org (free tier) ----
+    if FOOTBALLDATA_KEY:
+        print("\n" + "=" * 50)
+        print("SOURCE 2: FOOTBALL-DATA.ORG")
+        print("=" * 50)
+
+        fd_count = 0
+        for comp, season, desc in FOOTBALLDATA_COMPETITIONS:
+            raw = fetch_footballdata_matches(comp, season, desc)
+            parsed = parse_footballdata_matches(raw)
+            all_matches.extend(parsed)
+            fd_count += len(parsed)
+            print(f"  {desc}: {len(parsed)} matches")
+
+        print(f"  football-data.org total: {fd_count} matches")
+        sources_used.append(f"football-data.org ({fd_count} matches)")
+    else:
+        print("\nNo FOOTBALLDATA_KEY — skipping football-data.org")
+
+    # ---- Source 3: Open international results (always available, no key) ----
+    print("\n" + "=" * 50)
+    print("SOURCE 3: OPEN INTERNATIONAL RESULTS")
+    print("=" * 50)
+
+    open_matches = fetch_open_results()
+    if open_matches:
+        all_matches.extend(open_matches)
+        print(f"  Open results: {len(open_matches)} matches (2018+)")
+        sources_used.append(f"Open results ({len(open_matches)} matches)")
+    else:
+        print("  Could not fetch open results dataset")
+
+    # ---- Fallback: hardcoded data if nothing else worked ----
+    if not all_matches:
+        print("\nNo API data available — using fallback hardcoded data")
         for date, home, away, hs, aws, tourn, neutral in FALLBACK_MATCHES:
             all_matches.append({
                 "date": date, "home_team": home, "away_team": away,
                 "home_score": hs, "away_score": aws,
                 "tournament": tourn, "neutral_venue": neutral,
             })
+        sources_used.append(f"Fallback ({len(FALLBACK_MATCHES)} matches)")
+
+    print(f"\nData sources used: {', '.join(sources_used)}")
+    print(f"Total raw matches (pre-dedup): {len(all_matches)}")
 
     # Filter to matches involving WC2026 teams, deduplicate
     seen = set()

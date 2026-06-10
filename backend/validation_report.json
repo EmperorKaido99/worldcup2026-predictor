@@ -1,0 +1,27 @@
+{
+  "model_type": "LR",
+  "model_detail": "10.0 sigmoid",
+  "test_size": 791,
+  "model_accuracy": 0.6119,
+  "baseline_accuracy": 0.6018,
+  "beats_baseline": true,
+  "model_log_loss": 0.8521,
+  "baseline_log_loss": 13.7544,
+  "log_loss_better": true,
+  "brier_scores": {
+    "away_win": 0.1479,
+    "draw": 0.1754,
+    "home_win": 0.1779
+  },
+  "avg_brier": 0.1671,
+  "calibration": {
+    "away_win": 0.0649,
+    "draw": 0.0503,
+    "home_win": 0.077
+  },
+  "overall_calibration_gap": 0.0641,
+  "all_teams_valid": true,
+  "passed": 4,
+  "total": 4,
+  "accepted": true
+}
