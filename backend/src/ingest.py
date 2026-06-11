@@ -41,6 +41,13 @@ TEAM_NAME_MAP = {
     "Bosnia and Herzegovina": "Bosnia",
     "North Macedonia": "North Macedonia",
     "Trinidad And Tobago": "Trinidad and Tobago",
+    "Curacao": "Curaçao", "Curaçao": "Curaçao",
+    "Congo DR": "DR Congo", "DR Congo": "DR Congo", "Democratic Republic of Congo": "DR Congo",
+    "Congo": "DR Congo",
+    "Ivory Coast": "Ivory Coast",
+    "Cape Verde Islands": "Cape Verde", "Cabo Verde": "Cape Verde", "Cape Verde": "Cape Verde",
+    "Czech Republic": "Czech Republic",
+    "Bosnia And Herzegovina": "Bosnia",
 }
 
 # FIFA 3-letter codes
@@ -58,6 +65,9 @@ TEAM_IDS = {
     "Albania": "ALB", "Saudi Arabia": "KSA", "Jamaica": "JAM", "South Africa": "RSA",
     "Venezuela": "VEN", "Bolivia": "BOL", "Honduras": "HON", "Qatar": "QAT",
     "Uzbekistan": "UZB", "Iraq": "IRQ", "New Zealand": "NZL", "Indonesia": "IDN",
+    "Czech Republic": "CZE", "Bosnia": "BIH", "Haiti": "HAI", "Curaçao": "CUW",
+    "Ivory Coast": "CIV", "Sweden": "SWE", "Cape Verde": "CPV", "Norway": "NOR",
+    "Algeria": "ALG", "Jordan": "JOR", "DR Congo": "COD", "Ghana": "GHA",
 }
 
 # WC2026 participating nations
@@ -382,6 +392,12 @@ OPEN_RESULTS_TEAM_MAP = {
     "Korea DPR": "North Korea",
     "Chinese Taipei": "Taiwan",
     "Eswatini": "Swaziland",
+    "Curacao": "Curaçao",
+    "DR Congo": "DR Congo",
+    "Congo DR": "DR Congo",
+    "Democratic Republic of Congo": "DR Congo",
+    "Cabo Verde": "Cape Verde",
+    "Cape Verde Islands": "Cape Verde",
 }
 
 
@@ -442,6 +458,9 @@ FALLBACK_ELO = {
     "Albania": 1815, "Saudi Arabia": 1810, "Jamaica": 1800, "South Africa": 1795,
     "Venezuela": 1790, "Bolivia": 1785, "Honduras": 1780, "Qatar": 1775,
     "Uzbekistan": 1770, "Iraq": 1765, "New Zealand": 1720, "Indonesia": 1700,
+    "Czech Republic": 1860, "Bosnia": 1830, "Haiti": 1640, "Curaçao": 1580,
+    "Ivory Coast": 1920, "Sweden": 1900, "Cape Verde": 1650, "Norway": 1870,
+    "Algeria": 1880, "Jordan": 1700, "DR Congo": 1750, "Ghana": 1800,
 }
 
 FALLBACK_MATCHES = [

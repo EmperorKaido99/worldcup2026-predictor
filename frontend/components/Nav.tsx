@@ -4,9 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/", label: "Match Predictor", icon: "\u{1F3C6}" },
-  { href: "/xg", label: "xG Dashboard", icon: "\u{1F4CA}" },
-  { href: "/penalties", label: "Penalties", icon: "\u{1F945}" },
+  { href: "/", label: "Tournament", icon: "\u{1F3C6}" },
 ];
 
 export default function Nav() {

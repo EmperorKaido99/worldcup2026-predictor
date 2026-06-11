@@ -1,36 +1,47 @@
 team,team_id,elo_rating
 Albania,ALB,1815
+Algeria,ALG,1880
 Argentina,ARG,2080
 Australia,AUS,1910
 Austria,AUT,1930
 Belgium,BEL,1990
 Bolivia,BOL,1785
+Bosnia,BIH,1830
 Brazil,BRA,2050
 Cameroon,CMR,1865
 Canada,CAN,1870
+Cape Verde,CPV,1650
 Chile,CHI,1850
 Colombia,COL,1975
 Costa Rica,CRC,1825
 Croatia,CRO,1980
+Curaçao,CUW,1580
+Czech Republic,CZE,1860
+DR Congo,COD,1750
 Denmark,DEN,1940
 Ecuador,ECU,1885
 Egypt,EGY,1835
 England,ENG,2035
 France,FRA,2045
 Germany,GER,2010
+Ghana,GHA,1800
+Haiti,HAI,1640
 Honduras,HON,1780
 Indonesia,IDN,1700
 Iran,IRN,1890
 Iraq,IRQ,1765
 Italy,ITA,1985
+Ivory Coast,CIV,1920
 Jamaica,JAM,1800
 Japan,JPN,1960
+Jordan,JOR,1700
 Mali,MLI,1840
 Mexico,MEX,1950
 Morocco,MAR,1965
 Netherlands,NED,2015
 New Zealand,NZL,1720
 Nigeria,NGA,1895
+Norway,NOR,1870
 Panama,PAN,1830
 Paraguay,PAR,1845
 Peru,PER,1855
@@ -44,6 +55,7 @@ Slovenia,SVN,1820
 South Africa,RSA,1795
 South Korea,KOR,1920
 Spain,ESP,2040
+Sweden,SWE,1900
 Switzerland,SUI,1945
 Tunisia,TUN,1860
 Turkey,TUR,1905
