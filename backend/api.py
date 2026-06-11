@@ -12,6 +12,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from pydantic import BaseModel
 
 load_dotenv()
@@ -249,3 +250,38 @@ def predict_match(req: PredictMatchRequest):
             "form_away": _get_form_string(away_name),
         },
     }
+
+
+# --- xG Endpoints (P1) ---
+
+
+@app.get("/xg/team/{team_id}")
+def get_xg_stats(team_id: str):
+    """Get xG summary stats for a team."""
+    try:
+        from src.viz import get_team_xg_stats
+        return get_team_xg_stats(team_id)
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+
+
+@app.get("/xg/team/{team_id}/shotmap")
+def get_shot_map(team_id: str):
+    """Get shot map PNG for a team."""
+    try:
+        from src.viz import generate_shot_map
+        png_bytes = generate_shot_map(team_id)
+        return Response(content=png_bytes, media_type="image/png")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+
+
+@app.get("/xg/team/{team_id}/heatmap")
+def get_heatmap(team_id: str):
+    """Get shot heatmap PNG for a team."""
+    try:
+        from src.viz import generate_heatmap
+        png_bytes = generate_heatmap(team_id)
+        return Response(content=png_bytes, media_type="image/png")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=503, detail=str(e))
