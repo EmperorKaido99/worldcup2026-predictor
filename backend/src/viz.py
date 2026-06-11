@@ -16,23 +16,86 @@ from mplsoccer import VerticalPitch
 
 DATA_DIR = Path(__file__).parent.parent / "data" / "processed"
 
-# Team ID → StatsBomb team name mapping (for filtering shots)
+# Team ID → list of StatsBomb team names to search for (men's + women's)
 TEAM_ID_MAP = {
+    "ARG": ["Argentina", "Argentina Women's"],
+    "AUS": ["Australia", "Australia Women's"],
+    "BEL": ["Belgium"],
+    "BRA": ["Brazil", "Brazil Women's"],
+    "CAN": ["Canada", "Canada Women's"],
+    "CMR": ["Cameroon", "Cameroon W"],
+    "CRC": ["Costa Rica", "Costa Rica Women's"],
+    "CRO": ["Croatia"],
+    "DEN": ["Denmark", "Denmark Women's"],
+    "ECU": ["Ecuador"],
+    "ENG": ["England", "England Women's"],
+    "FRA": ["France", "France Women's"],
+    "GER": ["Germany", "Germany Women's"],
+    "GHA": ["Ghana"],
+    "IRN": ["Iran"],
+    "JPN": ["Japan", "Japan Women's"],
+    "KOR": ["South Korea", "Korea Republic Women's"],
+    "MEX": ["Mexico"],
+    "MAR": ["Morocco", "Morocco Women's"],
+    "NED": ["Netherlands", "Netherlands Women's"],
+    "POL": ["Poland"],
+    "POR": ["Portugal", "Portugal Women's"],
+    "QAT": ["Qatar"],
+    "KSA": ["Saudi Arabia"],
+    "SEN": ["Senegal"],
+    "SRB": ["Serbia"],
+    "ESP": ["Spain", "Spain Women's"],
+    "SUI": ["Switzerland", "Switzerland Women's"],
+    "TUN": ["Tunisia"],
+    "URU": ["Uruguay"],
+    "USA": ["United States", "United States Women's"],
+    "COL": ["Colombia", "Colombia Women's"],
+    "PAR": ["Paraguay"],
+    "PER": ["Peru"],
+    "NGA": ["Nigeria", "Nigeria Women's"],
+    "ALG": ["Algeria"],
+    "EGY": ["Egypt"],
+    "CIV": ["Ivory Coast"],
+    "COD": ["DR Congo"],
+    "NOR": ["Norway", "Norway Women's"],
+    "SWE": ["Sweden", "Sweden Women's"],
+    "CZE": ["Czech Republic"],
+    "JOR": ["Jordan"],
+    "CPV": ["Cape Verde"],
+    "CUW": ["Curacao"],
+    "HAI": ["Haiti", "Haiti Women's"],
+    "BIH": ["Bosnia and Herzegovina"],
+    "ITA": ["Italy", "Italy Women's"],
+    "TUR": ["Turkey"],
+    "SCO": ["Scotland", "Scotland W"],
+    "PAN": ["Panama", "Panama Women's"],
+    "NZL": ["New Zealand", "New Zealand Women's"],
+    "RSA": ["South Africa", "South Africa Women's"],
+    "IRQ": ["Iraq"],
+    "UZB": ["Uzbekistan"],
+    "AUT": ["Austria"],
+    "IDN": ["Indonesia"],
+}
+
+# Get display name for a team ID
+TEAM_DISPLAY_NAMES = {
     "ARG": "Argentina", "AUS": "Australia", "BEL": "Belgium", "BRA": "Brazil",
     "CAN": "Canada", "CMR": "Cameroon", "CRC": "Costa Rica", "CRO": "Croatia",
     "DEN": "Denmark", "ECU": "Ecuador", "ENG": "England", "FRA": "France",
     "GER": "Germany", "GHA": "Ghana", "IRN": "Iran", "JPN": "Japan",
-    "KOR": "Korea Republic", "MEX": "Mexico", "MAR": "Morocco", "NED": "Netherlands",
+    "KOR": "South Korea", "MEX": "Mexico", "MAR": "Morocco", "NED": "Netherlands",
     "POL": "Poland", "POR": "Portugal", "QAT": "Qatar", "KSA": "Saudi Arabia",
     "SEN": "Senegal", "SRB": "Serbia", "ESP": "Spain", "SUI": "Switzerland",
-    "TUN": "Tunisia", "URU": "Uruguay", "USA": "United States", "WAL": "Wales",
-    "COL": "Colombia", "PAR": "Paraguay", "CHI": "Chile", "PER": "Peru",
-    "BOL": "Bolivia", "VEN": "Venezuela", "NGA": "Nigeria", "ALG": "Algeria",
-    "EGY": "Egypt", "CIV": "Ivory Coast", "COD": "DR Congo",
+    "TUN": "Tunisia", "URU": "Uruguay", "USA": "United States",
+    "COL": "Colombia", "PAR": "Paraguay", "PER": "Peru",
+    "NGA": "Nigeria", "ALG": "Algeria", "EGY": "Egypt",
+    "CIV": "Ivory Coast", "COD": "DR Congo",
     "NOR": "Norway", "SWE": "Sweden", "CZE": "Czech Republic",
     "JOR": "Jordan", "CPV": "Cape Verde", "CUW": "Curacao",
-    "HAI": "Haiti", "BIH": "Bosnia and Herzegovina",
-    "ITA": "Italy", "TUR": "Turkey", "SCO": "Scotland",
+    "HAI": "Haiti", "BIH": "Bosnia", "ITA": "Italy", "TUR": "Turkey",
+    "SCO": "Scotland", "PAN": "Panama", "NZL": "New Zealand",
+    "RSA": "South Africa", "IRQ": "Iraq", "UZB": "Uzbekistan",
+    "AUT": "Austria", "IDN": "Indonesia",
 }
 
 
@@ -46,19 +109,32 @@ def _load_shots() -> pd.DataFrame:
     return pd.read_csv(shots_path)
 
 
+def get_teams_with_data() -> list:
+    """Return list of team IDs that have shot data."""
+    shots = _load_shots()
+    all_teams_in_data = set(shots["team"].unique())
+    teams_with_data = []
+    for team_id, names in TEAM_ID_MAP.items():
+        if any(name in all_teams_in_data for name in names):
+            teams_with_data.append(team_id)
+    return sorted(teams_with_data)
+
+
+def _filter_team_shots(shots: pd.DataFrame, team_id: str) -> tuple:
+    """Filter shots for a team using all known name variants. Returns (filtered_df, display_name)."""
+    names = TEAM_ID_MAP.get(team_id, [team_id])
+    display_name = TEAM_DISPLAY_NAMES.get(team_id, team_id)
+    team_shots = shots[shots["team"].isin(names)]
+    return team_shots, display_name
+
+
 def generate_shot_map(team_id: str, position: str = "ALL") -> bytes:
     """
     Generate a shot map PNG for a team.
     Returns PNG bytes.
     """
     shots = _load_shots()
-    team_name = TEAM_ID_MAP.get(team_id, team_id)
-
-    # Filter to team
-    team_shots = shots[shots["team"] == team_name]
-    if team_shots.empty:
-        # Try partial match
-        team_shots = shots[shots["team"].str.contains(team_name, case=False, na=False)]
+    team_shots, team_name = _filter_team_shots(shots, team_id)
 
     if team_shots.empty:
         return _empty_pitch_png(f"No shot data for {team_name}")
@@ -119,11 +195,7 @@ def generate_shot_map(team_id: str, position: str = "ALL") -> bytes:
 def generate_heatmap(team_id: str) -> bytes:
     """Generate a shot heatmap PNG for a team."""
     shots = _load_shots()
-    team_name = TEAM_ID_MAP.get(team_id, team_id)
-
-    team_shots = shots[shots["team"] == team_name]
-    if team_shots.empty:
-        team_shots = shots[shots["team"].str.contains(team_name, case=False, na=False)]
+    team_shots, team_name = _filter_team_shots(shots, team_id)
 
     if team_shots.empty:
         return _empty_pitch_png(f"No shot data for {team_name}")
@@ -188,11 +260,7 @@ def _empty_pitch_png(message: str) -> bytes:
 def get_team_xg_stats(team_id: str) -> dict:
     """Get summary xG stats for a team."""
     shots = _load_shots()
-    team_name = TEAM_ID_MAP.get(team_id, team_id)
-
-    team_shots = shots[shots["team"] == team_name]
-    if team_shots.empty:
-        team_shots = shots[shots["team"].str.contains(team_name, case=False, na=False)]
+    team_shots, team_name = _filter_team_shots(shots, team_id)
 
     if team_shots.empty:
         return {

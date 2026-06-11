@@ -81,6 +81,11 @@ export async function getXgStats(teamId: string): Promise<XgStats> {
   return fetchWithTimeout(`${API_URL}/xg/team/${teamId}`);
 }
 
+export async function getXgTeamsWithData(): Promise<string[]> {
+  const data = await fetchWithTimeout(`${API_URL}/xg/teams-with-data`);
+  return data.teams;
+}
+
 export function getXgShotMapUrl(teamId: string): string {
   return `${API_URL}/xg/team/${teamId}/shotmap`;
 }

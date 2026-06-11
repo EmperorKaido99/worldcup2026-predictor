@@ -312,6 +312,16 @@ def predict_match(req: PredictMatchRequest):
 # --- xG Endpoints (P1) ---
 
 
+@app.get("/xg/teams-with-data")
+def get_xg_teams():
+    """Get list of team IDs that have xG shot data."""
+    try:
+        from src.viz import get_teams_with_data
+        return {"teams": get_teams_with_data()}
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+
+
 @app.get("/xg/team/{team_id}")
 def get_xg_stats(team_id: str):
     """Get xG summary stats for a team."""
