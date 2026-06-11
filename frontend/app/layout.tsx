@@ -21,7 +21,7 @@ export default function RootLayout({
         className={`${inter.className} bg-zinc-950 text-white min-h-screen pb-20 md:pb-0`}
       >
         <Nav />
-        <main className="max-w-4xl mx-auto px-4 py-6">{children}</main>
+        <main className="max-w-5xl mx-auto px-4 py-6">{children}</main>
       </body>
     </html>
   );

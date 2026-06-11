@@ -88,3 +88,34 @@ export function getXgShotMapUrl(teamId: string): string {
 export function getXgHeatmapUrl(teamId: string): string {
   return `${API_URL}/xg/team/${teamId}/heatmap`;
 }
+
+// --- Penalty API (P2) ---
+
+export interface ZoneStat {
+  total: number;
+  goals: number;
+  probability: number;
+}
+
+export interface PenaltyStats {
+  zone_stats: Record<string, ZoneStat>;
+  total_penalties: number;
+  total_goals: number;
+  conversion_rate: number;
+}
+
+export interface TeamPenaltyStats {
+  team: string;
+  zones: Record<string, ZoneStat>;
+  total: number;
+  goals: number;
+  conversion: number;
+}
+
+export async function getPenaltyStats(): Promise<PenaltyStats> {
+  return fetchWithTimeout(`${API_URL}/penalties/stats`);
+}
+
+export async function getTeamPenaltyStats(teamId: string): Promise<TeamPenaltyStats> {
+  return fetchWithTimeout(`${API_URL}/penalties/team/${teamId}`);
+}

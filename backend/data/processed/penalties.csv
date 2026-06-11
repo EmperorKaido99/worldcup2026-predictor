@@ -1,0 +1,259 @@
+zone,is_goal,is_saved,is_right_foot,end_y,end_z,player,team,match_id,competition_id,technique
+2,1,0,1,42.3,0.3,Mehdi Taremi,Iran,3857271,43,Normal
+3,1,0,1,37.8,1.6,Cristiano Ronaldo dos Santos Aveiro,Portugal,3857298,43,Normal
+5,1,0,0,43.4,1.5,Gareth Frank Bale,Wales,3857282,43,Normal
+0,0,1,1,38.3,0.0,Salem Mohammed Al Dawsari,Saudi Arabia,3857297,43,Normal
+4,1,0,1,39.1,0.9,İlkay Gündoğan,Germany,3857284,43,Normal
+2,0,1,1,42.9,0.4,Robert Lewandowski,Poland,3857265,43,Normal
+0,0,1,0,38.0,0.2,Alphonso Davies,Canada,3857268,43,Normal
+5,1,0,0,43.3,1.4,Lionel Andrés Messi Cuccittini,Argentina,3869321,43,Normal
+3,0,1,1,37.2,1.2,Virgil van Dijk,Netherlands,3869321,43,Normal
+1,1,0,0,38.7,0.2,Lionel Andrés Messi Cuccittini,Argentina,3869321,43,Normal
+5,0,1,0,42.9,0.9,Steven Berghuis,Netherlands,3869321,43,Normal
+3,1,0,1,36.6,1.5,Leandro Daniel Paredes,Argentina,3869321,43,Normal
+5,1,0,0,43.7,1.1,Teun Koopmeiners,Netherlands,3869321,43,Normal
+5,1,0,1,42.8,1.4,Gonzalo Ariel Montiel,Argentina,3869321,43,Normal
+0,1,0,1,36.7,0.2,Wout Weghorst,Netherlands,3869321,43,Normal
+0,0,0,1,35.4,0.5,Enzo Fernandez,Argentina,3869321,43,Normal
+0,1,0,1,37.7,0.2,Luuk de Jong,Netherlands,3869321,43,Normal
+3,1,0,1,36.4,1.6,Lautaro Javier Martínez,Argentina,3869321,43,Normal
+2,1,0,0,41.8,0.2,Lionel Andrés Messi Cuccittini,Argentina,3869685,43,Normal
+0,1,0,1,37.3,0.3,Kylian Mbappé Lottin,France,3869685,43,Normal
+3,1,0,1,36.7,1.1,Kylian Mbappé Lottin,France,3869685,43,Normal
+3,1,0,1,37.6,1.3,Kylian Mbappé Lottin,France,3869685,43,Normal
+0,1,0,0,38.3,0.2,Lionel Andrés Messi Cuccittini,Argentina,3869685,43,Normal
+3,0,1,1,38.2,0.9,Kingsley Coman,France,3869685,43,Normal
+1,1,0,0,40.4,0.2,Paulo Bruno Exequiel Dybala,Argentina,3869685,43,Normal
+0,0,0,1,35.6,0.2,Aurélien Djani Tchouaméni,France,3869685,43,Normal
+0,1,0,1,37.6,0.2,Leandro Daniel Paredes,Argentina,3869685,43,Normal
+4,1,0,1,39.3,1.6,Randal Kolo Muani,France,3869685,43,Normal
+0,1,0,1,37.9,0.2,Gonzalo Ariel Montiel,Argentina,3869685,43,Normal
+2,1,0,1,43.4,0.2,Ismaïla Sarr,Senegal,3857267,43,Normal
+5,0,1,0,42.8,1.4,Lionel Andrés Messi Cuccittini,Argentina,3857264,43,Normal
+8,1,0,0,42.3,2.3,Lionel Andrés Messi Cuccittini,Argentina,3869519,43,Normal
+3,1,0,1,36.4,1.7,Harry Kane,England,3869354,43,Normal
+7,0,0,1,38.7,4.2,Harry Kane,England,3869354,43,Normal
+7,1,0,1,39.4,1.9,Nikola Vlašić,Croatia,3869420,43,Normal
+5,0,1,1,41.9,1.0,Rodrygo Silva de Goes,Brazil,3869420,43,Normal
+1,1,0,0,40.1,0.8,Lovro Majer,Croatia,3869420,43,Normal
+0,1,0,1,36.5,0.7,Carlos Henrique Casimiro,Brazil,3869420,43,Normal
+0,1,0,1,36.9,0.2,Luka Modrić,Croatia,3869420,43,Normal
+0,1,0,1,38.5,0.2,Pedro Guilherme Abreu dos Santos,Brazil,3869420,43,Normal
+0,1,0,1,36.5,0.2,Mislav Oršić,Croatia,3869420,43,Normal
+0,0,0,1,35.9,0.2,Marcos Aoás Corrêa,Brazil,3869420,43,Normal
+2,1,0,1,43.0,0.3,Abdelhamid Sabiri,Morocco,3869220,43,Normal
+2,0,0,0,44.0,0.2,Pablo Sarabia García,Spain,3869220,43,Normal
+4,1,0,0,40.0,1.3,Hakim Ziyech,Morocco,3869220,43,Normal
+2,0,1,1,42.7,0.7,Carlos Soler Barragán,Spain,3869220,43,Normal
+0,0,1,1,37.2,0.1,Badr Banoun,Morocco,3869220,43,Normal
+0,0,1,1,37.3,0.5,Sergio Busquets i Burgos,Spain,3869220,43,Normal
+1,1,0,1,40.1,0.2,Achraf Hakimi Mouh,Morocco,3869220,43,Normal
+2,0,1,1,41.9,0.2,Takumi Minamino,Japan,3869219,43,Normal
+3,1,0,1,36.8,1.3,Nikola Vlašić,Croatia,3869219,43,Normal
+0,0,1,1,37.5,0.2,Kaoru Mitoma,Japan,3869219,43,Normal
+4,1,0,1,39.9,1.7,Marcelo Brozović,Croatia,3869219,43,Normal
+5,1,0,1,41.9,0.9,Takuma Asano,Japan,3869219,43,Normal
+0,0,0,1,36.1,0.6,Marko Livaja,Croatia,3869219,43,Normal
+0,0,1,1,37.5,0.2,Maya Yoshida,Japan,3869219,43,Normal
+0,1,0,1,36.5,0.3,Mario Pašalić,Croatia,3869219,43,Normal
+2,1,0,1,42.3,0.2,Neymar da Silva Santos Junior,Brazil,3869253,43,Normal
+0,1,0,1,37.4,0.2,Robert Lewandowski,Poland,3869152,43,Normal
+0,1,0,1,38.2,0.6,Bruno Miguel Borges Fernandes,Portugal,3857270,43,Normal
+2,1,0,1,43.4,0.2,Enner Remberto Valencia Lastra,Ecuador,3857286,43,Normal
+1,1,0,0,38.7,0.2,Lionel Andrés Messi Cuccittini,Argentina,3857300,43,Normal
+2,0,1,0,42.3,0.2,André Ayew Pelé,Ghana,3857293,43,Normal
+0,1,0,1,37.3,0.5,Ferrán Torres García,Spain,3857291,43,Normal
+6,1,0,1,36.6,2.0,Harry Kane,England,7554,43,Normal
+3,1,0,1,37.8,1.6,Harry Kane,England,7554,43,Normal
+2,1,0,1,43.0,0.4,Andreas Granqvist,Sweden,7538,43,Normal
+4,1,0,1,40.3,1.6,Harry Kane,England,7585,43,Normal
+4,1,0,1,39.7,1.5,Radamel Falcao García Zárate,Colombia,7585,43,Normal
+0,1,0,1,36.2,0.5,Harry Kane,England,7585,43,Normal
+6,1,0,1,37.0,2.0,Juan Guillermo Cuadrado Bello,Colombia,7585,43,Normal
+0,1,0,1,36.2,0.5,Marcus Rashford,England,7585,43,Normal
+2,1,0,1,42.0,0.2,Luis Fernando Muriel Fruto,Colombia,7585,43,Normal
+2,0,1,1,43.8,0.5,Jordan Brian Henderson,England,7585,43,Normal
+8,0,0,1,43.4,2.7,Andrés Mateus Uribe Villa,Colombia,7585,43,Normal
+6,1,0,1,37.0,1.9,Kieran Trippier,England,7585,43,Normal
+4,0,1,1,38.9,1.3,Carlos Arturo Bacca Ahumada,Colombia,7585,43,Normal
+0,1,0,1,36.4,0.4,Eric Dier,England,7585,43,Normal
+7,1,0,1,40.7,2.4,Gylfi Þór Sigurðsson,Iceland,7561,43,Normal
+8,1,0,0,43.4,2.4,Mohamed Salah,Egypt,7540,43,Normal
+3,0,1,0,38.3,1.3,Lionel Andrés Messi Cuccittini,Argentina,7531,43,Normal
+5,0,1,1,42.4,0.9,Cristiano Ronaldo dos Santos Aveiro,Portugal,7557,43,Normal
+8,1,0,1,42.6,2.5,Karim Ansarifard,Iran,7557,43,Normal
+8,1,0,0,41.5,1.8,Carlos Alberto Vela Garrido,Mexico,7553,43,Normal
+5,1,0,1,43.8,1.3,Cristiano Ronaldo dos Santos Aveiro,Portugal,7576,43,Normal
+0,1,0,1,36.4,0.5,Ferjani Sassi,Tunisia,7537,43,Normal
+0,1,0,0,38.3,0.2,Antoine Griezmann,France,7580,43,Normal
+2,0,1,1,43.0,0.2,Luka Modrić,Croatia,7581,43,Normal
+0,0,1,1,36.6,0.6,Christian Dannemann Eriksen,Denmark,7581,43,Normal
+1,0,1,1,38.7,0.5,Milan Badelj,Croatia,7581,43,Normal
+8,1,0,1,42.8,2.5,Simon Thorup Kjær,Denmark,7581,43,Normal
+0,1,0,1,37.0,0.2,Andrej Kramarić,Croatia,7581,43,Normal
+0,1,0,1,37.0,0.2,Michael Krohn-Dehli,Denmark,7581,43,Normal
+1,1,0,1,40.3,0.2,Luka Modrić,Croatia,7581,43,Normal
+0,0,1,1,36.2,0.8,Lasse Schöne,Denmark,7581,43,Normal
+0,0,1,0,36.6,0.4,Josip Pivarić,Croatia,7581,43,Normal
+2,0,1,1,41.5,0.2,Nicolai Jørgensen,Denmark,7581,43,Normal
+0,1,0,1,37.2,0.3,Ivan Rakitić,Croatia,7581,43,Normal
+8,0,0,1,43.2,3.9,Gylfi Þór Sigurðsson,Iceland,7549,43,Normal
+0,1,0,1,36.2,0.3,Luka Modrić,Croatia,7529,43,Normal
+8,0,0,0,43.2,2.7,Bryan Ruiz González,Costa Rica,7568,43,Normal
+5,1,0,0,43.8,1.4,Antoine Griezmann,France,7530,43,Normal
+2,1,0,1,42.0,0.2,Mile Jedinak,Australia,7530,43,Normal
+2,1,0,1,42.4,0.2,Mile Jedinak,Australia,7547,43,Normal
+0,1,0,0,37.6,0.1,Antoine Griezmann,France,8658,43,Normal
+5,1,0,1,43.0,1.7,Artem Dzyuba,Russia,7582,43,Normal
+5,1,0,1,42.0,1.6,Andrés Iniesta Luján,Spain,7582,43,Normal
+3,1,0,1,37.4,1.2,Fyodor Smolov,Russia,7582,43,Normal
+3,1,0,1,36.2,1.1,Gerard Piqué Bernabéu,Spain,7582,43,Normal
+5,1,0,1,43.4,1.6,Sergei Ignashevich,Russia,7582,43,Normal
+0,0,1,1,37.8,0.6,Jorge Resurrección Merodio,Spain,7582,43,Normal
+0,1,0,1,38.5,0.2,Aleksandr Golovin,Russia,7582,43,Normal
+3,1,0,1,37.8,1.6,Sergio Ramos García,Spain,7582,43,Normal
+4,1,0,0,40.5,1.3,Denis Cheryshev,Russia,7582,43,Normal
+4,0,1,0,39.1,0.9,Iago Aspas Juncal,Spain,7582,43,Normal
+0,1,0,1,37.0,0.0,Eden Hazard,Belgium,7552,43,Normal
+7,0,0,1,40.1,4.1,Christian Alberto Cueva Bravo,Peru,7532,43,Normal
+2,1,0,1,42.2,0.4,Victor Moses,Nigeria,7564,43,Normal
+6,1,0,1,36.2,2.4,Andreas Granqvist,Sweden,7566,43,Normal
+2,1,0,1,41.5,0.3,Shinji Kagawa,Japan,7541,43,Normal
+3,0,1,1,38.1,1.1,Fyodor Smolov,Russia,8652,43,Normal
+5,1,0,1,43.6,1.7,Marcelo Brozović,Croatia,8652,43,Normal
+2,1,0,1,43.2,0.4,Alan Dzagoev,Russia,8652,43,Normal
+2,0,1,1,43.8,0.1,Mateo Kovačić,Croatia,8652,43,Normal
+0,0,0,1,35.2,0.3,Mário Figueira Fernandes,Russia,8652,43,Normal
+0,1,0,1,37.6,0.2,Luka Modrić,Croatia,8652,43,Normal
+0,1,0,1,37.0,0.7,Sergei Ignashevich,Russia,8652,43,Normal
+3,1,0,1,36.6,1.6,Domagoj Vida,Croatia,8652,43,Normal
+0,1,0,1,36.2,0.4,Daler Kuzyaev,Russia,8652,43,Normal
+0,1,0,1,36.6,0.4,Ivan Rakitić,Croatia,8652,43,Normal
+0,0,1,1,37.6,0.3,Fahad Mosaed Al Muwallad Al Harbi,Saudi Arabia,7559,43,Normal
+6,1,0,0,37.4,2.3,Salman Mohammed Al Faraj,Saudi Arabia,7559,43,Normal
+5,0,1,1,43.2,0.9,Ghizlane Chebbak,Morocco Women's,3893834,72,Normal
+1,1,0,0,40.2,0.2,Alexandra Popp,Germany Women's,3893818,72,Normal
+0,1,0,1,37.4,0.0,Pernille Mosegaard Harder,Denmark Women's,3893825,72,Normal
+0,1,0,1,36.7,0.2,Kadidiatou Diani,France Women's,3893829,72,Normal
+0,1,0,1,36.3,0.2,Kadidiatou Diani,France Women's,3893829,72,Normal
+3,1,0,1,36.7,0.9,Yomira Tibisay Pinzón Ríos,Panama Women's,3893829,72,Normal
+0,1,0,0,37.1,0.2,María Catalina Usme Pineda,Colombia Women's,3893802,72,Normal
+3,1,0,1,36.7,1.1,Elin Ingrid Johanna Rubensson,Sweden Women's,3893830,72,Normal
+3,0,1,0,38.5,1.1,Selma Bacha,France Women's,3902968,72,Normal
+0,1,0,1,36.4,0.3,Caitlin Jade Foord,Australia Women's,3902968,72,Normal
+0,1,0,1,36.7,0.2,Kadidiatou Diani,France Women's,3902968,72,Normal
+3,0,1,0,37.2,0.9,Stephanie-Elise Catley,Australia Women's,3902968,72,Normal
+3,1,0,1,37.1,1.2,Wendie Renard,France Women's,3902968,72,Normal
+1,1,0,1,41.3,0.2,Samantha May Kerr,Australia Women's,3902968,72,Normal
+2,1,0,1,42.8,0.2,Eugénie Le Sommer,France Women's,3902968,72,Normal
+0,1,0,1,36.8,0.5,Mary Boio Fowler,Australia Women's,3902968,72,Normal
+0,0,1,1,37.4,0.4,Eve Perisset,France Women's,3902968,72,Normal
+5,0,0,1,44.0,1.6,Mackenzie Arnold,Australia Women's,3902968,72,Normal
+0,1,0,1,38.3,0.5,Onema Grace Geyoro,France Women's,3902968,72,Normal
+0,1,0,1,37.4,0.5,Katrina Gorry,Australia Women's,3902968,72,Normal
+7,1,0,0,41.3,2.0,Sakina Karchaoui,France Women's,3902968,72,Normal
+2,1,0,1,42.6,0.2,Tameka Yallop,Australia Women's,3902968,72,Normal
+4,1,0,1,41.2,1.3,Maëlle Lakrar,France Women's,3902968,72,Normal
+0,1,0,1,36.1,0.7,Ellie Madison Carpenter,Australia Women's,3902968,72,Normal
+2,0,1,1,42.3,0.8,Kenza Dali,France Women's,3902968,72,Normal
+3,0,1,1,38.5,1.0,Clare Hunt,Australia Women's,3902968,72,Normal
+0,0,0,1,36.0,0.2,Vicki Becho,France Women's,3902968,72,Normal
+2,1,0,1,42.2,0.2,Cortnee Brooke Vine,Australia Women's,3902968,72,Normal
+2,1,0,1,42.5,0.6,Riko Ueki,Japan Women's,3893793,72,Normal
+0,1,0,1,37.4,0.2,Barbra Banda,Zambia W,3893823,72,Normal
+0,1,0,0,36.9,0.0,Shuang Wang,China PR Women's,3893813,72,Normal
+2,0,1,1,43.1,0.2,Christine Margaret Sinclair,Canada Women's,3893790,72,Normal
+0,1,0,1,37.2,0.2,Arianna Caruso,Italy Women's,3893831,72,Normal
+2,0,1,0,43.2,0.2,Jennifer Hermoso Fuentes,Spain Women's,3906390,72,Normal
+3,0,1,0,38.1,1.6,Jennifer Hermoso Fuentes,Spain Women's,3893791,72,Normal
+8,0,0,1,43.2,2.8,Ria Percival,New Zealand Women's,3893787,72,Normal
+0,1,0,0,37.1,0.2,Guro Reiten,Norway Women's,3893820,72,Normal
+2,1,0,0,43.5,0.3,Fridolina Rolfö,Sweden Women's,3906389,72,Normal
+3,1,0,0,37.3,1.4,Stephanie-Elise Catley,Australia Women's,3893821,72,Normal
+0,1,0,1,36.6,0.2,Andi Sullivan,United States Women's,3901797,72,Normal
+2,1,0,0,43.6,0.8,Fridolina Rolfö,Sweden Women's,3901797,72,Normal
+3,1,0,1,36.6,0.9,Lindsey Michelle Heaps,United States Women's,3901797,72,Normal
+3,1,0,1,36.5,1.3,Elin Ingrid Johanna Rubensson,Sweden Women's,3901797,72,Normal
+6,1,0,0,37.3,2.0,Kristie Mewis,United States Women's,3901797,72,Normal
+6,0,0,1,37.0,4.5,Gun Nathalie Björn,Sweden Women's,3901797,72,Normal
+8,0,0,1,43.4,5.0,Megan Anna Rapinoe,United States Women's,3901797,72,Normal
+5,0,1,1,43.6,0.9,Rebecka Blomqvist,Sweden Women's,3901797,72,Normal
+8,0,0,1,44.9,2.4,Sophia Olivia Wilson,United States Women's,3901797,72,Normal
+6,1,0,1,37.7,2.5,Hanna Ulrika Bennison,Sweden Women's,3901797,72,Normal
+7,1,0,1,40.2,1.9,Alyssa Michele Naeher,United States Women's,3901797,72,Normal
+8,1,0,0,43.8,2.0,Magdalena Lilly Eriksson,Sweden Women's,3901797,72,Normal
+5,0,0,1,44.2,0.9,Kelley Maureen O'Hara,United States Women's,3901797,72,Normal
+3,1,0,1,38.6,0.9,Lina Mona Andréa Hurtig,Sweden Women's,3901797,72,Normal
+0,1,0,1,36.2,0.2,María Francesca Caldentey Oliver,Spain Women's,3902240,72,Normal
+0,1,0,1,36.7,0.2,Ingrid Filippa Angeldal,Sweden Women's,3902239,72,Normal
+7,0,0,1,39.6,2.8,Riko Ueki,Japan Women's,3902239,72,Normal
+3,0,0,1,35.3,1.2,Georgia Stanway,England Women's,3901735,72,Normal
+3,0,0,1,34.8,1.7,Ugochi Desire Oparanozie,Nigeria Women's,3901735,72,Normal
+7,1,0,1,41.3,2.3,Bethany England,England Women's,3901735,72,Normal
+7,0,0,0,40.4,6.5,Michelle Alozie,Nigeria Women's,3901735,72,Normal
+6,1,0,1,36.7,2.2,Rachel Daly,England Women's,3901735,72,Normal
+5,1,0,1,42.3,1.1,Rasheedat Busayo Ajibade,Nigeria Women's,3901735,72,Normal
+5,1,0,0,43.4,1.0,Alex Greenwood,England Women's,3901735,72,Normal
+8,1,0,1,43.2,1.8,Christy Onyenaturuchi Ucheibe,Nigeria Women's,3901735,72,Normal
+6,1,0,1,36.6,2.1,Chloe Kelly,England Women's,3901735,72,Normal
+6,1,0,0,37.0,1.8,Stephanie-Elise Catley,Australia Women's,3893788,72,Normal
+3,1,0,1,36.9,1.0,Ramona Bachmann,Switzerland Women's,3893789,72,Normal
+0,1,0,1,38.0,0.7,Georgia Stanway,England Women's,3893794,72,Normal
+0,0,1,0,38.0,0.3,Alexandra Morgan Carrasco,United States Women's,3893792,72,Normal
+1,1,0,0,39.9,0.3,Shuang Wang,China PR Women's,3893828,72,Normal
+2,1,0,0,43.5,0.3,Marta Vieira da Silva Veiga,Brazil Women's,68312,72,Normal
+0,0,1,1,37.2,0.3,Janine Elizabeth Sonis,Canada Women's,69163,72,Normal
+0,1,0,1,37.0,0.2,Cristiana Girelli,Italy Women's,22963,72,Normal
+2,1,0,0,42.9,0.7,Sara Däbritz,Germany Women's,68355,72,Normal
+2,1,0,1,43.1,0.4,Caroline Graham Hansen,Norway Women's,68357,72,Normal
+8,0,0,1,43.2,4.0,Samantha May Kerr,Australia Women's,68357,72,Normal
+2,1,0,0,43.3,0.2,Guro Reiten,Norway Women's,68357,72,Normal
+0,0,1,1,37.0,0.4,Emily Gielnik,Australia Women's,68357,72,Normal
+0,1,0,1,36.4,0.3,Maren Nævdal Mjelde,Norway Women's,68357,72,Normal
+5,1,0,0,43.2,1.7,Stephanie-Elise Catley,Australia Women's,68357,72,Normal
+5,1,0,1,43.2,1.4,Ingrid Syrstad Engen,Norway Women's,68357,72,Normal
+3,1,0,1,36.5,1.1,Elin Ingrid Johanna Rubensson,Sweden Women's,22973,72,Normal
+2,1,0,1,43.2,0.2,Megan Anna Rapinoe,United States Women's,69321,72,Normal
+8,0,0,0,41.7,2.8,Francisca Alejandra Lara Lara,Chile Women's,68343,72,Normal
+8,1,0,1,43.7,2.0,Wendie Renard,France Women's,22980,72,Normal
+0,0,1,1,37.2,0.3,Stephanie Houghton,England Women's,69258,72,Normal
+0,1,0,1,36.8,0.2,Eugénie Le Sommer,France Women's,22948,72,Normal
+2,1,0,1,43.1,0.2,Yuika Sugasawa,Japan Women's,22961,72,Normal
+0,1,0,0,37.2,0.5,Marta Vieira da Silva Veiga,Brazil Women's,22955,72,Normal
+2,1,0,1,42.2,0.3,Lieke Martens,Netherlands Women's,69188,72,Normal
+5,0,1,1,42.0,1.2,Nikita Parris,England Women's,22962,72,Normal
+4,1,0,1,39.8,0.9,María Florencia Bonsegundo,Argentina Women's,68338,72,Normal
+6,1,0,1,37.0,2.4,Nikita Parris,England Women's,22936,72,Normal
+0,0,1,1,37.2,0.3,Samantha May Kerr,Australia Women's,22933,72,Normal
+0,1,0,1,36.5,0.2,Caroline Graham Hansen,Norway Women's,22981,72,Normal
+0,1,0,1,36.6,0.7,Isabell Herlovsen,Norway Women's,22981,72,Normal
+0,0,0,1,35.7,0.2,Carli Anne Hollins,United States Women's,22974,72,Normal
+3,1,0,0,37.6,1.0,Jennifer Hermoso Fuentes,Spain Women's,22930,72,Normal
+5,1,0,0,43.0,1.2,Jennifer Hermoso Fuentes,Spain Women's,22930,72,Normal
+0,0,1,0,37.1,0.1,Andressa Alves da Silva,Brazil Women's,22934,72,Normal
+3,0,1,1,37.2,1.3,Nikita Parris,England Women's,69199,72,Normal
+0,1,0,1,36.3,0.2,Megan Anna Rapinoe,United States Women's,69161,72,Normal
+0,1,0,1,36.3,0.2,Megan Anna Rapinoe,United States Women's,69161,72,Normal
+0,1,0,0,37.0,0.2,Lionel Andrés Messi Cuccittini,Barcelona,3773593,11,Normal
+0,1,0,1,37.4,0.2,Sergio Ramos García,Real Madrid,3773585,11,Normal
+0,1,0,1,36.6,0.2,Jaime Mata Arnaiz,Getafe,3773587,11,Normal
+3,0,1,0,37.6,1.0,Lionel Andrés Messi Cuccittini,Barcelona,3773377,11,Normal
+0,0,1,0,37.4,0.0,Lionel Andrés Messi Cuccittini,Barcelona,3773695,11,Normal
+2,1,0,1,42.3,0.5,Rafael Mir Vicente,Huesca,3773369,11,Normal
+0,1,0,1,36.7,0.2,Enes Ünal,Getafe,3773661,11,Normal
+2,1,0,0,43.3,0.8,Antoine Griezmann,Barcelona,3773661,11,Normal
+0,1,0,0,37.0,0.7,Lionel Andrés Messi Cuccittini,Barcelona,3773415,11,Normal
+0,1,0,1,37.0,0.2,Alejandro Fernández Iglesias,Cádiz,3773415,11,Normal
+3,0,1,0,37.9,0.9,Antoine Griezmann,Barcelona,3773477,11,Normal
+8,1,0,0,43.3,2.3,Lionel Andrés Messi Cuccittini,Barcelona,3773477,11,Normal
+0,1,0,1,38.1,0.2,Thierry Henry,Arsenal,3749493,2,Normal
+2,1,0,1,41.8,0.7,Thierry Henry,Arsenal,3749296,2,Normal
+0,1,0,1,37.4,0.3,Thierry Henry,Arsenal,3749257,2,Normal
+5,1,0,1,43.1,1.5,Thierry Henry,Arsenal,3749133,2,Normal
+1,1,0,1,39.6,0.5,Thierry Henry,Arsenal,3749528,2,Lob
+6,0,0,1,37.5,2.9,Ruud van Nistelrooy,Manchester United,3749552,2,Normal
+5,1,0,1,43.1,1.5,Robbie Keane,Tottenham Hotspur,3749068,2,Normal
+4,1,0,1,40.9,1.7,Thierry Henry,Arsenal,3749453,2,Lob
+2,1,0,1,42.6,0.1,Thierry Henry,Arsenal,3749153,2,Normal
+6,1,0,1,37.3,1.8,Massimo Maccarone,Middlesbrough,3749153,2,Normal
+4,1,0,1,39.2,1.7,Paolo Di Canio,Charlton Athletic,3749526,2,Lob

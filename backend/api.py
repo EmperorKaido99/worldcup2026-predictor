@@ -207,6 +207,57 @@ def predict_match(req: PredictMatchRequest):
     neutral_flag = 1 if req.neutral else 0
     host_flag = 1 if (not req.neutral and home_name in HOST_NATIONS) else 0
 
+    def _win_streak(team, n=10):
+        tm = matches[
+            (matches["home_team"] == team) | (matches["away_team"] == team)
+        ].sort_values("date").tail(n)
+        streak = 0
+        for _, m in reversed(list(tm.iterrows())):
+            if m["home_team"] == team:
+                won = m["home_score"] > m["away_score"]
+            else:
+                won = m["away_score"] > m["home_score"]
+            if won:
+                streak += 1
+            else:
+                break
+        return streak
+
+    def _unbeaten_streak(team, n=10):
+        tm = matches[
+            (matches["home_team"] == team) | (matches["away_team"] == team)
+        ].sort_values("date").tail(n)
+        streak = 0
+        for _, m in reversed(list(tm.iterrows())):
+            if m["home_team"] == team:
+                lost = m["home_score"] < m["away_score"]
+            else:
+                lost = m["away_score"] < m["home_score"]
+            if not lost:
+                streak += 1
+            else:
+                break
+        return streak
+
+    def _h2h_stats(team1, team2, n=5):
+        h2h = matches[
+            ((matches["home_team"] == team1) & (matches["away_team"] == team2))
+            | ((matches["home_team"] == team2) & (matches["away_team"] == team1))
+        ].sort_values("date").tail(n)
+        wins, gd = 0, 0
+        for _, m in h2h.iterrows():
+            if m["home_team"] == team1:
+                gd += m["home_score"] - m["away_score"]
+                if m["home_score"] > m["away_score"]:
+                    wins += 1
+            else:
+                gd += m["away_score"] - m["home_score"]
+                if m["away_score"] > m["home_score"]:
+                    wins += 1
+        return wins, gd
+
+    h2h_wins, h2h_gd = _h2h_stats(home_name, away_name)
+
     feature_vector = np.array([[
         elo_home,
         elo_away,
@@ -219,6 +270,12 @@ def predict_match(req: PredictMatchRequest):
         _points_rate(away_name),
         neutral_flag,
         host_flag,
+        _win_streak(home_name),
+        _win_streak(away_name),
+        _unbeaten_streak(home_name),
+        _unbeaten_streak(away_name),
+        h2h_wins,
+        h2h_gd,
     ]])
 
     scaler = artifacts["scaler"]
@@ -285,3 +342,78 @@ def get_heatmap(team_id: str):
         return Response(content=png_bytes, media_type="image/png")
     except FileNotFoundError as e:
         raise HTTPException(status_code=503, detail=str(e))
+
+
+# --- Penalty Endpoints (P2) ---
+
+_penalty_artifacts = None
+_penalty_team_stats = None
+
+
+def _load_penalty_model():
+    global _penalty_artifacts, _penalty_team_stats
+    if _penalty_artifacts is not None:
+        return _penalty_artifacts, _penalty_team_stats
+
+    model_path = MODELS_DIR / "penalty_model.joblib"
+    team_path = MODELS_DIR / "penalty_team_stats.joblib"
+    if not model_path.exists():
+        raise HTTPException(
+            status_code=503,
+            detail="Penalty model not trained. Run: python -m src.train_penalty",
+        )
+    _penalty_artifacts = joblib.load(model_path)
+    if team_path.exists():
+        _penalty_team_stats = joblib.load(team_path)
+    else:
+        _penalty_team_stats = {}
+    return _penalty_artifacts, _penalty_team_stats
+
+
+@app.get("/penalties/stats")
+def get_penalty_stats():
+    """Get overall penalty zone statistics."""
+    artifacts, _ = _load_penalty_model()
+    return {
+        "zone_stats": artifacts["zone_stats"],
+        "total_penalties": artifacts["total_penalties"],
+        "total_goals": artifacts["total_goals"],
+        "conversion_rate": artifacts["conversion_rate"],
+    }
+
+
+@app.get("/penalties/team/{team_id}")
+def get_team_penalty_stats(team_id: str):
+    """Get penalty stats for a specific team."""
+    _, team_stats = _load_penalty_model()
+
+    # Resolve team name from ID
+    teams, _ = _load_teams()
+    id_to_name = {t["id"]: t["name"] for t in teams}
+    team_name = id_to_name.get(team_id, team_id)
+
+    # Try exact match, then partial
+    stats = team_stats.get(team_name)
+    if not stats:
+        for name, s in team_stats.items():
+            if team_name.lower() in name.lower() or name.lower() in team_name.lower():
+                stats = s
+                team_name = name
+                break
+
+    if not stats:
+        return {
+            "team": team_name,
+            "zones": {str(i): {"total": 0, "goals": 0, "probability": 0} for i in range(9)},
+            "total": 0,
+            "goals": 0,
+            "conversion": 0,
+        }
+
+    return {
+        "team": team_name,
+        "zones": stats["zones"],
+        "total": stats["total"],
+        "goals": stats["goals"],
+        "conversion": stats["conversion"],
+    }

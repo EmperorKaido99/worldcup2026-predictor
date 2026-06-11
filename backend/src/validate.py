@@ -191,11 +191,16 @@ def validate():
             elo_a = get_elo_at_date(elo_history, away_name, now, initial_elo.get(away_name, 1500))
             h_stats = rolling_stats(matches, home_name, now)
             a_stats = rolling_stats(matches, away_name, now)
+            from src.features import head_to_head
+            h2h = head_to_head(matches, home_name, away_name, now)
             feat = np.array([[
                 elo_h, elo_a, elo_h - elo_a,
                 h_stats["goals_scored_rate"], h_stats["goals_conceded_rate"], h_stats["points_rate"],
                 a_stats["goals_scored_rate"], a_stats["goals_conceded_rate"], a_stats["points_rate"],
                 1, 0,  # neutral, not host
+                h_stats["win_streak"], a_stats["win_streak"],
+                h_stats["unbeaten_streak"], a_stats["unbeaten_streak"],
+                h2h["h2h_wins"], h2h["h2h_gd"],
             ]])
             proba = model.predict_proba(scaler.transform(feat))
             if proba.shape[1] != 3 or not np.isclose(proba.sum(), 1.0, atol=0.01):

@@ -123,6 +123,8 @@ def rolling_stats(matches: pd.DataFrame, team: str, before_date, n=10):
             "goals_conceded_rate": 1.0,
             "points_rate": 1.0,
             "form_str": "-----",
+            "win_streak": 0,
+            "unbeaten_streak": 0,
         }
 
     goals_scored = []
@@ -154,12 +156,64 @@ def rolling_stats(matches: pd.DataFrame, team: str, before_date, n=10):
             else:
                 form_chars.append("L")
 
+    # Compute streaks from most recent match backwards
+    win_streak = 0
+    for c in reversed(form_chars):
+        if c == "W":
+            win_streak += 1
+        else:
+            break
+
+    unbeaten_streak = 0
+    for c in reversed(form_chars):
+        if c in ("W", "D"):
+            unbeaten_streak += 1
+        else:
+            break
+
     return {
         "goals_scored_rate": np.mean(goals_scored),
         "goals_conceded_rate": np.mean(goals_conceded),
         "points_rate": np.mean(points),
         "form_str": "".join(form_chars[-5:]),
+        "win_streak": win_streak,
+        "unbeaten_streak": unbeaten_streak,
     }
+
+
+def head_to_head(matches: pd.DataFrame, team1: str, team2: str, before_date, n=5):
+    """Compute head-to-head record between two teams before a given date."""
+    h2h = matches[
+        (
+            ((matches["home_team"] == team1) & (matches["away_team"] == team2))
+            | ((matches["home_team"] == team2) & (matches["away_team"] == team1))
+        )
+        & (matches["date"] < before_date)
+    ].sort_values("date").tail(n)
+
+    if len(h2h) == 0:
+        return {"h2h_wins": 0, "h2h_draws": 0, "h2h_losses": 0, "h2h_gd": 0}
+
+    wins, draws, losses, gd = 0, 0, 0, 0
+    for _, m in h2h.iterrows():
+        if m["home_team"] == team1:
+            gd += m["home_score"] - m["away_score"]
+            if m["home_score"] > m["away_score"]:
+                wins += 1
+            elif m["home_score"] == m["away_score"]:
+                draws += 1
+            else:
+                losses += 1
+        else:
+            gd += m["away_score"] - m["home_score"]
+            if m["away_score"] > m["home_score"]:
+                wins += 1
+            elif m["home_score"] == m["away_score"]:
+                draws += 1
+            else:
+                losses += 1
+
+    return {"h2h_wins": wins, "h2h_draws": draws, "h2h_losses": losses, "h2h_gd": gd}
 
 
 def build_feature_table(matches: pd.DataFrame, elo_df: pd.DataFrame) -> pd.DataFrame:
@@ -182,6 +236,7 @@ def build_feature_table(matches: pd.DataFrame, elo_df: pd.DataFrame) -> pd.DataF
 
         home_stats = rolling_stats(matches, home, date)
         away_stats = rolling_stats(matches, away, date)
+        h2h = head_to_head(matches, home, away, date)
 
         neutral = bool(match["neutral_venue"])
         host_flag = 1 if (not neutral and home in HOST_NATIONS) else 0
@@ -201,6 +256,12 @@ def build_feature_table(matches: pd.DataFrame, elo_df: pd.DataFrame) -> pd.DataF
             "away_points_rate": away_stats["points_rate"],
             "neutral_venue": int(neutral),
             "host_nation": host_flag,
+            "home_win_streak": home_stats["win_streak"],
+            "away_win_streak": away_stats["win_streak"],
+            "home_unbeaten": home_stats["unbeaten_streak"],
+            "away_unbeaten": away_stats["unbeaten_streak"],
+            "h2h_wins": h2h["h2h_wins"],
+            "h2h_gd": h2h["h2h_gd"],
             "result": compute_result(match),
             "form_home": home_stats["form_str"],
             "form_away": away_stats["form_str"],
@@ -216,6 +277,9 @@ def get_feature_columns():
         "home_goals_rate", "home_conceded_rate", "home_points_rate",
         "away_goals_rate", "away_conceded_rate", "away_points_rate",
         "neutral_venue", "host_nation",
+        "home_win_streak", "away_win_streak",
+        "home_unbeaten", "away_unbeaten",
+        "h2h_wins", "h2h_gd",
     ]
 
 

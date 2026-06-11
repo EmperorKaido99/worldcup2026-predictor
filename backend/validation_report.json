@@ -1,25 +1,25 @@
 {
-  "model_type": "LR",
-  "model_detail": "10.0 sigmoid",
-  "test_size": 791,
-  "model_accuracy": 0.6119,
-  "baseline_accuracy": 0.6018,
+  "model_type": "GB",
+  "model_detail": "50 lr=0.1,d=4",
+  "test_size": 921,
+  "model_accuracy": 0.633,
+  "baseline_accuracy": 0.6156,
   "beats_baseline": true,
-  "model_log_loss": 0.8521,
-  "baseline_log_loss": 13.7544,
+  "model_log_loss": 0.8401,
+  "baseline_log_loss": 13.2755,
   "log_loss_better": true,
   "brier_scores": {
-    "away_win": 0.1479,
-    "draw": 0.1754,
-    "home_win": 0.1779
+    "away_win": 0.1466,
+    "draw": 0.1706,
+    "home_win": 0.1738
   },
-  "avg_brier": 0.1671,
+  "avg_brier": 0.1637,
   "calibration": {
-    "away_win": 0.0649,
-    "draw": 0.0503,
-    "home_win": 0.077
+    "away_win": 0.0322,
+    "draw": 0.024,
+    "home_win": 0.015
   },
-  "overall_calibration_gap": 0.0641,
+  "overall_calibration_gap": 0.0237,
   "all_teams_valid": true,
   "passed": 4,
   "total": 4,
