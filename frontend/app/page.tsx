@@ -107,7 +107,7 @@ export default function TournamentPage() {
 
       predictions.forEach((pred, i) => {
         const match = matches[i];
-        const goals = estimateGoals(pred.probabilities);
+        const goals = estimateGoals(pred.probabilities, pred.expected_goals);
         const key = `${match.home.id}-${match.away.id}`;
         results[key] = goals;
         groupResults[key] = { ...goals, probs: pred.probabilities };

@@ -20,6 +20,10 @@ export interface PredictMatchResponse {
     draw: number;
     away_win: number;
   };
+  expected_goals: {
+    home: number;
+    away: number;
+  };
   context: {
     elo_home: number;
     elo_away: number;

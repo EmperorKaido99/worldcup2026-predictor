@@ -410,9 +410,9 @@ def parse_open_results(csv_path: Path) -> list:
         print(f"  ERROR parsing open results CSV: {e}")
         return []
 
-    # Filter to 2018+
+    # Filter to 2014+ (more data for better model training)
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    df = df[df["date"] >= "2018-01-01"].copy()
+    df = df[df["date"] >= "2014-01-01"].copy()
 
     matches = []
     for _, row in df.iterrows():

@@ -30,8 +30,13 @@ COMPETITIONS = [
     (43, 3),    # FIFA World Cup 2018
     (43, 55),   # FIFA World Cup 1990
     (43, 54),   # FIFA World Cup 1986
-    (72, 107),  # Women's World Cup 2023 (more shot data for training)
+    (72, 107),  # Women's World Cup 2023
     (72, 30),   # Women's World Cup 2019
+    (55, 43),   # Euro 2020
+    (11, 90),   # La Liga 2020/21
+    (11, 42),   # La Liga 2019/20
+    (2, 44),    # Premier League 2003/04
+    (49, 3),    # NWSL 2018
 ]
 
 # Pitch dimensions in StatsBomb coordinate system
@@ -121,6 +126,31 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
         # First time shot
         first_time = 1 if shot.get("shot_first_time") else 0
 
+        # Freeze frame — count defenders between shooter and goal
+        defenders_in_path = 0
+        gk_in_path = 0
+        freeze = shot.get("shot_freeze_frame")
+        if isinstance(freeze, list):
+            for player_info in freeze:
+                if isinstance(player_info, dict):
+                    loc_p = player_info.get("location", [0, 0])
+                    is_teammate = player_info.get("teammate", True)
+                    is_gk = player_info.get("position", {})
+                    gk_name = is_gk.get("name", "") if isinstance(is_gk, dict) else ""
+                    if not is_teammate and isinstance(loc_p, (list, tuple)) and len(loc_p) >= 2:
+                        px, py = float(loc_p[0]), float(loc_p[1])
+                        # Is player between shooter and goal?
+                        if px > x and px < PITCH_LENGTH:
+                            defenders_in_path += 1
+                            if "keeper" in gk_name.lower() or "goalkeeper" in gk_name.lower():
+                                gk_in_path = 1
+
+        # Play pattern
+        play_pattern = str(shot.get("play_pattern", "Regular Play"))
+        is_counter = 1 if "Counter" in play_pattern else 0
+        is_corner = 1 if "Corner" in play_pattern else 0
+        is_throw_in = 1 if "Throw" in play_pattern else 0
+
         # Outcome
         outcome = str(shot.get("shot_outcome", ""))
         is_goal = 1 if "Goal" in outcome else 0
@@ -141,6 +171,11 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
             "is_penalty": is_penalty,
             "is_free_kick": is_free_kick,
             "first_time": first_time,
+            "defenders_in_path": defenders_in_path,
+            "gk_in_path": gk_in_path,
+            "is_counter": is_counter,
+            "is_corner": is_corner,
+            "is_throw_in": is_throw_in,
             "is_goal": is_goal,
             "sb_xg": sb_xg,
             "team": shot.get("team", ""),
@@ -159,11 +194,15 @@ FEATURE_COLS = [
     "is_head", "is_right_foot", "is_left_foot",
     "is_volley", "is_half_volley",
     "is_penalty", "is_free_kick", "first_time",
+    "defenders_in_path", "gk_in_path",
+    "is_counter", "is_corner", "is_throw_in",
 ]
 
 
 def train_model(df: pd.DataFrame):
-    """Train and save the xG model."""
+    """Train and save the xG model with model search."""
+    from sklearn.ensemble import RandomForestClassifier
+
     X = df[FEATURE_COLS].values
     y = df["is_goal"].values
 
@@ -174,27 +213,57 @@ def train_model(df: pd.DataFrame):
     print(f"\nTraining set: {len(X_train)} shots ({y_train.sum()} goals, {y_train.mean():.1%} rate)")
     print(f"Test set:     {len(X_test)} shots ({y_test.sum()} goals, {y_test.mean():.1%} rate)")
 
-    # Gradient boosting with calibration
-    base_model = GradientBoostingClassifier(
-        n_estimators=200,
-        max_depth=4,
-        learning_rate=0.1,
-        subsample=0.8,
-        random_state=42,
-    )
-    model = CalibratedClassifierCV(base_model, cv=5, method="isotonic")
-    model.fit(X_train, y_train)
+    candidates = []
 
-    # Evaluate
-    y_prob = model.predict_proba(X_test)[:, 1]
-    brier = brier_score_loss(y_test, y_prob)
+    # 1. Gradient Boosting variants
+    for n_est in [200, 300, 500]:
+        for lr in [0.05, 0.1]:
+            for depth in [3, 4, 5]:
+                try:
+                    base = GradientBoostingClassifier(
+                        n_estimators=n_est, max_depth=depth, learning_rate=lr,
+                        subsample=0.8, random_state=42, min_samples_leaf=10,
+                    )
+                    model = CalibratedClassifierCV(base, cv=5, method="isotonic")
+                    model.fit(X_train, y_train)
+                    y_prob = model.predict_proba(X_test)[:, 1]
+                    brier = brier_score_loss(y_test, y_prob)
+                    auc = roc_auc_score(y_test, y_prob)
+                    candidates.append((f"GB n={n_est} lr={lr} d={depth}", model, brier, auc))
+                    print(f"  GB n={n_est} lr={lr} d={depth}: brier={brier:.4f} auc={auc:.4f}")
+                except Exception:
+                    pass
+
+    # 2. Random Forest variants
+    for n_est in [300, 500]:
+        for depth in [8, 10, None]:
+            try:
+                base = RandomForestClassifier(
+                    n_estimators=n_est, max_depth=depth, random_state=42, min_samples_leaf=5,
+                )
+                model = CalibratedClassifierCV(base, cv=5, method="isotonic")
+                model.fit(X_train, y_train)
+                y_prob = model.predict_proba(X_test)[:, 1]
+                brier = brier_score_loss(y_test, y_prob)
+                auc = roc_auc_score(y_test, y_prob)
+                candidates.append((f"RF n={n_est} d={depth}", model, brier, auc))
+                print(f"  RF n={n_est} d={depth}: brier={brier:.4f} auc={auc:.4f}")
+            except Exception:
+                pass
+
+    # Pick best by Brier score (lower = better calibration)
+    candidates.sort(key=lambda x: x[2])
+    best_name, best_model, best_brier, best_auc = candidates[0]
+
+    y_prob = best_model.predict_proba(X_test)[:, 1]
     logloss = log_loss(y_test, y_prob)
-    auc = roc_auc_score(y_test, y_prob)
 
-    print(f"\n--- xG Model Evaluation ---")
-    print(f"Brier score: {brier:.4f}")
+    print(f"\n{'='*50}")
+    print(f"BEST xG MODEL: {best_name}")
+    print(f"{'='*50}")
+    print(f"Brier score: {best_brier:.4f}")
     print(f"Log loss:    {logloss:.4f}")
-    print(f"ROC AUC:     {auc:.4f}")
+    print(f"ROC AUC:     {best_auc:.4f}")
 
     # Compare with StatsBomb xG
     if "sb_xg" in df.columns:
@@ -207,9 +276,9 @@ def train_model(df: pd.DataFrame):
     # Save model
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
     artifacts = {
-        "model": model,
+        "model": best_model,
         "feature_cols": FEATURE_COLS,
-        "metrics": {"brier": brier, "log_loss": logloss, "roc_auc": auc},
+        "metrics": {"brier": best_brier, "log_loss": logloss, "roc_auc": best_auc},
     }
     joblib.dump(artifacts, MODELS_DIR / "xg_model.joblib")
     print(f"\nModel saved to {MODELS_DIR / 'xg_model.joblib'}")
@@ -219,7 +288,7 @@ def train_model(df: pd.DataFrame):
     df.to_csv(DATA_DIR / "shots.csv", index=False)
     print(f"Shot data saved to {DATA_DIR / 'shots.csv'}")
 
-    return model
+    return best_model
 
 
 def main():

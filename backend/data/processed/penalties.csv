@@ -246,6 +246,29 @@ zone,is_goal,is_saved,is_right_foot,end_y,end_z,player,team,match_id,competition
 0,1,0,1,37.0,0.2,Alejandro Fernández Iglesias,Cádiz,3773415,11,Normal
 3,0,1,0,37.9,0.9,Antoine Griezmann,Barcelona,3773477,11,Normal
 8,1,0,0,43.3,2.3,Lionel Andrés Messi Cuccittini,Barcelona,3773477,11,Normal
+2,1,0,0,43.6,0.8,Lionel Andrés Messi Cuccittini,Barcelona,303532,11,Normal
+8,1,0,0,42.4,2.0,Lionel Andrés Messi Cuccittini,Barcelona,303504,11,Normal
+1,1,0,0,38.8,0.7,Mikel Oyarzabal Ugarte,Real Sociedad,303664,11,Normal
+5,0,1,1,42.8,1.3,Maximiliano Gómez González,Valencia,303400,11,Normal
+5,1,0,0,43.3,1.1,Lionel Andrés Messi Cuccittini,Barcelona,303479,11,Normal
+2,1,0,0,43.3,0.2,Saúl Ñíguez Esclapez,Atlético Madrid,303696,11,Normal
+3,1,0,0,37.6,1.1,Lionel Andrés Messi Cuccittini,Barcelona,303696,11,Normal
+2,1,0,0,43.3,0.2,Saúl Ñíguez Esclapez,Atlético Madrid,303696,11,Normal
+0,1,0,0,36.5,0.0,Lionel Andrés Messi Cuccittini,Barcelona,303487,11,Normal
+0,1,0,0,37.1,0.2,Sergio Canales Madrazo,Real Betis,303707,11,Normal
+0,1,0,1,37.1,0.2,Álvaro Vadillo Cifuentes,Granada,303666,11,Normal
+3,1,0,1,37.9,1.2,Luis Alberto Suárez Díaz,Barcelona,303517,11,Normal
+0,0,1,0,37.9,0.2,Lionel Andrés Messi Cuccittini,Barcelona,69222,11,Normal
+2,0,1,1,43.4,0.5,Samuel Eto''o Fils,Barcelona,69225,11,Normal
+2,1,0,0,42.5,0.0,Lionel Andrés Messi Cuccittini,Barcelona,69211,11,Normal
+0,1,0,1,36.4,0.2,Samuel Eto''o Fils,Barcelona,69212,11,Normal
+3,1,0,0,37.3,1.5,Lionel Andrés Messi Cuccittini,Barcelona,69216,11,Normal
+0,1,0,1,36.7,0.0,Nikola Žigić,Racing Santander,69209,11,Normal
+6,1,0,1,36.0,2.0,Matías Ariel Fernández Fernández,Villarreal,69217,11,Normal
+0,0,1,1,37.4,0.6,Samuel Eto''o Fils,Barcelona,69195,11,Normal
+3,1,0,1,36.7,0.9,Diego Forlán Corazo,Atlético Madrid,69185,11,Normal
+0,1,0,0,37.2,0.2,Lionel Andrés Messi Cuccittini,Barcelona,69215,11,Normal
+3,1,0,1,36.5,1.7,Samuel Eto''o Fils,Barcelona,69183,11,Normal
 0,1,0,1,38.1,0.2,Thierry Henry,Arsenal,3749493,2,Normal
 2,1,0,1,41.8,0.7,Thierry Henry,Arsenal,3749296,2,Normal
 0,1,0,1,37.4,0.3,Thierry Henry,Arsenal,3749257,2,Normal
@@ -257,3 +280,65 @@ zone,is_goal,is_saved,is_right_foot,end_y,end_z,player,team,match_id,competition
 2,1,0,1,42.6,0.1,Thierry Henry,Arsenal,3749153,2,Normal
 6,1,0,1,37.3,1.8,Massimo Maccarone,Middlesbrough,3749153,2,Normal
 4,1,0,1,39.2,1.7,Paolo Di Canio,Charlton Athletic,3749526,2,Lob
+2,0,1,0,42.3,0.7,Ezgjan Alioski,North Macedonia,3788758,55,Normal
+0,0,1,0,37.6,0.7,Ruslan Malinovskiy,Ukraine,3788758,55,Normal
+3,1,0,1,38.4,0.9,Cristiano Ronaldo dos Santos Aveiro,Portugal,3788773,55,Normal
+3,1,0,1,37.5,1.6,Karim Benzema,France,3788773,55,Normal
+0,1,0,1,36.8,0.2,Cristiano Ronaldo dos Santos Aveiro,Portugal,3788773,55,Normal
+5,1,0,1,42.6,1.2,Emil Peter Forsberg,Sweden,3788761,55,Normal
+0,1,0,0,36.4,0.3,Patrik Schick,Czech Republic,3788760,55,Normal
+0,0,0,1,36.1,0.2,Sergio Busquets i Burgos,Spain,3795108,55,Normal
+3,1,0,1,36.6,1.7,Mario Gavranović,Switzerland,3795108,55,Normal
+6,1,0,1,36.6,2.4,Daniel Olmo Carvajal,Spain,3795108,55,Normal
+0,0,1,1,37.3,0.6,Fabian Lukas Schär,Switzerland,3795108,55,Normal
+2,0,1,1,42.4,0.8,Rodrigo Hernández Cascante,Spain,3795108,55,Normal
+0,0,1,1,37.4,0.4,Manuel Obafemi Akanji,Switzerland,3795108,55,Normal
+8,1,0,0,43.5,2.3,Gerard Moreno Balaguero,Spain,3795108,55,Normal
+7,0,0,1,38.7,3.9,Ruben Vargas,Switzerland,3795108,55,Normal
+2,1,0,0,43.3,0.4,Mikel Oyarzabal Ugarte,Spain,3795108,55,Normal
+2,1,0,0,41.8,0.5,Romelu Lukaku Menama,Belgium,3795107,55,Normal
+0,0,1,1,37.4,0.0,Manuel Locatelli,Italy,3795220,55,Normal
+6,0,0,1,36.7,4.5,Daniel Olmo Carvajal,Spain,3795220,55,Normal
+0,1,0,1,36.9,0.6,Andrea Belotti,Italy,3795220,55,Normal
+5,1,0,0,42.8,1.7,Gerard Moreno Balaguero,Spain,3795220,55,Normal
+2,1,0,1,42.9,0.8,Leonardo Bonucci,Italy,3795220,55,Normal
+0,1,0,1,36.8,0.2,Thiago Alcântara do Nascimento,Spain,3795220,55,Normal
+8,1,0,0,43.2,2.2,Federico Bernardeschi,Italy,3795220,55,Normal
+2,0,1,1,42.3,0.2,Álvaro Borja Morata Martín,Spain,3795220,55,Normal
+2,1,0,1,43.2,0.2,Jorge Luiz Frello Filho,Italy,3795220,55,Normal
+0,1,0,0,37.2,0.4,Domenico Berardi,Italy,3795506,55,Normal
+3,1,0,1,36.6,0.9,Harry Kane,England,3795506,55,Normal
+2,0,1,1,42.1,0.5,Andrea Belotti,Italy,3795506,55,Normal
+8,1,0,1,43.2,2.4,Harry Maguire,England,3795506,55,Normal
+3,1,0,1,37.6,1.6,Leonardo Bonucci,Italy,3795506,55,Normal
+0,0,0,1,35.8,0.2,Marcus Rashford,England,3795506,55,Normal
+1,1,0,0,40.1,0.3,Federico Bernardeschi,Italy,3795506,55,Normal
+2,0,1,1,42.5,0.8,Jadon Sancho,England,3795506,55,Normal
+0,0,1,1,37.9,0.2,Jorge Luiz Frello Filho,Italy,3795506,55,Normal
+5,0,1,0,42.0,0.9,Bukayo Saka,England,3795506,55,Normal
+4,1,0,1,40.3,1.6,Artem Dzyuba,Russia,3788769,55,Normal
+6,0,0,0,35.6,5.4,Gareth Frank Bale,Wales,3788755,55,Normal
+0,0,0,0,36.0,0.4,Gerard Moreno Balaguero,Spain,3788762,55,Normal
+2,0,1,1,42.7,0.3,Harry Kane,England,3795221,55,Normal
+0,0,1,0,37.2,0.2,Ricardo Iván Rodríguez Araya,Switzerland,3794691,55,Normal
+6,1,0,1,37.4,1.9,Mario Gavranović,Switzerland,3794691,55,Normal
+6,1,0,1,36.7,2.2,Paul Pogba,France,3794691,55,Normal
+5,1,0,1,43.1,1.7,Fabian Lukas Schär,Switzerland,3794691,55,Normal
+5,1,0,0,42.8,0.9,Olivier Giroud,France,3794691,55,Normal
+0,1,0,1,36.4,0.2,Manuel Obafemi Akanji,Switzerland,3794691,55,Normal
+3,1,0,1,36.6,0.9,Marcus Thuram,France,3794691,55,Normal
+0,1,0,1,37.1,0.5,Ruben Vargas,Switzerland,3794691,55,Normal
+8,1,0,0,43.2,2.1,Presnel Kimpembe,France,3794691,55,Normal
+2,1,0,1,43.5,0.5,Admir Mehmedi,Switzerland,3794691,55,Normal
+3,0,1,1,37.6,1.6,Kylian Mbappé Lottin,France,3794691,55,Normal
+0,1,0,1,37.1,0.2,Memphis Depay,Netherlands,3788756,55,Normal
+5,1,0,1,42.7,0.9,Cristiano Ronaldo dos Santos Aveiro,Portugal,3788752,55,Normal
+2,0,1,1,42.6,0.2,Pierre-Emile Højbjerg,Denmark,3788742,55,Normal
+3,0,1,1,38.0,1.1,Álvaro Borja Morata Martín,Spain,3788775,55,Normal
+0,1,0,1,36.2,0.4,Jodie Taylor,OL Reign,7443,49,Normal
+5,0,1,0,42.4,1.3,Marta Vieira da Silva,Orlando Pride,7492,49,Normal
+5,1,0,1,44.0,1.6,Lynn Raenie Williams,North Carolina Courage,7519,49,Normal
+0,1,0,1,36.2,0.7,Yuki Nagasato,Chicago Red Stars,7475,49,Normal
+6,1,0,1,36.4,2.3,Megan Anna Rapinoe,OL Reign,7478,49,Normal
+3,0,1,1,36.6,1.0,Carli Anne Hollins,NJ/NY Gotham FC,7456,49,Normal
+8,1,0,0,43.6,2.2,Alexandra Morgan Carrasco,Orlando Pride,7483,49,Normal

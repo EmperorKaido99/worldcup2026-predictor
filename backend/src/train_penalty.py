@@ -30,7 +30,11 @@ COMPETITIONS = [
     (72, 107),  # Women's World Cup 2023
     (72, 30),   # Women's World Cup 2019
     (11, 90),   # La Liga 2020/21
+    (11, 42),   # La Liga 2019/20
+    (11, 41),   # La Liga 2018/19
     (2, 44),    # Premier League 2003/04
+    (55, 43),   # Euro 2020
+    (49, 3),    # NWSL 2018
 ]
 
 # Goal grid mapping: StatsBomb end_location → 3x3 zone
@@ -216,6 +220,30 @@ def main():
         }
     joblib.dump(team_stats, MODELS_DIR / "penalty_team_stats.joblib")
     print(f"Team stats saved to {MODELS_DIR / 'penalty_team_stats.joblib'}")
+
+    # Train a goal probability model (ML-based, not just zone stats)
+    from sklearn.ensemble import GradientBoostingClassifier
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import accuracy_score, roc_auc_score
+
+    pen_features = ["zone", "is_right_foot", "end_y", "end_z"]
+    available = [c for c in pen_features if c in pens_df.columns]
+    if len(available) >= 2 and len(pens_df) >= 50:
+        X = pens_df[available].values
+        y = pens_df["is_goal"].values
+        X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+        pen_model = GradientBoostingClassifier(
+            n_estimators=100, max_depth=3, learning_rate=0.1, random_state=42,
+        )
+        pen_model.fit(X_tr, y_tr)
+        acc = accuracy_score(y_te, pen_model.predict(X_te))
+        auc = roc_auc_score(y_te, pen_model.predict_proba(X_te)[:, 1])
+        print(f"\nPenalty ML Model: acc={acc:.3f} auc={auc:.3f}")
+
+        artifacts["penalty_ml_model"] = pen_model
+        artifacts["penalty_ml_features"] = available
+        joblib.dump(artifacts, MODELS_DIR / "penalty_model.joblib")
+        print(f"Updated penalty model with ML scorer")
 
     print("\nDone!")
 

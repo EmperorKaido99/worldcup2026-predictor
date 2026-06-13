@@ -1,7 +1,7 @@
 """
 Train the match outcome prediction model (P0).
-Multinomial Logistic Regression with calibration.
-Hyperparameter search to beat the naive Elo baseline.
+Searches over Logistic Regression, Gradient Boosting, and Random Forest.
+Uses calibration and weighted recent-match emphasis.
 """
 
 import numpy as np
@@ -10,7 +10,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, log_loss, brier_score_loss
 from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from pathlib import Path
 import joblib
 
@@ -23,6 +23,16 @@ def naive_baseline_accuracy(y_true, elo_diff):
     """Baseline: higher Elo team wins (home if equal)."""
     preds = np.where(elo_diff > 0, 2, np.where(elo_diff < 0, 0, 2))
     return accuracy_score(y_true, preds)
+
+
+def compute_sample_weights(dates, decay=0.002):
+    """Give more weight to recent matches (exponential decay)."""
+    max_date = dates.max()
+    days_ago = (max_date - dates).dt.days.values.astype(float)
+    weights = np.exp(-decay * days_ago)
+    # Normalize so mean weight = 1
+    weights = weights / weights.mean()
+    return weights
 
 
 def train():
@@ -49,6 +59,10 @@ def train():
     X_test = test_df[feature_cols].values
     y_test = test_df["result"].values
 
+    # Compute sample weights — recent matches matter more
+    train_weights = compute_sample_weights(train_df["date"])
+    print(f"Sample weights: min={train_weights.min():.3f}, max={train_weights.max():.3f}")
+
     # Scale features
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
@@ -66,7 +80,7 @@ def train():
             try:
                 base = LogisticRegression(max_iter=2000, C=C, solver="lbfgs", random_state=42)
                 model = CalibratedClassifierCV(base, cv=5, method=cal_method)
-                model.fit(X_train_scaled, y_train)
+                model.fit(X_train_scaled, y_train, sample_weight=train_weights)
                 acc = accuracy_score(y_test, model.predict(X_test_scaled))
                 ll = log_loss(y_test, model.predict_proba(X_test_scaled))
                 candidates.append(("LR", C, cal_method, model, acc, ll))
@@ -74,16 +88,16 @@ def train():
             except Exception:
                 pass
 
-    # 2. Gradient Boosting (lightweight)
-    for n_est in [50, 100, 200]:
-        for lr in [0.05, 0.1]:
-            for depth in [3, 4]:
+    # 2. Gradient Boosting (expanded search)
+    for n_est in [100, 200, 300, 500]:
+        for lr in [0.03, 0.05, 0.1]:
+            for depth in [3, 4, 5]:
                 try:
                     gb = GradientBoostingClassifier(
                         n_estimators=n_est, learning_rate=lr, max_depth=depth,
-                        random_state=42, subsample=0.8,
+                        random_state=42, subsample=0.8, min_samples_leaf=5,
                     )
-                    gb.fit(X_train_scaled, y_train)
+                    gb.fit(X_train_scaled, y_train, sample_weight=train_weights)
                     acc = accuracy_score(y_test, gb.predict(X_test_scaled))
                     ll = log_loss(y_test, gb.predict_proba(X_test_scaled))
                     candidates.append(("GB", n_est, f"lr={lr},d={depth}", gb, acc, ll))
@@ -91,7 +105,24 @@ def train():
                 except Exception:
                     pass
 
-    # Pick best model (prefer accuracy, break ties with log loss)
+    # 3. Random Forest (calibrated)
+    for n_est in [200, 500]:
+        for depth in [6, 8, 10, None]:
+            try:
+                rf = RandomForestClassifier(
+                    n_estimators=n_est, max_depth=depth,
+                    random_state=42, min_samples_leaf=5,
+                )
+                cal_rf = CalibratedClassifierCV(rf, cv=5, method="isotonic")
+                cal_rf.fit(X_train_scaled, y_train, sample_weight=train_weights)
+                acc = accuracy_score(y_test, cal_rf.predict(X_test_scaled))
+                ll = log_loss(y_test, cal_rf.predict_proba(X_test_scaled))
+                candidates.append(("RF", n_est, f"d={depth}", cal_rf, acc, ll))
+                print(f"  RF n={n_est} d={depth}: acc={acc:.3f} logloss={ll:.3f}")
+            except Exception:
+                pass
+
+    # Pick best model: primary=accuracy, secondary=log loss
     candidates.sort(key=lambda x: (-x[4], x[5]))
     best = candidates[0]
     best_name, best_param, best_detail, best_model, best_acc, best_ll = best
@@ -128,6 +159,11 @@ def train():
         label = {0: "away_win", 1: "draw", 2: "home_win"}[cls]
         count = (y_test == cls).sum()
         print(f"  {label}: {count} ({count/len(y_test)*100:.1f}%)")
+
+    # Show top 5 candidates
+    print(f"\nTop 5 models:")
+    for i, c in enumerate(candidates[:5]):
+        print(f"  {i+1}. {c[0]} {c[1]} {c[2]}: acc={c[4]:.3f} logloss={c[5]:.3f}")
 
     # Save model artifacts
     artifacts = {

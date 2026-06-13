@@ -10,7 +10,7 @@ interface MatchPredictionModalProps {
   team2: string;
   team1Name: string;
   team2Name: string;
-  onPickWinner: (winnerId: string, probs: { home_win: number; draw: number; away_win: number }) => void;
+  onPickWinner: (winnerId: string, probs: { home_win: number; draw: number; away_win: number }, expectedGoals?: { home: number; away: number }) => void;
   onClose: () => void;
   isGroupMatch?: boolean;
 }
@@ -194,7 +194,7 @@ export default function MatchPredictionModal({
             {/* Action buttons */}
             {isGroupMatch ? (
               <button
-                onClick={() => onPickWinner(team1, prediction.probabilities)}
+                onClick={() => onPickWinner(team1, prediction.probabilities, prediction.expected_goals)}
                 className="w-full px-4 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition-colors text-sm"
               >
                 Accept Result
@@ -206,13 +206,13 @@ export default function MatchPredictionModal({
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <button
-                    onClick={() => onPickWinner(team1, prediction.probabilities)}
+                    onClick={() => onPickWinner(team1, prediction.probabilities, prediction.expected_goals)}
                     className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-emerald-600/20 border border-emerald-600/40 hover:bg-emerald-600/30 hover:border-emerald-500 transition-colors"
                   >
                     <TeamBadge teamId={team1} teamName={team1Name} size="sm" />
                   </button>
                   <button
-                    onClick={() => onPickWinner(team2, prediction.probabilities)}
+                    onClick={() => onPickWinner(team2, prediction.probabilities, prediction.expected_goals)}
                     className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-emerald-600/20 border border-emerald-600/40 hover:bg-emerald-600/30 hover:border-emerald-500 transition-colors"
                   >
                     <TeamBadge teamId={team2} teamName={team2Name} size="sm" />

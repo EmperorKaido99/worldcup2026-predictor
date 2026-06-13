@@ -55,9 +55,10 @@ export default function GroupCard({
 
   function handleMatchPredicted(
     matchKey: string,
-    probs: { home_win: number; draw: number; away_win: number }
+    probs: { home_win: number; draw: number; away_win: number },
+    expectedGoals?: { home: number; away: number }
   ) {
-    const goals = estimateGoals(probs);
+    const goals = estimateGoals(probs, expectedGoals);
     const newResults = {
       ...matchResults,
       [matchKey]: { ...goals, probs },
@@ -78,7 +79,7 @@ export default function GroupCard({
           away: match.away.id,
           neutral: true,
         });
-        const goals = estimateGoals(pred.probabilities);
+        const goals = estimateGoals(pred.probabilities, pred.expected_goals);
         newResults[key] = { ...goals, probs: pred.probabilities };
       }
       onMatchResultsUpdate(group.name, newResults);
@@ -253,8 +254,8 @@ export default function GroupCard({
           team2={predictingMatch.away.id}
           team1Name={predictingMatch.home.name}
           team2Name={predictingMatch.away.name}
-          onPickWinner={(_winnerId, probs) =>
-            handleMatchPredicted(predictingMatch.key, probs)
+          onPickWinner={(_winnerId, probs, expectedGoals) =>
+            handleMatchPredicted(predictingMatch.key, probs, expectedGoals)
           }
           onClose={() => setPredictingMatch(null)}
           isGroupMatch

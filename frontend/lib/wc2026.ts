@@ -305,26 +305,73 @@ export function resolveSource(
   return undefined;
 }
 
-// Estimate goals from probabilities (for group simulation)
-export function estimateGoals(probs: {
-  home_win: number;
-  draw: number;
-  away_win: number;
-}): { homeGoals: number; awayGoals: number } {
-  const rand = Math.random();
-  if (rand < probs.home_win) {
-    // Home win — generate a plausible scoreline
-    const margin = Math.random() < 0.6 ? 1 : Math.random() < 0.8 ? 2 : 3;
-    const awayGoals = Math.random() < 0.5 ? 0 : 1;
-    return { homeGoals: awayGoals + margin, awayGoals };
-  } else if (rand < probs.home_win + probs.draw) {
-    // Draw
-    const goals = Math.random() < 0.35 ? 0 : Math.random() < 0.7 ? 1 : 2;
-    return { homeGoals: goals, awayGoals: goals };
+// Poisson random sample: returns a random integer from Poisson(lambda)
+function poissonSample(lambda: number): number {
+  // Knuth algorithm for Poisson sampling
+  const L = Math.exp(-lambda);
+  let k = 0;
+  let p = 1.0;
+  do {
+    k++;
+    p *= Math.random();
+  } while (p > L);
+  return k - 1;
+}
+
+// Estimate goals using Poisson distribution based on expected goals from the model
+export function estimateGoals(
+  probs: { home_win: number; draw: number; away_win: number },
+  expectedGoals?: { home: number; away: number }
+): { homeGoals: number; awayGoals: number } {
+  // Use expected goals from the API if available, otherwise fallback to prob-based estimate
+  let xgHome: number;
+  let xgAway: number;
+
+  if (expectedGoals && expectedGoals.home > 0 && expectedGoals.away > 0) {
+    xgHome = expectedGoals.home;
+    xgAway = expectedGoals.away;
   } else {
-    // Away win
-    const margin = Math.random() < 0.6 ? 1 : Math.random() < 0.8 ? 2 : 3;
-    const homeGoals = Math.random() < 0.5 ? 0 : 1;
-    return { homeGoals, awayGoals: homeGoals + margin };
+    // Fallback: estimate xG from probabilities
+    // Average international match has ~2.5 total goals
+    const totalXg = 2.5;
+    const homeStrength = probs.home_win + probs.draw * 0.5;
+    const awayStrength = probs.away_win + probs.draw * 0.5;
+    xgHome = totalXg * homeStrength / (homeStrength + awayStrength);
+    xgAway = totalXg * awayStrength / (homeStrength + awayStrength);
   }
+
+  // Sample from Poisson distribution with up to 5 retries to get a
+  // result consistent with the predicted outcome direction
+  const maxAttempts = 5;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const homeGoals = poissonSample(xgHome);
+    const awayGoals = poissonSample(xgAway);
+
+    // On last attempt, accept any result
+    if (attempt === maxAttempts - 1) {
+      return { homeGoals, awayGoals };
+    }
+
+    // Check if the result is broadly consistent with the strongest prediction
+    const strongFavorite = Math.max(probs.home_win, probs.draw, probs.away_win);
+    if (strongFavorite >= 0.5) {
+      // Strong prediction — try to match it
+      if (probs.home_win === strongFavorite && homeGoals > awayGoals) {
+        return { homeGoals, awayGoals };
+      }
+      if (probs.away_win === strongFavorite && awayGoals > homeGoals) {
+        return { homeGoals, awayGoals };
+      }
+      if (probs.draw === strongFavorite && homeGoals === awayGoals) {
+        return { homeGoals, awayGoals };
+      }
+      // Otherwise retry to get a more plausible result
+    } else {
+      // No strong favorite — accept any reasonable result
+      return { homeGoals, awayGoals };
+    }
+  }
+
+  // Should never reach here, but fallback
+  return { homeGoals: poissonSample(xgHome), awayGoals: poissonSample(xgAway) };
 }

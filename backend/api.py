@@ -146,6 +146,9 @@ def get_teams():
 
 @app.post("/predict-match")
 def predict_match(req: PredictMatchRequest):
+    from src.features import rolling_stats, rolling_stats_short, head_to_head, \
+        expected_score as elo_expected_score, get_tournament_weight
+
     teams, elo_map = _load_teams()
     artifacts = _load_model()
 
@@ -161,7 +164,7 @@ def predict_match(req: PredictMatchRequest):
     if req.home == req.away:
         raise HTTPException(status_code=400, detail="Home and away teams must differ")
 
-    # Use dynamic Elo (computed from match history) for better accuracy
+    # Load matches and dynamic Elo
     matches = _load_matches()
     if _dynamic_elo:
         elo_home = round(_dynamic_elo.get(home_name, elo_map.get(home_name, 1700)))
@@ -170,112 +173,61 @@ def predict_match(req: PredictMatchRequest):
         elo_home = elo_map.get(home_name, 1700)
         elo_away = elo_map.get(away_name, 1700)
 
-    def _rolling_rate(team, col_if_home, col_if_away, n=10):
-        tm = matches[
-            (matches["home_team"] == team) | (matches["away_team"] == team)
-        ].sort_values("date").tail(n)
-        vals = []
-        for _, m in tm.iterrows():
-            if m["home_team"] == team:
-                vals.append(m[col_if_home])
-            else:
-                vals.append(m[col_if_away])
-        return float(np.mean(vals)) if vals else 1.0
+    # Use the same rolling_stats from features.py for consistency
+    # Use a future date so all matches are included
+    future_date = pd.Timestamp("2099-01-01")
+    home_stats_10 = rolling_stats(matches, home_name, future_date, n=10)
+    away_stats_10 = rolling_stats(matches, away_name, future_date, n=10)
+    home_stats_5 = rolling_stats_short(matches, home_name, future_date, n=5)
+    away_stats_5 = rolling_stats_short(matches, away_name, future_date, n=5)
+    h2h = head_to_head(matches, home_name, away_name, future_date)
 
-    def _points_rate(team, n=10):
-        tm = matches[
-            (matches["home_team"] == team) | (matches["away_team"] == team)
-        ].sort_values("date").tail(n)
-        pts = []
-        for _, m in tm.iterrows():
-            if m["home_team"] == team:
-                if m["home_score"] > m["away_score"]:
-                    pts.append(3)
-                elif m["home_score"] == m["away_score"]:
-                    pts.append(1)
-                else:
-                    pts.append(0)
-            else:
-                if m["away_score"] > m["home_score"]:
-                    pts.append(3)
-                elif m["home_score"] == m["away_score"]:
-                    pts.append(1)
-                else:
-                    pts.append(0)
-        return float(np.mean(pts)) if pts else 1.0
+    # Elo momentum
+    from src.features import get_elo_momentum
+    elo_df = pd.read_csv(DATA_DIR / "elo_ratings.csv")
+    initial_elo = dict(zip(elo_df["team"], elo_df["elo_rating"]))
+    from src.features import compute_dynamic_elo
+    _, elo_history = compute_dynamic_elo(matches, initial_elo)
+    elo_mom_home = round(get_elo_momentum(elo_history, home_name, future_date), 1)
+    elo_mom_away = round(get_elo_momentum(elo_history, away_name, future_date), 1)
 
     neutral_flag = 1 if req.neutral else 0
     host_flag = 1 if (not req.neutral and home_name in HOST_NATIONS) else 0
+    elo_exp = round(elo_expected_score(elo_home, elo_away), 3)
 
-    def _win_streak(team, n=10):
-        tm = matches[
-            (matches["home_team"] == team) | (matches["away_team"] == team)
-        ].sort_values("date").tail(n)
-        streak = 0
-        for _, m in reversed(list(tm.iterrows())):
-            if m["home_team"] == team:
-                won = m["home_score"] > m["away_score"]
-            else:
-                won = m["away_score"] > m["home_score"]
-            if won:
-                streak += 1
-            else:
-                break
-        return streak
-
-    def _unbeaten_streak(team, n=10):
-        tm = matches[
-            (matches["home_team"] == team) | (matches["away_team"] == team)
-        ].sort_values("date").tail(n)
-        streak = 0
-        for _, m in reversed(list(tm.iterrows())):
-            if m["home_team"] == team:
-                lost = m["home_score"] < m["away_score"]
-            else:
-                lost = m["away_score"] < m["home_score"]
-            if not lost:
-                streak += 1
-            else:
-                break
-        return streak
-
-    def _h2h_stats(team1, team2, n=5):
-        h2h = matches[
-            ((matches["home_team"] == team1) & (matches["away_team"] == team2))
-            | ((matches["home_team"] == team2) & (matches["away_team"] == team1))
-        ].sort_values("date").tail(n)
-        wins, gd = 0, 0
-        for _, m in h2h.iterrows():
-            if m["home_team"] == team1:
-                gd += m["home_score"] - m["away_score"]
-                if m["home_score"] > m["away_score"]:
-                    wins += 1
-            else:
-                gd += m["away_score"] - m["home_score"]
-                if m["away_score"] > m["home_score"]:
-                    wins += 1
-        return wins, gd
-
-    h2h_wins, h2h_gd = _h2h_stats(home_name, away_name)
-
+    # Build feature vector matching the training feature order exactly
     feature_vector = np.array([[
         elo_home,
         elo_away,
         elo_home - elo_away,
-        _rolling_rate(home_name, "home_score", "away_score"),
-        _rolling_rate(home_name, "away_score", "home_score"),
-        _points_rate(home_name),
-        _rolling_rate(away_name, "away_score", "home_score"),
-        _rolling_rate(away_name, "home_score", "away_score"),
-        _points_rate(away_name),
+        elo_exp,
+        elo_mom_home,
+        elo_mom_away,
+        home_stats_10["goals_scored_rate"],
+        home_stats_10["goals_conceded_rate"],
+        home_stats_10["points_rate"],
+        home_stats_10["gd_rate"],
+        away_stats_10["goals_scored_rate"],
+        away_stats_10["goals_conceded_rate"],
+        away_stats_10["points_rate"],
+        away_stats_10["gd_rate"],
+        home_stats_5["win_rate"],
+        away_stats_5["win_rate"],
+        home_stats_5["gd_rate"],
+        away_stats_5["gd_rate"],
+        home_stats_10["clean_sheet_rate"],
+        away_stats_10["clean_sheet_rate"],
         neutral_flag,
         host_flag,
-        _win_streak(home_name),
-        _win_streak(away_name),
-        _unbeaten_streak(home_name),
-        _unbeaten_streak(away_name),
-        h2h_wins,
-        h2h_gd,
+        home_stats_10["win_streak"],
+        away_stats_10["win_streak"],
+        home_stats_10["unbeaten_streak"],
+        away_stats_10["unbeaten_streak"],
+        home_stats_10["rest_days"],
+        away_stats_10["rest_days"],
+        h2h["h2h_wins"],
+        h2h["h2h_gd"],
+        1.0,  # tournament_weight (World Cup = 1.0)
     ]])
 
     scaler = artifacts["scaler"]
@@ -295,11 +247,36 @@ def predict_match(req: PredictMatchRequest):
         elif cls == 2:
             prob_map["home_win"] = round(float(proba[i]), 3)
 
+    # Compute expected goals from team stats and Elo
+    home_attack = home_stats_10["goals_scored_rate"]
+    home_defense = home_stats_10["goals_conceded_rate"]
+    away_attack = away_stats_10["goals_scored_rate"]
+    away_defense = away_stats_10["goals_conceded_rate"]
+
+    base_xg_home = (home_attack + away_defense) / 2.0
+    base_xg_away = (away_attack + home_defense) / 2.0
+
+    elo_factor = (elo_home - elo_away) / 800.0
+    xg_home = max(0.3, base_xg_home + elo_factor * 0.5)
+    xg_away = max(0.3, base_xg_away - elo_factor * 0.5)
+
+    hw = prob_map.get("home_win", 0.33)
+    aw = prob_map.get("away_win", 0.33)
+    xg_home = xg_home * (1.0 + (hw - aw) * 0.3)
+    xg_away = xg_away * (1.0 + (aw - hw) * 0.3)
+
+    xg_home = round(max(0.3, min(3.5, xg_home)), 2)
+    xg_away = round(max(0.2, min(3.0, xg_away)), 2)
+
     return {
         "home": req.home,
         "away": req.away,
         "neutral": req.neutral,
         "probabilities": prob_map,
+        "expected_goals": {
+            "home": xg_home,
+            "away": xg_away,
+        },
         "context": {
             "elo_home": elo_home,
             "elo_away": elo_away,
@@ -426,4 +403,71 @@ def get_team_penalty_stats(team_id: str):
         "total": stats["total"],
         "goals": stats["goals"],
         "conversion": stats["conversion"],
+    }
+
+
+class ShootoutRequest(BaseModel):
+    team1: str
+    team2: str
+    rounds: int = 5
+    simulations: int = 1000
+
+
+@app.post("/penalties/simulate-shootout")
+def simulate_shootout(req: ShootoutRequest):
+    """Monte Carlo penalty shootout simulation between two teams."""
+    import random
+
+    artifacts, team_stats = _load_penalty_model()
+    teams, _ = _load_teams()
+    id_to_name = {t["id"]: t["name"] for t in teams}
+    name1 = id_to_name.get(req.team1, req.team1)
+    name2 = id_to_name.get(req.team2, req.team2)
+
+    # Get team-specific conversion rates (or use overall)
+    overall_conv = artifacts["conversion_rate"]
+
+    def get_conv(team_name):
+        for name, s in team_stats.items():
+            if team_name.lower() in name.lower() or name.lower() in team_name.lower():
+                return s["conversion"]
+        return overall_conv
+
+    conv1 = get_conv(name1)
+    conv2 = get_conv(name2)
+
+    # Run Monte Carlo simulations
+    team1_wins = 0
+    for _ in range(req.simulations):
+        score1, score2 = 0, 0
+        # Regular rounds
+        for r in range(req.rounds):
+            if random.random() < conv1:
+                score1 += 1
+            if random.random() < conv2:
+                score2 += 1
+        # Sudden death if tied
+        while score1 == score2:
+            if random.random() < conv1:
+                score1 += 1
+            if random.random() < conv2:
+                score2 += 1
+            if score1 == score2:
+                continue
+        if score1 > score2:
+            team1_wins += 1
+
+    team1_pct = round(team1_wins / req.simulations, 3)
+    team2_pct = round(1.0 - team1_pct, 3)
+
+    return {
+        "team1": req.team1,
+        "team2": req.team2,
+        "team1_name": name1,
+        "team2_name": name2,
+        "team1_win_pct": team1_pct,
+        "team2_win_pct": team2_pct,
+        "team1_conversion": conv1,
+        "team2_conversion": conv2,
+        "simulations": req.simulations,
     }

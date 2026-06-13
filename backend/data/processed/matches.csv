@@ -1,4 +1,2053 @@
 date,home_team,away_team,home_score,away_score,tournament,neutral_venue
+2014-01-01,Kuwait,Jordan,1,2,WAFF Championship,True
+2014-01-04,Bahrain,Jordan,0,1,WAFF Championship,True
+2014-01-04,Namibia,Ghana,0,1,Friendly,False
+2014-01-04,Nigeria,Ethiopia,2,1,Friendly,False
+2014-01-04,Qatar,Kuwait,3,0,WAFF Championship,False
+2014-01-07,Qatar,Jordan,2,0,WAFF Championship,False
+2014-01-15,Moldova,Norway,1,2,Friendly,True
+2014-01-17,Moldova,Sweden,1,2,Friendly,True
+2014-01-18,Norway,Poland,0,3,Friendly,True
+2014-01-21,Iceland,Sweden,0,2,Friendly,True
+2014-01-22,Chile,Costa Rica,4,0,Friendly,False
+2014-01-25,Costa Rica,South Korea,0,1,Friendly,True
+2014-01-29,Mexico,South Korea,4,0,Friendly,True
+2014-01-31,Oman,Jordan,0,0,AFC Asian Cup qualification,False
+2014-02-01,USA,South Korea,2,0,Friendly,False
+2014-02-04,Singapore,Jordan,1,3,AFC Asian Cup qualification,False
+2014-02-21,Iraq,North Korea,2,0,Friendly,True
+2014-03-03,Iran,Kuwait,3,2,AFC Asian Cup qualification,False
+2014-03-05,Albania,Malta,2,0,Friendly,False
+2014-03-05,Algeria,Slovenia,2,0,Friendly,False
+2014-03-05,Australia,Ecuador,3,4,Friendly,True
+2014-03-05,Austria,Uruguay,1,1,Friendly,False
+2014-03-05,Belgium,Ivory Coast,2,2,Friendly,False
+2014-03-05,Bosnia,Egypt,0,2,Friendly,True
+2014-03-05,Colombia,Tunisia,1,1,Friendly,True
+2014-03-05,Czech Republic,Norway,2,2,Friendly,False
+2014-03-05,England,Denmark,1,0,Friendly,False
+2014-03-05,France,Netherlands,2,0,Friendly,False
+2014-03-05,Germany,Chile,1,0,Friendly,False
+2014-03-05,Greece,South Korea,0,2,Friendly,False
+2014-03-05,Iran,Guinea,1,2,Friendly,False
+2014-03-05,Iraq,China,3,1,AFC Asian Cup qualification,True
+2014-03-05,Republic of Ireland,Serbia,1,2,Friendly,False
+2014-03-05,Japan,New Zealand,4,2,Friendly,False
+2014-03-05,Jordan,Syria,2,1,AFC Asian Cup qualification,False
+2014-03-05,Kosovo,Haiti,0,0,Friendly,False
+2014-03-05,Luxembourg,Cape Verde,0,0,Friendly,False
+2014-03-05,Mali,Senegal,1,1,Friendly,True
+2014-03-05,Montenegro,Ghana,1,0,Friendly,False
+2014-03-05,Morocco,Gabon,1,1,Friendly,False
+2014-03-05,Poland,Scotland,0,1,Friendly,False
+2014-03-05,Portugal,Cameroon,5,1,Friendly,False
+2014-03-05,Qatar,Bahrain,0,0,AFC Asian Cup qualification,False
+2014-03-05,Romania,Argentina,0,0,Friendly,False
+2014-03-05,Saudi Arabia,Indonesia,1,0,AFC Asian Cup qualification,False
+2014-03-05,South Africa,Brazil,0,5,Friendly,False
+2014-03-05,Spain,Italy,1,0,Friendly,False
+2014-03-05,Saint Lucia,Jamaica,0,5,Friendly,False
+2014-03-05,Switzerland,Croatia,2,2,Friendly,False
+2014-03-05,Turkey,Sweden,2,1,Friendly,False
+2014-03-05,Ukraine,USA,2,0,Friendly,True
+2014-03-05,Uzbekistan,United Arab Emirates,1,1,AFC Asian Cup qualification,False
+2014-03-26,Andorra,Indonesia,0,1,Friendly,True
+2014-03-29,Cuba,Indonesia,1,0,Friendly,True
+2014-05-10,Palestine,Jordan,1,0,Palestine International Championship,False
+2014-05-13,Germany,Poland,0,0,Friendly,False
+2014-05-14,Jordan,Pakistan,1,0,Palestine International Championship,True
+2014-05-17,Netherlands,Ecuador,1,1,Friendly,False
+2014-05-17,Sri Lanka,Jordan,0,4,Palestine International Championship,True
+2014-05-18,Belarus,Iran,0,0,Friendly,True
+2014-05-20,Palestine,Jordan,1,0,Palestine International Championship,False
+2014-05-21,Burkina Faso,Senegal,1,1,Friendly,False
+2014-05-21,Finland,Czech Republic,2,2,Friendly,False
+2014-05-21,Kosovo,Turkey,1,6,Friendly,False
+2014-05-22,Hungary,Denmark,2,2,Friendly,False
+2014-05-23,Bulgaria,Canada,1,1,Friendly,True
+2014-05-24,Moldova,Saudi Arabia,4,0,Friendly,True
+2014-05-25,Republic of Ireland,Turkey,1,2,Friendly,False
+2014-05-25,Kosovo,Senegal,1,3,Friendly,True
+2014-05-25,Mali,Guinea,1,2,Friendly,True
+2014-05-26,Australia,South Africa,1,1,Friendly,False
+2014-05-26,Belgium,Luxembourg,5,1,Friendly,False
+2014-05-26,Jamaica,Serbia,1,2,Friendly,True
+2014-05-26,North Macedonia,Cameroon,0,2,Friendly,True
+2014-05-26,Montenegro,Iran,0,0,Friendly,True
+2014-05-27,France,Norway,4,0,Friendly,False
+2014-05-27,Japan,Cyprus,1,0,Friendly,False
+2014-05-27,Moldova,Canada,1,1,Friendly,True
+2014-05-27,Uzbekistan,Oman,0,1,Friendly,False
+2014-05-28,Angola,Morocco,2,0,Friendly,True
+2014-05-28,Denmark,Sweden,1,0,Friendly,False
+2014-05-28,South Korea,Tunisia,0,1,Friendly,False
+2014-05-28,Nigeria,Scotland,2,2,Friendly,True
+2014-05-29,Cameroon,Paraguay,1,2,Friendly,True
+2014-05-29,Georgia,Saudi Arabia,2,0,Friendly,True
+2014-05-29,Uzbekistan,Oman,0,1,Friendly,False
+2014-05-30,Angola,Iran,1,1,Friendly,True
+2014-05-30,Austria,Iceland,1,1,Friendly,False
+2014-05-30,Bosnia,Ivory Coast,2,1,Friendly,True
+2014-05-30,England,Peru,3,0,Friendly,False
+2014-05-30,North Macedonia,Qatar,0,0,Friendly,True
+2014-05-30,New Zealand,South Africa,0,0,Friendly,False
+2014-05-30,Spain,Bolivia,2,0,Friendly,False
+2014-05-30,Switzerland,Jamaica,1,0,Friendly,False
+2014-05-30,Uruguay,Northern Ireland,1,0,Friendly,False
+2014-05-31,Albania,Romania,0,1,Friendly,True
+2014-05-31,Armenia,Algeria,1,3,Friendly,True
+2014-05-31,Colombia,Senegal,2,2,Friendly,True
+2014-05-31,Croatia,Mali,2,1,Friendly,False
+2014-05-31,Italy,Republic of Ireland,0,0,Friendly,True
+2014-05-31,Mexico,Ecuador,3,1,Friendly,True
+2014-05-31,Netherlands,Ghana,1,0,Friendly,False
+2014-05-31,Norway,Russia,1,1,Friendly,False
+2014-05-31,Portugal,Greece,0,0,Friendly,False
+2014-06-01,France,Paraguay,1,1,Friendly,False
+2014-06-01,Germany,Cameroon,2,2,Friendly,False
+2014-06-01,Honduras,Israel,2,4,Friendly,True
+2014-06-01,Sweden,Belgium,0,2,Friendly,False
+2014-06-01,USA,Turkey,2,1,Friendly,False
+2014-06-02,Costa Rica,Japan,1,3,Friendly,True
+2014-06-03,Brazil,Panama,4,0,Friendly,False
+2014-06-03,Czech Republic,Austria,1,2,Friendly,False
+2014-06-03,Greece,Nigeria,0,0,Friendly,True
+2014-06-03,Mexico,Bosnia,0,1,Friendly,True
+2014-06-03,Switzerland,Peru,2,0,Friendly,False
+2014-06-04,Argentina,Trinidad and Tobago,3,0,Friendly,False
+2014-06-04,Ecuador,England,2,2,Friendly,True
+2014-06-04,El Salvador,Ivory Coast,1,2,Friendly,True
+2014-06-04,Hungary,Albania,1,0,Friendly,False
+2014-06-04,Italy,Luxembourg,1,1,Friendly,False
+2014-06-04,Jamaica,Egypt,2,2,Friendly,True
+2014-06-04,Netherlands,Wales,2,0,Friendly,False
+2014-06-04,Romania,Algeria,1,2,Friendly,True
+2014-06-04,Uruguay,Slovenia,2,0,Friendly,False
+2014-06-06,Bolivia,Greece,1,2,Friendly,True
+2014-06-06,Brazil,Serbia,1,0,Friendly,False
+2014-06-06,Colombia,Jordan,3,0,Friendly,True
+2014-06-06,Costa Rica,Republic of Ireland,1,1,Friendly,True
+2014-06-06,Croatia,Australia,1,0,Friendly,True
+2014-06-06,Germany,Armenia,6,1,Friendly,False
+2014-06-06,Japan,Zambia,4,3,Friendly,True
+2014-06-06,Mexico,Portugal,0,1,Friendly,True
+2014-06-06,Russia,Morocco,2,0,Friendly,False
+2014-06-07,Argentina,Slovenia,2,0,Friendly,False
+2014-06-07,Belgium,Tunisia,1,0,Friendly,False
+2014-06-07,Cameroon,Moldova,1,0,Friendly,False
+2014-06-07,El Salvador,Spain,0,2,Friendly,True
+2014-06-07,Honduras,England,0,0,Friendly,True
+2014-06-07,USA,Nigeria,2,1,Friendly,False
+2014-06-08,France,Jamaica,8,0,Friendly,False
+2014-06-08,Iran,Trinidad and Tobago,2,0,Friendly,True
+2014-06-08,San Marino,Albania,0,3,Friendly,False
+2014-06-09,Ghana,South Korea,4,0,Friendly,True
+2014-06-10,Republic of Ireland,Portugal,1,5,Friendly,True
+2014-06-12,Brazil,Croatia,3,1,FIFA World Cup,False
+2014-06-13,Chile,Australia,3,1,FIFA World Cup,True
+2014-06-13,Mexico,Cameroon,1,0,FIFA World Cup,True
+2014-06-13,Spain,Netherlands,1,5,FIFA World Cup,True
+2014-06-14,Colombia,Greece,3,0,FIFA World Cup,True
+2014-06-14,England,Italy,1,2,FIFA World Cup,True
+2014-06-14,Ivory Coast,Japan,2,1,FIFA World Cup,True
+2014-06-14,Uruguay,Costa Rica,1,3,FIFA World Cup,True
+2014-06-15,Argentina,Bosnia,2,1,FIFA World Cup,True
+2014-06-15,France,Honduras,3,0,FIFA World Cup,True
+2014-06-15,Switzerland,Ecuador,2,1,FIFA World Cup,True
+2014-06-16,Germany,Portugal,4,0,FIFA World Cup,True
+2014-06-16,Ghana,USA,1,2,FIFA World Cup,True
+2014-06-16,Iran,Nigeria,0,0,FIFA World Cup,True
+2014-06-17,Belgium,Algeria,2,1,FIFA World Cup,True
+2014-06-17,Brazil,Mexico,0,0,FIFA World Cup,False
+2014-06-17,Russia,South Korea,1,1,FIFA World Cup,True
+2014-06-18,Australia,Netherlands,2,3,FIFA World Cup,True
+2014-06-18,Cameroon,Croatia,0,4,FIFA World Cup,True
+2014-06-18,Spain,Chile,0,2,FIFA World Cup,True
+2014-06-19,Colombia,Ivory Coast,2,1,FIFA World Cup,True
+2014-06-19,Japan,Greece,0,0,FIFA World Cup,True
+2014-06-19,Uruguay,England,2,1,FIFA World Cup,True
+2014-06-20,Honduras,Ecuador,1,2,FIFA World Cup,True
+2014-06-20,Italy,Costa Rica,0,1,FIFA World Cup,True
+2014-06-20,Switzerland,France,2,5,FIFA World Cup,True
+2014-06-21,Argentina,Iran,1,0,FIFA World Cup,True
+2014-06-21,Germany,Ghana,2,2,FIFA World Cup,True
+2014-06-21,Indonesia,Pakistan,4,0,Friendly,False
+2014-06-21,Nigeria,Bosnia,1,0,FIFA World Cup,True
+2014-06-22,Belgium,Russia,1,0,FIFA World Cup,True
+2014-06-22,South Korea,Algeria,2,4,FIFA World Cup,True
+2014-06-22,USA,Portugal,2,2,FIFA World Cup,True
+2014-06-23,Australia,Spain,0,3,FIFA World Cup,True
+2014-06-23,Brazil,Cameroon,4,1,FIFA World Cup,False
+2014-06-23,Croatia,Mexico,1,3,FIFA World Cup,True
+2014-06-23,Netherlands,Chile,2,0,FIFA World Cup,True
+2014-06-24,Costa Rica,England,0,0,FIFA World Cup,True
+2014-06-24,Greece,Ivory Coast,2,1,FIFA World Cup,True
+2014-06-24,Italy,Uruguay,0,1,FIFA World Cup,True
+2014-06-24,Japan,Colombia,1,4,FIFA World Cup,True
+2014-06-25,Bosnia,Iran,3,1,FIFA World Cup,True
+2014-06-25,Ecuador,France,0,0,FIFA World Cup,True
+2014-06-25,Honduras,Switzerland,0,3,FIFA World Cup,True
+2014-06-25,Indonesia,Nepal,2,0,Friendly,False
+2014-06-25,Nigeria,Argentina,2,3,FIFA World Cup,True
+2014-06-26,Algeria,Russia,1,1,FIFA World Cup,True
+2014-06-26,South Korea,Belgium,0,1,FIFA World Cup,True
+2014-06-26,Portugal,Ghana,2,1,FIFA World Cup,True
+2014-06-26,USA,Germany,0,1,FIFA World Cup,True
+2014-06-28,Brazil,Chile,1,1,FIFA World Cup,False
+2014-06-28,Colombia,Uruguay,2,0,FIFA World Cup,True
+2014-06-29,China,Mali,1,3,Friendly,False
+2014-06-29,Costa Rica,Greece,1,1,FIFA World Cup,True
+2014-06-29,Netherlands,Mexico,2,1,FIFA World Cup,True
+2014-06-30,France,Nigeria,2,0,FIFA World Cup,True
+2014-06-30,Germany,Algeria,2,1,FIFA World Cup,True
+2014-07-01,Argentina,Switzerland,1,0,FIFA World Cup,True
+2014-07-01,Belgium,USA,2,1,FIFA World Cup,True
+2014-07-04,Brazil,Colombia,2,1,FIFA World Cup,False
+2014-07-04,France,Germany,0,1,FIFA World Cup,True
+2014-07-05,Argentina,Belgium,1,0,FIFA World Cup,True
+2014-07-05,Netherlands,Costa Rica,0,0,FIFA World Cup,True
+2014-07-08,Brazil,Germany,1,7,FIFA World Cup,False
+2014-07-09,Netherlands,Argentina,0,0,FIFA World Cup,True
+2014-07-12,Brazil,Netherlands,0,3,FIFA World Cup,False
+2014-07-13,Germany,Argentina,1,0,FIFA World Cup,True
+2014-07-14,Qatar,Indonesia,2,2,Friendly,False
+2014-08-06,Peru,Panama,3,0,Friendly,False
+2014-08-20,Azerbaijan,Uzbekistan,0,0,Friendly,False
+2014-08-20,Panama,Cuba,4,0,Friendly,False
+2014-08-27,Norway,United Arab Emirates,0,0,Friendly,False
+2014-08-30,Egypt,Kenya,1,0,Friendly,False
+2014-09-03,Costa Rica,Nicaragua,3,0,UNCAF Cup,True
+2014-09-03,Czech Republic,USA,0,1,Friendly,False
+2014-09-03,Denmark,Turkey,1,2,Friendly,False
+2014-09-03,England,Norway,1,0,Friendly,False
+2014-09-03,Germany,Argentina,2,4,Friendly,False
+2014-09-03,Morocco,Qatar,0,0,Friendly,False
+2014-09-03,Puerto Rico,Curaçao,2,2,CFU Caribbean Cup qualification,False
+2014-09-04,Belgium,Australia,2,0,Friendly,False
+2014-09-04,Bosnia,Liechtenstein,3,0,Friendly,False
+2014-09-04,Croatia,Cyprus,2,0,Friendly,False
+2014-09-04,France,Spain,1,0,Friendly,False
+2014-09-04,Iraq,Peru,0,2,Friendly,True
+2014-09-04,Italy,Netherlands,2,0,Friendly,False
+2014-09-04,Sweden,Estonia,2,0,Friendly,False
+2014-09-04,Uzbekistan,Jordan,2,0,Friendly,False
+2014-09-05,Curaçao,Grenada,2,1,CFU Caribbean Cup qualification,True
+2014-09-05,Japan,Uruguay,0,2,Kirin Challenge Cup,False
+2014-09-05,Brazil,Colombia,1,0,Friendly,True
+2014-09-05,South Korea,Venezuela,3,1,Friendly,False
+2014-09-05,Senegal,Egypt,2,0,African Cup of Nations qualification,False
+2014-09-05,Sudan,South Africa,0,3,African Cup of Nations qualification,False
+2014-09-06,DR Congo,Cameroon,0,2,African Cup of Nations qualification,False
+2014-09-06,Ethiopia,Algeria,1,2,African Cup of Nations qualification,False
+2014-09-06,Ghana,Uganda,1,1,African Cup of Nations qualification,False
+2014-09-06,Ivory Coast,Sierra Leone,2,1,African Cup of Nations qualification,False
+2014-09-06,Mexico,Chile,0,0,Friendly,True
+2014-09-06,Niger,Cape Verde,1,3,African Cup of Nations qualification,False
+2014-09-06,Nigeria,Congo,2,3,African Cup of Nations qualification,False
+2014-09-06,Tunisia,Botswana,2,1,African Cup of Nations qualification,False
+2014-09-07,Costa Rica,Panama,2,2,UNCAF Cup,True
+2014-09-07,Denmark,Armenia,2,1,UEFA Euro qualification,False
+2014-09-07,French Guiana,Curaçao,0,0,CFU Caribbean Cup qualification,True
+2014-09-07,Germany,Scotland,2,1,UEFA Euro qualification,False
+2014-09-07,Mali,Malawi,2,0,African Cup of Nations qualification,False
+2014-09-07,Morocco,Libya,3,0,Friendly,False
+2014-09-07,Paraguay,United Arab Emirates,0,0,Friendly,True
+2014-09-07,Portugal,Albania,0,1,UEFA Euro qualification,False
+2014-09-07,Serbia,France,1,1,Friendly,False
+2014-09-08,Australia,Saudi Arabia,3,2,Friendly,True
+2014-09-08,Austria,Sweden,1,1,UEFA Euro qualification,False
+2014-09-08,Estonia,Slovenia,1,0,UEFA Euro qualification,False
+2014-09-08,South Korea,Uruguay,0,1,Friendly,False
+2014-09-08,Spain,North Macedonia,5,1,UEFA Euro qualification,False
+2014-09-08,Switzerland,England,0,2,UEFA Euro qualification,False
+2014-09-08,Uzbekistan,New Zealand,3,1,Friendly,False
+2014-09-09,Bosnia,Cyprus,1,2,UEFA Euro qualification,False
+2014-09-09,China,Jordan,1,1,Friendly,False
+2014-09-09,Croatia,Malta,2,0,UEFA Euro qualification,False
+2014-09-09,Czech Republic,Netherlands,2,1,UEFA Euro qualification,False
+2014-09-09,Haiti,Chile,0,1,Friendly,True
+2014-09-09,Iceland,Turkey,3,0,UEFA Euro qualification,False
+2014-09-09,Indonesia,Yemen,0,0,Friendly,False
+2014-09-09,Japan,Venezuela,2,2,Friendly,False
+2014-09-09,Mexico,Bolivia,1,0,Friendly,True
+2014-09-09,Norway,Italy,0,2,UEFA Euro qualification,False
+2014-09-09,Qatar,Peru,0,2,Friendly,False
+2014-09-10,Algeria,Mali,1,0,African Cup of Nations qualification,False
+2014-09-10,Botswana,Senegal,0,2,African Cup of Nations qualification,False
+2014-09-10,Cameroon,Ivory Coast,4,1,African Cup of Nations qualification,False
+2014-09-10,Cape Verde,Zambia,2,1,African Cup of Nations qualification,False
+2014-09-10,DR Congo,Sierra Leone,2,0,African Cup of Nations qualification,False
+2014-09-10,Egypt,Tunisia,0,1,African Cup of Nations qualification,False
+2014-09-10,South Africa,Nigeria,0,0,African Cup of Nations qualification,False
+2014-09-10,Togo,Ghana,2,3,African Cup of Nations qualification,False
+2014-09-14,Indonesia,Malaysia,2,0,Friendly,False
+2014-09-25,Indonesia,Cambodia,1,0,Friendly,False
+2014-10-06,Qatar,Uzbekistan,3,0,Friendly,False
+2014-10-08,Curaçao,Martinique,1,1,CFU Caribbean Cup qualification,True
+2014-10-08,Haiti,French Guiana,2,2,CFU Caribbean Cup qualification,False
+2014-10-09,England,San Marino,5,0,UEFA Euro qualification,False
+2014-10-09,Moldova,Austria,1,2,UEFA Euro qualification,False
+2014-10-09,Morocco,Central African Republic,4,0,Friendly,False
+2014-10-09,Qatar,Lebanon,5,0,Friendly,False
+2014-10-09,Slovakia,Spain,2,1,UEFA Euro qualification,False
+2014-10-09,Slovenia,Switzerland,1,0,UEFA Euro qualification,False
+2014-10-09,Sweden,Russia,1,1,UEFA Euro qualification,False
+2014-10-10,Belgium,Andorra,6,0,UEFA Euro qualification,False
+2014-10-10,Botswana,Egypt,0,2,African Cup of Nations qualification,False
+2014-10-10,Bulgaria,Croatia,0,1,UEFA Euro qualification,False
+2014-10-10,Italy,Azerbaijan,2,1,UEFA Euro qualification,False
+2014-10-10,Japan,Jamaica,1,0,Friendly,False
+2014-10-10,Jordan,Kuwait,0,1,Friendly,False
+2014-10-10,South Korea,Paraguay,2,0,Friendly,False
+2014-10-10,Malta,Norway,0,3,UEFA Euro qualification,False
+2014-10-10,Netherlands,Kazakhstan,3,1,UEFA Euro qualification,False
+2014-10-10,Oman,Costa Rica,3,4,Friendly,False
+2014-10-10,Saudi Arabia,Uruguay,1,1,Friendly,False
+2014-10-10,Senegal,Tunisia,0,0,African Cup of Nations qualification,False
+2014-10-10,Saint Vincent and the Grenadines,Curaçao,1,0,CFU Caribbean Cup qualification,True
+2014-10-10,Turkey,Czech Republic,1,2,UEFA Euro qualification,False
+2014-10-10,United Arab Emirates,Australia,0,0,Friendly,False
+2014-10-10,Uzbekistan,Bahrain,0,0,Friendly,True
+2014-10-10,Wales,Bosnia,0,0,UEFA Euro qualification,False
+2014-10-10,Yemen,Iraq,1,1,Friendly,True
+2014-10-10,Chile,Peru,3,0,Friendly,False
+2014-10-11,Albania,Denmark,1,1,UEFA Euro qualification,False
+2014-10-11,Argentina,Brazil,0,2,Superclásico de las Américas,True
+2014-10-11,Armenia,Serbia,1,1,UEFA Euro qualification,False
+2014-10-11,Cameroon,Sierra Leone,0,0,African Cup of Nations qualification,False
+2014-10-11,Congo,South Africa,0,2,African Cup of Nations qualification,False
+2014-10-11,DR Congo,Ivory Coast,1,2,African Cup of Nations qualification,False
+2014-10-11,Ethiopia,Mali,0,2,African Cup of Nations qualification,False
+2014-10-11,France,Portugal,2,1,Friendly,False
+2014-10-11,Guinea,Ghana,1,1,African Cup of Nations qualification,True
+2014-10-11,Malawi,Algeria,0,2,African Cup of Nations qualification,False
+2014-10-11,Mozambique,Cape Verde,2,0,African Cup of Nations qualification,False
+2014-10-11,Poland,Germany,2,0,UEFA Euro qualification,False
+2014-10-11,Scotland,Georgia,1,0,UEFA Euro qualification,False
+2014-10-11,Sudan,Nigeria,1,0,African Cup of Nations qualification,False
+2014-10-12,Austria,Montenegro,1,0,UEFA Euro qualification,False
+2014-10-12,Estonia,England,0,1,UEFA Euro qualification,False
+2014-10-12,Guadeloupe,Curaçao,0,1,CFU Caribbean Cup qualification,False
+2014-10-12,Haiti,Saint Kitts and Nevis,0,0,CFU Caribbean Cup qualification,False
+2014-10-12,Lithuania,Slovenia,0,2,UEFA Euro qualification,False
+2014-10-12,Luxembourg,Spain,0,4,UEFA Euro qualification,False
+2014-10-12,Mexico,Panama,1,0,Friendly,False
+2014-10-12,Sweden,Liechtenstein,2,0,UEFA Euro qualification,False
+2014-10-13,Bosnia,Belgium,1,1,UEFA Euro qualification,False
+2014-10-13,Croatia,Azerbaijan,6,0,UEFA Euro qualification,False
+2014-10-13,Iceland,Netherlands,2,0,UEFA Euro qualification,False
+2014-10-13,Jordan,Kuwait,1,1,Friendly,False
+2014-10-13,Kazakhstan,Czech Republic,2,4,UEFA Euro qualification,False
+2014-10-13,Latvia,Turkey,1,1,UEFA Euro qualification,False
+2014-10-13,Malta,Italy,0,1,UEFA Euro qualification,False
+2014-10-13,Morocco,Kenya,3,0,Friendly,False
+2014-10-13,Norway,Bulgaria,2,1,UEFA Euro qualification,False
+2014-10-13,Oman,Uruguay,0,3,Friendly,False
+2014-10-14,Armenia,France,0,3,Friendly,False
+2014-10-14,Bahrain,Iraq,0,0,Friendly,False
+2014-10-14,China,Paraguay,2,1,Friendly,False
+2014-10-14,Denmark,Portugal,0,1,UEFA Euro qualification,False
+2014-10-14,Germany,Republic of Ireland,1,1,UEFA Euro qualification,False
+2014-10-14,Hong Kong,Argentina,0,7,Friendly,False
+2014-10-14,Japan,Brazil,0,4,Friendly,True
+2014-10-14,South Korea,Costa Rica,1,3,Friendly,False
+2014-10-14,Poland,Scotland,2,2,UEFA Euro qualification,False
+2014-10-14,Qatar,Australia,1,0,Friendly,False
+2014-10-14,San Marino,Switzerland,0,4,UEFA Euro qualification,False
+2014-10-14,Saudi Arabia,Lebanon,1,1,Friendly,False
+2014-10-14,Serbia,Albania,0,3,UEFA Euro qualification,False
+2014-10-14,United Arab Emirates,Uzbekistan,0,4,Friendly,False
+2014-10-14,USA,Honduras,1,1,Friendly,False
+2014-10-14,Peru,Guatemala,1,0,Friendly,False
+2014-10-15,Algeria,Malawi,3,0,African Cup of Nations qualification,False
+2014-10-15,Cameroon,Sierra Leone,2,0,African Cup of Nations qualification,False
+2014-10-15,Cape Verde,Mozambique,1,0,African Cup of Nations qualification,False
+2014-10-15,Egypt,Botswana,2,0,African Cup of Nations qualification,False
+2014-10-15,Ghana,Guinea,3,1,African Cup of Nations qualification,False
+2014-10-15,Ivory Coast,DR Congo,3,4,African Cup of Nations qualification,False
+2014-10-15,Mali,Ethiopia,2,3,African Cup of Nations qualification,False
+2014-10-15,Nigeria,Sudan,3,1,African Cup of Nations qualification,False
+2014-10-15,South Africa,Congo,0,0,African Cup of Nations qualification,False
+2014-10-15,Tunisia,Senegal,1,0,African Cup of Nations qualification,False
+2014-10-25,Zambia,Ivory Coast,1,1,Friendly,False
+2014-11-06,Qatar,North Korea,3,1,Friendly,False
+2014-11-06,Saudi Arabia,Palestine,2,0,Friendly,False
+2014-11-11,Curaçao,Trinidad and Tobago,2,3,CFU Caribbean Cup,True
+2014-11-12,Argentina,Croatia,2,1,Friendly,True
+2014-11-12,Belgium,Iceland,3,1,Friendly,False
+2014-11-12,Haiti,Antigua and Barbuda,2,2,CFU Caribbean Cup,True
+2014-11-12,Netherlands,Mexico,2,3,Friendly,False
+2014-11-12,Norway,Estonia,0,1,Friendly,False
+2014-11-12,Turkey,Brazil,0,4,Friendly,False
+2014-11-13,Curaçao,Cuba,2,3,CFU Caribbean Cup,True
+2014-11-13,Morocco,Benin,6,1,Friendly,False
+2014-11-13,Saudi Arabia,Qatar,1,1,Gulf Cup,False
+2014-11-13,Uruguay,Costa Rica,3,3,Friendly,False
+2014-11-14,Botswana,Tunisia,0,0,African Cup of Nations qualification,False
+2014-11-14,China,New Zealand,1,1,Friendly,False
+2014-11-14,France,Albania,1,1,Friendly,False
+2014-11-14,Germany,Gibraltar,4,0,UEFA Euro qualification,False
+2014-11-14,Iraq,Kuwait,0,1,Gulf Cup,True
+2014-11-14,Ivory Coast,Sierra Leone,5,1,African Cup of Nations qualification,False
+2014-11-14,Japan,Honduras,6,0,Friendly,False
+2014-11-14,Jordan,South Korea,0,1,Friendly,False
+2014-11-14,Martinique,Haiti,0,3,CFU Caribbean Cup,True
+2014-11-14,Paraguay,Peru,2,1,Friendly,False
+2014-11-14,Portugal,Armenia,1,0,UEFA Euro qualification,False
+2014-11-14,Scotland,Republic of Ireland,1,0,UEFA Euro qualification,False
+2014-11-14,Serbia,Denmark,1,3,UEFA Euro qualification,False
+2014-11-14,USA,Colombia,1,2,Friendly,True
+2014-11-15,Algeria,Ethiopia,3,1,African Cup of Nations qualification,False
+2014-11-15,Austria,Russia,1,0,UEFA Euro qualification,False
+2014-11-15,Cameroon,DR Congo,1,0,African Cup of Nations qualification,False
+2014-11-15,Cape Verde,Niger,3,1,African Cup of Nations qualification,False
+2014-11-15,Congo,Nigeria,0,2,African Cup of Nations qualification,False
+2014-11-15,Egypt,Senegal,0,1,African Cup of Nations qualification,False
+2014-11-15,England,Slovenia,3,1,UEFA Euro qualification,False
+2014-11-15,French Guiana,Curaçao,4,1,CFU Caribbean Cup,True
+2014-11-15,Indonesia,Syria,0,2,Friendly,False
+2014-11-15,Malawi,Mali,2,0,African Cup of Nations qualification,False
+2014-11-15,Montenegro,Sweden,1,1,UEFA Euro qualification,False
+2014-11-15,South Africa,Sudan,2,1,African Cup of Nations qualification,False
+2014-11-15,Spain,Belarus,3,0,UEFA Euro qualification,False
+2014-11-15,Switzerland,Lithuania,4,0,UEFA Euro qualification,False
+2014-11-15,Uganda,Ghana,1,0,African Cup of Nations qualification,False
+2014-11-16,Azerbaijan,Norway,0,1,UEFA Euro qualification,False
+2014-11-16,Belgium,Wales,0,0,UEFA Euro qualification,False
+2014-11-16,Czech Republic,Iceland,2,1,UEFA Euro qualification,False
+2014-11-16,Israel,Bosnia,3,0,UEFA Euro qualification,False
+2014-11-16,Italy,Croatia,1,1,UEFA Euro qualification,False
+2014-11-16,Morocco,Zimbabwe,2,1,Friendly,False
+2014-11-16,Netherlands,Latvia,6,0,UEFA Euro qualification,False
+2014-11-16,Saudi Arabia,Bahrain,3,0,Gulf Cup,False
+2014-11-16,Turkey,Kazakhstan,3,1,UEFA Euro qualification,False
+2014-11-16,Yemen,Qatar,0,0,Gulf Cup,True
+2014-11-17,Iraq,Oman,1,1,Gulf Cup,True
+2014-11-18,Austria,Brazil,1,2,Friendly,False
+2014-11-18,Belarus,Mexico,3,2,Friendly,False
+2014-11-18,Bolivia,Venezuela,3,2,Friendly,False
+2014-11-18,Chile,Uruguay,1,2,Friendly,False
+2014-11-18,China,Honduras,0,0,Friendly,False
+2014-11-18,Cuba,Haiti,1,2,CFU Caribbean Cup,True
+2014-11-18,Estonia,Jordan,1,0,Friendly,False
+2014-11-18,France,Sweden,1,0,Friendly,False
+2014-11-18,Greece,Serbia,0,2,Friendly,False
+2014-11-18,Iran,South Korea,1,0,Friendly,False
+2014-11-18,Republic of Ireland,USA,4,1,Friendly,False
+2014-11-18,Italy,Albania,1,0,Friendly,False
+2014-11-18,Jamaica,Trinidad and Tobago,0,0,CFU Caribbean Cup,False
+2014-11-18,Japan,Australia,2,1,Friendly,False
+2014-11-18,Panama,Canada,0,0,Friendly,False
+2014-11-18,Peru,Paraguay,2,1,Friendly,False
+2014-11-18,Poland,Switzerland,2,2,Friendly,False
+2014-11-18,Portugal,Argentina,1,0,Friendly,True
+2014-11-18,Romania,Denmark,2,0,Friendly,False
+2014-11-18,Scotland,England,1,3,Friendly,False
+2014-11-18,Slovenia,Colombia,0,1,Friendly,False
+2014-11-18,Spain,Germany,0,1,Friendly,False
+2014-11-18,Thailand,New Zealand,2,0,Friendly,False
+2014-11-19,Bahrain,Qatar,0,0,Gulf Cup,True
+2014-11-19,DR Congo,Sierra Leone,3,1,African Cup of Nations qualification,False
+2014-11-19,Ghana,Togo,3,1,African Cup of Nations qualification,False
+2014-11-19,Ivory Coast,Cameroon,0,0,African Cup of Nations qualification,False
+2014-11-19,Mali,Algeria,2,0,African Cup of Nations qualification,False
+2014-11-19,Nigeria,South Africa,2,2,African Cup of Nations qualification,False
+2014-11-19,Saudi Arabia,Yemen,1,0,Gulf Cup,False
+2014-11-19,Senegal,Botswana,3,0,African Cup of Nations qualification,False
+2014-11-19,Tunisia,Egypt,2,1,African Cup of Nations qualification,False
+2014-11-19,Zambia,Cape Verde,1,0,African Cup of Nations qualification,False
+2014-11-20,United Arab Emirates,Iraq,2,0,Gulf Cup,True
+2014-11-22,Vietnam,Indonesia,2,2,AFF Championship,False
+2014-11-23,Oman,Qatar,1,3,Gulf Cup,True
+2014-11-23,Saudi Arabia,United Arab Emirates,3,2,Gulf Cup,False
+2014-11-25,Philippines,Indonesia,4,0,AFF Championship,True
+2014-11-26,Saudi Arabia,Qatar,1,2,Gulf Cup,False
+2014-11-28,Indonesia,Laos,5,1,AFF Championship,True
+2014-11-30,South Africa,Ivory Coast,2,0,Friendly,False
+2014-12-13,Uzbekistan,Palestine,1,0,Friendly,True
+2014-12-21,Uzbekistan,Jordan,2,1,Friendly,True
+2014-12-22,Iraq,Kuwait,1,1,Friendly,True
+2014-12-25,Uzbekistan,Iraq,1,0,Friendly,True
+2014-12-27,Qatar,Estonia,3,0,Friendly,False
+2014-12-28,Uzbekistan,Iraq,0,0,Friendly,True
+2014-12-30,Bahrain,Saudi Arabia,4,1,Friendly,True
+2014-12-30,United Arab Emirates,Jordan,1,0,Friendly,True
+2014-12-31,Qatar,Oman,2,2,Friendly,True
+2015-01-04,Bahrain,Jordan,1,0,Friendly,True
+2015-01-04,Iran,Iraq,1,0,Friendly,True
+2015-01-04,South Korea,Saudi Arabia,2,0,Friendly,True
+2015-01-04,South Africa,Zambia,1,0,Friendly,False
+2015-01-07,Cameroon,DR Congo,1,1,Friendly,False
+2015-01-09,Australia,Kuwait,4,1,AFC Asian Cup,False
+2015-01-09,Senegal,Gabon,1,0,Friendly,True
+2015-01-10,Cameroon,South Africa,1,1,Friendly,True
+2015-01-10,Cape Verde,Congo,3,2,Friendly,True
+2015-01-10,South Korea,Oman,1,0,AFC Asian Cup,True
+2015-01-10,Saudi Arabia,China,0,1,AFC Asian Cup,True
+2015-01-10,Uzbekistan,North Korea,1,0,AFC Asian Cup,True
+2015-01-11,Iran,Bahrain,2,0,AFC Asian Cup,True
+2015-01-11,Nigeria,Ivory Coast,0,1,Friendly,True
+2015-01-11,Tunisia,Algeria,1,1,Friendly,False
+2015-01-11,United Arab Emirates,Qatar,4,1,AFC Asian Cup,True
+2015-01-12,Japan,Palestine,4,0,AFC Asian Cup,True
+2015-01-12,Jordan,Iraq,0,1,AFC Asian Cup,True
+2015-01-13,Australia,Oman,4,0,AFC Asian Cup,False
+2015-01-13,Kuwait,South Korea,0,1,AFC Asian Cup,True
+2015-01-13,Senegal,Guinea,5,2,Friendly,True
+2015-01-14,China,Uzbekistan,2,1,AFC Asian Cup,True
+2015-01-14,North Korea,Saudi Arabia,1,4,AFC Asian Cup,True
+2015-01-14,Mali,South Africa,0,3,Friendly,True
+2015-01-15,Qatar,Iran,0,1,AFC Asian Cup,True
+2015-01-15,Sweden,Ivory Coast,2,0,Friendly,True
+2015-01-16,Canada,Iceland,1,2,Friendly,True
+2015-01-16,Iraq,Japan,0,1,AFC Asian Cup,True
+2015-01-16,Palestine,Jordan,1,5,AFC Asian Cup,True
+2015-01-17,Australia,South Korea,0,1,AFC Asian Cup,False
+2015-01-17,Yemen,Nigeria,0,2,Friendly,True
+2015-01-18,Tunisia,Cape Verde,1,1,African Cup of Nations,True
+2015-01-18,Uzbekistan,Saudi Arabia,3,1,AFC Asian Cup,True
+2015-01-18,Zambia,DR Congo,1,1,African Cup of Nations,True
+2015-01-19,Algeria,South Africa,3,1,African Cup of Nations,True
+2015-01-19,Canada,Iceland,1,1,Friendly,True
+2015-01-19,Finland,Sweden,1,0,Friendly,True
+2015-01-19,Ghana,Senegal,1,2,African Cup of Nations,True
+2015-01-19,Iran,United Arab Emirates,1,0,AFC Asian Cup,True
+2015-01-19,Qatar,Bahrain,1,2,AFC Asian Cup,True
+2015-01-20,Iraq,Palestine,2,0,AFC Asian Cup,True
+2015-01-20,Ivory Coast,Guinea,1,1,African Cup of Nations,True
+2015-01-20,Japan,Jordan,2,0,AFC Asian Cup,True
+2015-01-20,Mali,Cameroon,1,1,African Cup of Nations,True
+2015-01-22,Australia,China,2,0,AFC Asian Cup,False
+2015-01-22,Cape Verde,DR Congo,0,0,African Cup of Nations,True
+2015-01-22,South Korea,Uzbekistan,2,0,AFC Asian Cup,True
+2015-01-22,Zambia,Tunisia,1,2,African Cup of Nations,True
+2015-01-23,Ghana,Algeria,1,0,African Cup of Nations,True
+2015-01-23,Iran,Iraq,3,3,AFC Asian Cup,True
+2015-01-23,Japan,United Arab Emirates,1,1,AFC Asian Cup,True
+2015-01-23,South Africa,Senegal,1,1,African Cup of Nations,True
+2015-01-24,Cameroon,Guinea,1,1,African Cup of Nations,True
+2015-01-24,Ivory Coast,Mali,1,1,African Cup of Nations,True
+2015-01-26,Cape Verde,Zambia,0,0,African Cup of Nations,True
+2015-01-26,DR Congo,Tunisia,1,1,African Cup of Nations,True
+2015-01-26,South Korea,Iraq,2,0,AFC Asian Cup,True
+2015-01-27,Australia,United Arab Emirates,2,0,AFC Asian Cup,False
+2015-01-27,Senegal,Algeria,0,2,African Cup of Nations,True
+2015-01-27,South Africa,Ghana,1,2,African Cup of Nations,True
+2015-01-28,Cameroon,Ivory Coast,0,1,African Cup of Nations,True
+2015-01-28,Chile,USA,3,2,Friendly,False
+2015-01-28,Guinea,Mali,1,1,African Cup of Nations,True
+2015-01-30,Curaçao,Aruba,0,0,ABCS Tournament,True
+2015-01-30,Iraq,United Arab Emirates,2,3,AFC Asian Cup,True
+2015-01-31,Australia,South Korea,2,1,AFC Asian Cup,False
+2015-01-31,Congo,DR Congo,2,4,African Cup of Nations,True
+2015-01-31,Equatorial Guinea,Tunisia,2,1,African Cup of Nations,False
+2015-02-01,Curaçao,Bonaire,4,1,ABCS Tournament,True
+2015-02-01,Ghana,Guinea,3,0,African Cup of Nations,True
+2015-02-01,Ivory Coast,Algeria,3,1,African Cup of Nations,True
+2015-02-04,DR Congo,Ivory Coast,1,3,African Cup of Nations,True
+2015-02-04,Honduras,Venezuela,2,3,Friendly,False
+2015-02-05,Equatorial Guinea,Ghana,0,3,African Cup of Nations,False
+2015-02-07,Equatorial Guinea,DR Congo,0,0,African Cup of Nations,False
+2015-02-08,Ivory Coast,Ghana,0,0,African Cup of Nations,True
+2015-02-08,USA,Panama,2,0,Friendly,False
+2015-03-25,Denmark,USA,3,2,Friendly,False
+2015-03-25,French Guiana,Honduras,3,1,Gold Cup qualification,False
+2015-03-25,Gabon,Mali,4,3,Friendly,True
+2015-03-25,Germany,Australia,2,2,Friendly,False
+2015-03-25,Indonesia,Cameroon,0,1,Friendly,False
+2015-03-25,Nigeria,Uganda,0,1,Friendly,False
+2015-03-25,Scotland,Northern Ireland,1,0,Friendly,False
+2015-03-25,Swaziland,South Africa,1,3,Friendly,False
+2015-03-26,Bahrain,Colombia,0,6,Friendly,False
+2015-03-26,Chile,Iran,0,2,Friendly,True
+2015-03-26,Egypt,Equatorial Guinea,2,0,Friendly,False
+2015-03-26,France,Brazil,1,3,Friendly,False
+2015-03-26,Ivory Coast,Angola,2,0,Friendly,False
+2015-03-26,Jordan,Syria,0,1,Friendly,False
+2015-03-26,Qatar,Algeria,1,0,Friendly,False
+2015-03-27,Canada,Guatemala,1,0,Friendly,True
+2015-03-27,China,Haiti,2,2,Friendly,False
+2015-03-27,Curaçao,Montserrat,2,1,FIFA World Cup qualification,False
+2015-03-27,England,Lithuania,4,0,UEFA Euro qualification,False
+2015-03-27,Japan,Tunisia,2,0,Kirin Challenge Cup,False
+2015-03-27,South Korea,Uzbekistan,1,1,Friendly,False
+2015-03-27,Liechtenstein,Austria,0,5,UEFA Euro qualification,False
+2015-03-27,Moldova,Sweden,0,2,UEFA Euro qualification,False
+2015-03-27,Slovenia,San Marino,6,0,UEFA Euro qualification,False
+2015-03-27,Spain,Ukraine,1,0,UEFA Euro qualification,False
+2015-03-27,Switzerland,Estonia,3,0,UEFA Euro qualification,False
+2015-03-27,Trinidad and Tobago,Panama,0,1,Friendly,False
+2015-03-28,Argentina,El Salvador,2,0,Friendly,True
+2015-03-28,Andorra,Bosnia,0,3,UEFA Euro qualification,False
+2015-03-28,Belgium,Cyprus,5,0,UEFA Euro qualification,False
+2015-03-28,Bulgaria,Italy,2,2,UEFA Euro qualification,False
+2015-03-28,Croatia,Norway,5,1,UEFA Euro qualification,False
+2015-03-28,Czech Republic,Latvia,1,1,UEFA Euro qualification,False
+2015-03-28,Ghana,Senegal,1,2,Friendly,True
+2015-03-28,Iraq,DR Congo,2,1,Friendly,True
+2015-03-28,Morocco,Uruguay,0,1,Friendly,False
+2015-03-28,Netherlands,Turkey,1,1,UEFA Euro qualification,False
+2015-03-29,Albania,Armenia,2,1,UEFA Euro qualification,False
+2015-03-29,Brazil,Chile,1,0,Friendly,True
+2015-03-29,France,Denmark,2,0,Friendly,False
+2015-03-29,Georgia,Germany,0,2,UEFA Euro qualification,False
+2015-03-29,Honduras,French Guiana,3,0,Gold Cup qualification,False
+2015-03-29,Ivory Coast,Equatorial Guinea,1,1,Friendly,False
+2015-03-29,Portugal,Serbia,2,1,UEFA Euro qualification,False
+2015-03-29,Scotland,Gibraltar,6,1,UEFA Euro qualification,False
+2015-03-29,South Africa,Nigeria,1,1,Friendly,False
+2015-03-30,Indonesia,Myanmar,2,1,Friendly,False
+2015-03-30,Jamaica,Cuba,3,0,Friendly,False
+2015-03-30,Kuwait,Colombia,1,3,Friendly,True
+2015-03-30,North Macedonia,Australia,0,0,Friendly,False
+2015-03-30,Oman,Algeria,1,4,Friendly,True
+2015-03-30,Qatar,Slovenia,1,0,Friendly,False
+2015-03-30,Saudi Arabia,Jordan,2,1,Friendly,False
+2015-03-30,Thailand,Cameroon,2,3,Friendly,False
+2015-03-31,Argentina,Ecuador,2,1,Friendly,True
+2015-03-31,Austria,Bosnia,1,1,Friendly,False
+2015-03-31,China,Tunisia,1,1,Friendly,False
+2015-03-31,Ghana,Mali,1,1,Friendly,True
+2015-03-31,Iraq,DR Congo,1,0,Friendly,True
+2015-03-31,Israel,Belgium,0,1,UEFA Euro qualification,False
+2015-03-31,Italy,England,1,1,Friendly,False
+2015-03-31,Japan,Uzbekistan,5,1,Friendly,False
+2015-03-31,South Korea,New Zealand,1,0,Friendly,False
+2015-03-31,Luxembourg,Turkey,1,2,Friendly,False
+2015-03-31,Montserrat,Curaçao,2,2,FIFA World Cup qualification,False
+2015-03-31,Netherlands,Spain,2,0,Friendly,False
+2015-03-31,Panama,Costa Rica,2,1,Friendly,False
+2015-03-31,Peru,Venezuela,0,1,Friendly,True
+2015-03-31,Portugal,Cape Verde,0,2,Friendly,False
+2015-03-31,Slovakia,Czech Republic,1,0,Friendly,False
+2015-03-31,Sweden,Iran,3,1,Friendly,False
+2015-03-31,Switzerland,USA,1,1,Friendly,False
+2015-04-15,USA,Mexico,2,0,Friendly,False
+2015-05-14,Lesotho,South Africa,0,0,Friendly,False
+2015-05-16,Lesotho,South Africa,1,1,Friendly,False
+2015-05-24,South Africa,Botswana,0,0,COSAFA Cup,False
+2015-05-25,Ghana,Madagascar,1,2,COSAFA Cup,True
+2015-05-27,South Africa,Malawi,0,0,COSAFA Cup,False
+2015-05-27,Zambia,Ghana,3,0,COSAFA Cup,True
+2015-05-30,Jordan,Lebanon,0,0,Friendly,False
+2015-05-30,Mexico,Guatemala,3,0,Friendly,False
+2015-05-31,El Salvador,Honduras,0,2,Friendly,True
+2015-05-31,Northern Ireland,Qatar,1,1,Friendly,True
+2015-06-03,Panama,Ecuador,1,1,Friendly,False
+2015-06-03,Peru,Mexico,1,1,Friendly,False
+2015-06-05,Curaçao,Trinidad and Tobago,1,0,Friendly,False
+2015-06-05,Jordan,Kuwait,2,2,Friendly,True
+2015-06-05,Netherlands,USA,3,4,Friendly,False
+2015-06-05,Scotland,Qatar,1,0,Friendly,False
+2015-06-06,Argentina,Bolivia,5,0,Friendly,False
+2015-06-06,Burkina Faso,Cameroon,2,3,Friendly,True
+2015-06-06,Colombia,Costa Rica,1,0,Friendly,True
+2015-06-06,Ecuador,Panama,4,0,Friendly,False
+2015-06-06,Paraguay,Honduras,2,2,Friendly,False
+2015-06-06,Uruguay,Guatemala,5,1,Friendly,False
+2015-06-07,Brazil,Mexico,2,0,Friendly,False
+2015-06-07,Croatia,Gibraltar,4,0,Friendly,False
+2015-06-07,France,Belgium,3,4,Friendly,False
+2015-06-07,Republic of Ireland,England,0,0,Friendly,False
+2015-06-07,Serbia,Azerbaijan,4,1,Friendly,True
+2015-06-08,Denmark,Montenegro,2,1,Friendly,False
+2015-06-08,Egypt,Malawi,2,1,Friendly,False
+2015-06-08,Ghana,Togo,1,0,Friendly,False
+2015-06-08,Norway,Sweden,0,0,Friendly,False
+2015-06-08,Turkey,Bulgaria,4,0,Friendly,False
+2015-06-09,DR Congo,Cameroon,1,1,Friendly,True
+2015-06-10,Brazil,Honduras,1,0,Friendly,False
+2015-06-10,Curaçao,Cuba,0,0,FIFA World Cup qualification,False
+2015-06-10,Germany,USA,1,2,Friendly,False
+2015-06-10,Switzerland,Liechtenstein,3,0,Friendly,False
+2015-06-11,Chile,Ecuador,2,0,Copa América,False
+2015-06-11,Japan,Iraq,4,0,Kirin Challenge Cup,False
+2015-06-11,South Korea,United Arab Emirates,3,0,Friendly,True
+2015-06-11,Maldives,Qatar,0,1,FIFA World Cup qualification,False
+2015-06-11,Saudi Arabia,Palestine,3,2,FIFA World Cup qualification,False
+2015-06-11,Spain,Costa Rica,2,1,Friendly,False
+2015-06-11,Tajikistan,Jordan,1,3,FIFA World Cup qualification,False
+2015-06-11,Uzbekistan,Iran,0,1,Friendly,False
+2015-06-11,Dominica,Canada,0,2,FIFA World Cup qualification,False
+2015-06-12,Bosnia,Israel,3,1,UEFA Euro qualification,False
+2015-06-12,Croatia,Italy,1,1,UEFA Euro qualification,False
+2015-06-12,Iceland,Czech Republic,2,1,UEFA Euro qualification,False
+2015-06-12,Kazakhstan,Turkey,0,1,UEFA Euro qualification,False
+2015-06-12,Latvia,Netherlands,0,2,UEFA Euro qualification,False
+2015-06-12,Mexico,Bolivia,0,0,Copa América,True
+2015-06-12,Morocco,Libya,1,0,African Cup of Nations qualification,False
+2015-06-12,Norway,Azerbaijan,0,0,UEFA Euro qualification,False
+2015-06-12,Wales,Belgium,1,0,UEFA Euro qualification,False
+2015-06-12,Tunisia,Djibouti,8,1,African Cup of Nations qualification,False
+2015-06-13,Albania,France,1,0,Friendly,False
+2015-06-13,Algeria,Seychelles,4,0,African Cup of Nations qualification,False
+2015-06-13,Argentina,Paraguay,2,2,Copa América,True
+2015-06-13,Armenia,Portugal,2,3,UEFA Euro qualification,False
+2015-06-13,Cape Verde,São Tomé and Príncipe,7,1,African Cup of Nations qualification,False
+2015-06-13,Denmark,Serbia,2,0,UEFA Euro qualification,False
+2015-06-13,Gibraltar,Germany,0,7,UEFA Euro qualification,True
+2015-06-13,Republic of Ireland,Scotland,1,1,UEFA Euro qualification,False
+2015-06-13,Mali,South Sudan,2,0,African Cup of Nations qualification,False
+2015-06-13,Senegal,Burundi,3,1,African Cup of Nations qualification,False
+2015-06-13,South Africa,Gambia,0,0,African Cup of Nations qualification,False
+2015-06-13,Uruguay,Jamaica,1,0,Copa América,True
+2015-06-14,Belarus,Spain,0,1,UEFA Euro qualification,False
+2015-06-14,Brazil,Peru,2,1,Copa América,True
+2015-06-14,Cameroon,Mauritania,1,0,African Cup of Nations qualification,False
+2015-06-14,Colombia,Venezuela,0,1,Copa América,True
+2015-06-14,DR Congo,Madagascar,2,1,African Cup of Nations qualification,False
+2015-06-14,Cuba,Curaçao,1,1,FIFA World Cup qualification,False
+2015-06-14,Egypt,Tanzania,3,0,African Cup of Nations qualification,False
+2015-06-14,Gabon,Ivory Coast,0,0,Friendly,False
+2015-06-14,Ghana,Mauritius,7,1,African Cup of Nations qualification,False
+2015-06-14,Lithuania,Switzerland,1,2,UEFA Euro qualification,False
+2015-06-14,Russia,Austria,0,1,UEFA Euro qualification,False
+2015-06-14,Slovenia,England,2,3,UEFA Euro qualification,False
+2015-06-14,Sweden,Montenegro,3,1,UEFA Euro qualification,False
+2015-06-15,Chile,Mexico,3,3,Copa América,False
+2015-06-15,Ecuador,Bolivia,2,3,Copa América,True
+2015-06-16,Argentina,Uruguay,1,0,Copa América,True
+2015-06-16,Myanmar,South Korea,0,2,FIFA World Cup qualification,True
+2015-06-16,Italy,Portugal,0,1,Friendly,True
+2015-06-16,Japan,Singapore,0,0,FIFA World Cup qualification,False
+2015-06-16,Jordan,Trinidad and Tobago,3,0,Friendly,False
+2015-06-16,North Korea,Uzbekistan,4,2,FIFA World Cup qualification,False
+2015-06-16,Kyrgyzstan,Australia,1,2,FIFA World Cup qualification,False
+2015-06-16,Paraguay,Jamaica,1,0,Copa América,True
+2015-06-16,South Africa,Angola,2,1,Friendly,False
+2015-06-16,Turkmenistan,Iran,1,1,FIFA World Cup qualification,False
+2015-06-16,Canada,Dominica,4,0,FIFA World Cup qualification,False
+2015-06-17,Brazil,Colombia,0,1,Copa América,True
+2015-06-18,Peru,Venezuela,1,0,Copa América,True
+2015-06-19,Chile,Bolivia,5,0,Copa América,False
+2015-06-19,Mexico,Ecuador,1,2,Copa América,True
+2015-06-20,Argentina,Jamaica,1,0,Copa América,True
+2015-06-20,Uruguay,Paraguay,1,1,Copa América,True
+2015-06-21,Brazil,Venezuela,2,1,Copa América,True
+2015-06-21,Colombia,Peru,0,0,Copa América,True
+2015-06-24,Chile,Uruguay,1,0,Copa América,False
+2015-06-25,Bolivia,Peru,1,3,Copa América,True
+2015-06-26,Argentina,Colombia,0,0,Copa América,True
+2015-06-27,Brazil,Paraguay,1,1,Copa América,True
+2015-06-27,Mexico,Costa Rica,2,2,Friendly,True
+2015-06-29,Chile,Peru,2,1,Copa América,False
+2015-06-30,Argentina,Paraguay,6,1,Copa América,True
+2015-07-01,Honduras,Mexico,0,0,Friendly,True
+2015-07-03,Peru,Paraguay,2,0,Copa América,True
+2015-07-04,Chile,Argentina,0,0,Copa América,False
+2015-07-07,Panama,Haiti,1,1,Gold Cup,True
+2015-07-07,USA,Honduras,2,1,Gold Cup,False
+2015-07-08,Costa Rica,Jamaica,2,2,Gold Cup,True
+2015-07-08,El Salvador,Canada,0,0,Gold Cup,True
+2015-07-09,Mexico,Cuba,6,0,Gold Cup,True
+2015-07-10,Honduras,Panama,1,1,Gold Cup,True
+2015-07-10,USA,Haiti,1,0,Gold Cup,False
+2015-07-11,Costa Rica,El Salvador,1,1,Gold Cup,True
+2015-07-11,Jamaica,Canada,1,0,Gold Cup,True
+2015-07-12,Guatemala,Mexico,0,0,Gold Cup,True
+2015-07-13,Honduras,Haiti,0,1,Gold Cup,True
+2015-07-13,USA,Panama,1,1,Gold Cup,False
+2015-07-14,Canada,Costa Rica,0,0,Gold Cup,False
+2015-07-14,Jamaica,El Salvador,1,0,Gold Cup,True
+2015-07-15,Trinidad and Tobago,Mexico,4,4,Gold Cup,True
+2015-07-18,Haiti,Jamaica,0,1,Gold Cup,True
+2015-07-18,USA,Cuba,6,0,Gold Cup,False
+2015-07-19,Mexico,Costa Rica,1,0,Gold Cup,True
+2015-07-19,Trinidad and Tobago,Panama,1,1,Gold Cup,True
+2015-07-22,Panama,Mexico,1,2,Gold Cup,True
+2015-07-22,USA,Jamaica,1,2,Gold Cup,False
+2015-07-25,USA,Panama,1,1,Gold Cup,False
+2015-07-26,Jamaica,Mexico,1,3,Gold Cup,True
+2015-08-02,China,South Korea,0,2,EAFF Championship,False
+2015-08-02,North Korea,Japan,2,1,EAFF Championship,True
+2015-08-05,Japan,South Korea,1,1,EAFF Championship,True
+2015-08-09,China,Japan,1,1,EAFF Championship,False
+2015-08-09,South Korea,North Korea,0,0,EAFF Championship,True
+2015-08-26,Lebanon,Iraq,2,3,Friendly,False
+2015-08-28,Qatar,Singapore,4,0,Friendly,False
+2015-09-01,Congo,Ghana,2,3,Friendly,False
+2015-09-03,Australia,Bangladesh,5,0,FIFA World Cup qualification,False
+2015-09-03,Azerbaijan,Croatia,0,0,UEFA Euro qualification,False
+2015-09-03,Belgium,Bosnia,3,1,UEFA Euro qualification,False
+2015-09-03,Bulgaria,Norway,0,1,UEFA Euro qualification,False
+2015-09-03,Czech Republic,Kazakhstan,2,1,UEFA Euro qualification,False
+2015-09-03,Iran,Guam,6,0,FIFA World Cup qualification,False
+2015-09-03,Iraq,Taiwan,5,1,FIFA World Cup qualification,True
+2015-09-03,Italy,Malta,1,0,UEFA Euro qualification,False
+2015-09-03,Japan,Cambodia,3,0,FIFA World Cup qualification,False
+2015-09-03,Jordan,Kyrgyzstan,0,0,FIFA World Cup qualification,False
+2015-09-03,South Korea,Laos,8,0,FIFA World Cup qualification,False
+2015-09-03,Netherlands,Iceland,0,1,UEFA Euro qualification,False
+2015-09-03,Qatar,Bhutan,15,0,FIFA World Cup qualification,False
+2015-09-03,Saudi Arabia,Timor-Leste,7,0,FIFA World Cup qualification,False
+2015-09-03,Turkey,Latvia,1,1,UEFA Euro qualification,False
+2015-09-03,Uzbekistan,Yemen,1,0,FIFA World Cup qualification,False
+2015-09-04,Curaçao,El Salvador,0,1,FIFA World Cup qualification,False
+2015-09-04,Denmark,Albania,0,0,UEFA Euro qualification,False
+2015-09-04,Georgia,Scotland,1,0,UEFA Euro qualification,False
+2015-09-04,Germany,Poland,3,1,UEFA Euro qualification,False
+2015-09-04,Grenada,Haiti,1,3,FIFA World Cup qualification,False
+2015-09-04,Portugal,France,0,1,Friendly,False
+2015-09-04,Serbia,Armenia,2,0,UEFA Euro qualification,False
+2015-09-04,Venezuela,Honduras,0,3,Friendly,False
+2015-09-04,Canada,Belize,3,0,FIFA World Cup qualification,False
+2015-09-04,Jamaica,Nicaragua,2,3,FIFA World Cup qualification,False
+2015-09-04,USA,Peru,2,1,Friendly,False
+2015-09-05,Argentina,Bolivia,7,0,Friendly,True
+2015-09-05,Austria,Moldova,1,0,UEFA Euro qualification,False
+2015-09-05,Chile,Paraguay,3,2,Friendly,False
+2015-09-05,Costa Rica,Brazil,0,1,Friendly,True
+2015-09-05,Liberia,Tunisia,1,0,African Cup of Nations qualification,False
+2015-09-05,Mauritania,South Africa,3,1,African Cup of Nations qualification,False
+2015-09-05,Namibia,Senegal,0,2,African Cup of Nations qualification,False
+2015-09-05,Russia,Sweden,1,0,UEFA Euro qualification,False
+2015-09-05,Rwanda,Ghana,0,1,African Cup of Nations qualification,False
+2015-09-05,San Marino,England,0,6,UEFA Euro qualification,False
+2015-09-05,São Tomé and Príncipe,Morocco,0,3,African Cup of Nations qualification,False
+2015-09-05,Spain,Slovakia,2,0,UEFA Euro qualification,False
+2015-09-05,Switzerland,Slovenia,3,2,UEFA Euro qualification,False
+2015-09-05,Tanzania,Nigeria,0,0,African Cup of Nations qualification,False
+2015-09-06,Bosnia,Andorra,3,0,UEFA Euro qualification,False
+2015-09-06,Central African Republic,DR Congo,2,0,African Cup of Nations qualification,False
+2015-09-06,Benin,Mali,1,1,African Cup of Nations qualification,False
+2015-09-06,Cyprus,Belgium,0,1,UEFA Euro qualification,False
+2015-09-06,Italy,Bulgaria,1,0,UEFA Euro qualification,False
+2015-09-06,Latvia,Czech Republic,1,2,UEFA Euro qualification,False
+2015-09-06,Gambia,Cameroon,0,1,African Cup of Nations qualification,False
+2015-09-06,Lesotho,Algeria,1,3,African Cup of Nations qualification,False
+2015-09-06,Libya,Cape Verde,1,2,African Cup of Nations qualification,True
+2015-09-06,Norway,Croatia,2,0,UEFA Euro qualification,False
+2015-09-06,Sierra Leone,Ivory Coast,0,0,African Cup of Nations qualification,True
+2015-09-06,Turkey,Netherlands,3,0,UEFA Euro qualification,False
+2015-09-07,Albania,Portugal,0,1,UEFA Euro qualification,False
+2015-09-07,Armenia,Denmark,0,0,UEFA Euro qualification,False
+2015-09-07,Myanmar,New Zealand,1,1,Friendly,False
+2015-09-07,France,Serbia,2,1,Friendly,False
+2015-09-07,Scotland,Germany,2,3,UEFA Euro qualification,False
+2015-09-08,USA,Brazil,1,4,Friendly,False
+2015-09-08,Afghanistan,Japan,0,6,FIFA World Cup qualification,True
+2015-09-08,Bangladesh,Jordan,0,4,FIFA World Cup qualification,False
+2015-09-08,Ecuador,Honduras,2,0,Friendly,False
+2015-09-08,El Salvador,Curaçao,1,0,FIFA World Cup qualification,False
+2015-09-08,England,Switzerland,2,0,UEFA Euro qualification,False
+2015-09-08,Hong Kong,Qatar,2,3,FIFA World Cup qualification,False
+2015-09-08,India,Iran,0,3,FIFA World Cup qualification,False
+2015-09-08,Lebanon,South Korea,0,3,FIFA World Cup qualification,False
+2015-09-08,North Macedonia,Spain,0,1,UEFA Euro qualification,False
+2015-09-08,Malaysia,Saudi Arabia,0,3,FIFA World Cup qualification,False
+2015-09-08,Mexico,Argentina,2,2,Friendly,True
+2015-09-08,Nigeria,Niger,2,0,Friendly,False
+2015-09-08,Philippines,Uzbekistan,1,5,FIFA World Cup qualification,False
+2015-09-08,Slovenia,Estonia,1,0,UEFA Euro qualification,False
+2015-09-08,South Africa,Senegal,1,0,Friendly,False
+2015-09-08,Sweden,Austria,1,4,UEFA Euro qualification,False
+2015-09-08,Tajikistan,Australia,0,3,FIFA World Cup qualification,False
+2015-09-08,Thailand,Iraq,2,2,FIFA World Cup qualification,False
+2015-09-08,Venezuela,Panama,1,1,Friendly,False
+2015-09-08,Belize,Canada,1,1,FIFA World Cup qualification,False
+2015-09-08,Haiti,Grenada,3,0,FIFA World Cup qualification,False
+2015-09-08,Nicaragua,Jamaica,0,2,FIFA World Cup qualification,False
+2015-09-08,Colombia,Peru,1,1,Friendly,True
+2015-10-03,Jordan,Iraq,3,0,Friendly,False
+2015-10-08,Albania,Serbia,0,2,UEFA Euro qualification,False
+2015-10-08,Argentina,Ecuador,0,2,FIFA World Cup qualification,False
+2015-10-08,Bahrain,Uzbekistan,0,4,FIFA World Cup qualification,False
+2015-10-08,Bolivia,Uruguay,0,2,FIFA World Cup qualification,False
+2015-10-08,Chile,Brazil,2,0,FIFA World Cup qualification,False
+2015-10-08,Colombia,Peru,2,0,FIFA World Cup qualification,False
+2015-10-08,France,Armenia,4,0,Friendly,False
+2015-10-08,Republic of Ireland,Germany,1,0,UEFA Euro qualification,False
+2015-10-08,Jordan,Australia,2,0,FIFA World Cup qualification,False
+2015-10-08,Kuwait,South Korea,0,1,FIFA World Cup qualification,False
+2015-10-08,Nigeria,DR Congo,0,2,Friendly,True
+2015-10-08,Oman,Iran,1,1,FIFA World Cup qualification,False
+2015-10-08,Portugal,Denmark,1,0,UEFA Euro qualification,False
+2015-10-08,Qatar,China,1,0,FIFA World Cup qualification,False
+2015-10-08,Saudi Arabia,United Arab Emirates,2,1,FIFA World Cup qualification,False
+2015-10-08,Scotland,Poland,2,2,UEFA Euro qualification,False
+2015-10-08,Syria,Japan,0,3,FIFA World Cup qualification,True
+2015-10-08,Venezuela,Paraguay,0,1,FIFA World Cup qualification,False
+2015-10-08,Vietnam,Iraq,1,1,FIFA World Cup qualification,False
+2015-10-09,Algeria,Guinea,1,2,Friendly,False
+2015-10-09,Burkina Faso,Mali,1,4,Friendly,True
+2015-10-09,England,Estonia,2,0,UEFA Euro qualification,False
+2015-10-09,Liechtenstein,Sweden,0,2,UEFA Euro qualification,False
+2015-10-09,Montenegro,Austria,2,3,UEFA Euro qualification,False
+2015-10-09,Morocco,Ivory Coast,0,1,Friendly,False
+2015-10-09,Slovenia,Lithuania,1,1,UEFA Euro qualification,False
+2015-10-09,Spain,Luxembourg,4,0,UEFA Euro qualification,False
+2015-10-09,Switzerland,San Marino,7,0,UEFA Euro qualification,False
+2015-10-09,Tunisia,Gabon,3,3,Friendly,False
+2015-10-10,Andorra,Belgium,1,4,UEFA Euro qualification,False
+2015-10-10,Azerbaijan,Italy,1,3,UEFA Euro qualification,False
+2015-10-10,Bosnia,Wales,2,0,UEFA Euro qualification,False
+2015-10-10,Croatia,Bulgaria,3,0,UEFA Euro qualification,False
+2015-10-10,Czech Republic,Turkey,0,2,UEFA Euro qualification,False
+2015-10-10,Kazakhstan,Netherlands,1,2,UEFA Euro qualification,False
+2015-10-10,Norway,Malta,2,0,UEFA Euro qualification,False
+2015-10-10,USA,Mexico,2,3,Friendly,False
+2015-10-11,Armenia,Albania,0,3,UEFA Euro qualification,False
+2015-10-11,Denmark,France,1,2,Friendly,False
+2015-10-11,Egypt,Zambia,3,0,Friendly,True
+2015-10-11,Germany,Georgia,2,1,UEFA Euro qualification,False
+2015-10-11,Gibraltar,Scotland,0,6,UEFA Euro qualification,True
+2015-10-11,Nigeria,Cameroon,3,0,Friendly,True
+2015-10-11,Serbia,Portugal,1,2,UEFA Euro qualification,False
+2015-10-12,Austria,Liechtenstein,3,0,UEFA Euro qualification,False
+2015-10-12,Estonia,Switzerland,0,1,UEFA Euro qualification,False
+2015-10-12,Gabon,DR Congo,1,2,Friendly,True
+2015-10-12,Lithuania,England,0,3,UEFA Euro qualification,False
+2015-10-12,Morocco,Guinea,1,1,Friendly,False
+2015-10-12,San Marino,Slovenia,0,2,UEFA Euro qualification,False
+2015-10-12,Sweden,Moldova,2,0,UEFA Euro qualification,False
+2015-10-12,Ukraine,Spain,0,1,UEFA Euro qualification,False
+2015-10-13,Algeria,Senegal,1,0,Friendly,False
+2015-10-13,Belgium,Israel,3,1,UEFA Euro qualification,False
+2015-10-13,Brazil,Venezuela,3,1,FIFA World Cup qualification,False
+2015-10-13,Cyprus,Bosnia,2,3,UEFA Euro qualification,False
+2015-10-13,Ecuador,Bolivia,2,0,FIFA World Cup qualification,False
+2015-10-13,Iran,Japan,1,1,Friendly,False
+2015-10-13,Italy,Norway,2,1,UEFA Euro qualification,False
+2015-10-13,Jordan,Tajikistan,3,0,FIFA World Cup qualification,False
+2015-10-13,South Korea,Jamaica,3,0,Friendly,False
+2015-10-13,Malta,Croatia,0,1,UEFA Euro qualification,False
+2015-10-13,Netherlands,Czech Republic,2,3,UEFA Euro qualification,False
+2015-10-13,Paraguay,Argentina,0,0,FIFA World Cup qualification,False
+2015-10-13,Peru,Chile,3,4,FIFA World Cup qualification,False
+2015-10-13,Qatar,Maldives,4,0,FIFA World Cup qualification,False
+2015-10-13,Turkey,Iceland,1,0,UEFA Euro qualification,False
+2015-10-13,Uruguay,Colombia,3,0,FIFA World Cup qualification,False
+2015-11-06,DR Congo,Zambia,3,0,Friendly,True
+2015-11-07,Angola,DR Congo,1,0,Friendly,False
+2015-11-09,Palestine,Saudi Arabia,0,0,FIFA World Cup qualification,True
+2015-11-11,Jordan,Malta,2,0,Friendly,True
+2015-11-12,Australia,Kyrgyzstan,3,0,FIFA World Cup qualification,False
+2015-11-12,Bolivia,Venezuela,4,2,FIFA World Cup qualification,False
+2015-11-12,Burundi,DR Congo,2,3,FIFA World Cup qualification,False
+2015-11-12,Chile,Colombia,1,1,FIFA World Cup qualification,False
+2015-11-12,Ecuador,Uruguay,2,1,FIFA World Cup qualification,False
+2015-11-12,Iran,Turkmenistan,3,1,FIFA World Cup qualification,False
+2015-11-12,South Korea,Myanmar,4,0,FIFA World Cup qualification,False
+2015-11-12,Morocco,Equatorial Guinea,2,0,FIFA World Cup qualification,False
+2015-11-12,Norway,Hungary,0,1,UEFA Euro qualification,False
+2015-11-12,Oman,New Zealand,0,1,Friendly,False
+2015-11-12,Singapore,Japan,0,3,FIFA World Cup qualification,False
+2015-11-12,Uzbekistan,North Korea,3,1,FIFA World Cup qualification,False
+2015-11-13,Angola,South Africa,1,3,FIFA World Cup qualification,False
+2015-11-13,Argentina,Brazil,1,1,FIFA World Cup qualification,False
+2015-11-13,Belgium,Italy,3,1,Friendly,False
+2015-11-13,Bosnia,Republic of Ireland,1,1,UEFA Euro qualification,False
+2015-11-13,Comoros,Ghana,0,0,FIFA World Cup qualification,False
+2015-11-13,Costa Rica,Haiti,1,0,FIFA World Cup qualification,False
+2015-11-13,Czech Republic,Serbia,4,1,Friendly,False
+2015-11-13,France,Germany,2,0,Friendly,False
+2015-11-13,Kenya,Cape Verde,1,0,FIFA World Cup qualification,False
+2015-11-13,Kosovo,Albania,2,2,Friendly,False
+2015-11-13,Liberia,Ivory Coast,0,1,FIFA World Cup qualification,False
+2015-11-13,Madagascar,Senegal,2,2,FIFA World Cup qualification,False
+2015-11-13,Mauritania,Tunisia,1,2,FIFA World Cup qualification,False
+2015-11-13,Niger,Cameroon,0,3,FIFA World Cup qualification,False
+2015-11-13,Peru,Paraguay,1,0,FIFA World Cup qualification,False
+2015-11-13,Qatar,Turkey,1,2,Friendly,False
+2015-11-13,Slovakia,Switzerland,3,2,Friendly,False
+2015-11-13,Spain,England,2,0,Friendly,False
+2015-11-13,Swaziland,Nigeria,0,0,FIFA World Cup qualification,False
+2015-11-13,Wales,Netherlands,2,3,Friendly,False
+2015-11-13,Canada,Honduras,1,0,FIFA World Cup qualification,False
+2015-11-13,Jamaica,Panama,0,2,FIFA World Cup qualification,False
+2015-11-13,Mexico,El Salvador,3,0,FIFA World Cup qualification,False
+2015-11-13,USA,Saint Vincent and the Grenadines,6,1,FIFA World Cup qualification,False
+2015-11-14,Botswana,Mali,2,1,FIFA World Cup qualification,False
+2015-11-14,Chad,Egypt,1,0,FIFA World Cup qualification,False
+2015-11-14,Russia,Portugal,1,0,Friendly,False
+2015-11-14,Sweden,Denmark,2,1,UEFA Euro qualification,False
+2015-11-14,Tanzania,Algeria,2,2,FIFA World Cup qualification,False
+2015-11-14,Ukraine,Slovenia,2,0,UEFA Euro qualification,False
+2015-11-15,DR Congo,Burundi,3,0,FIFA World Cup qualification,False
+2015-11-15,Equatorial Guinea,Morocco,1,0,FIFA World Cup qualification,False
+2015-11-15,Hungary,Norway,2,1,UEFA Euro qualification,False
+2015-11-16,Albania,Georgia,2,2,Friendly,False
+2015-11-16,Republic of Ireland,Bosnia,2,0,UEFA Euro qualification,False
+2015-11-17,Algeria,Tanzania,7,0,FIFA World Cup qualification,False
+2015-11-17,Austria,Switzerland,1,2,Friendly,False
+2015-11-17,Bangladesh,Australia,0,4,FIFA World Cup qualification,False
+2015-11-17,Bhutan,Qatar,0,3,FIFA World Cup qualification,False
+2015-11-17,Brazil,Peru,3,0,FIFA World Cup qualification,False
+2015-11-17,Cambodia,Japan,0,2,FIFA World Cup qualification,False
+2015-11-17,Cameroon,Niger,0,0,FIFA World Cup qualification,False
+2015-11-17,Cape Verde,Kenya,2,0,FIFA World Cup qualification,False
+2015-11-17,Colombia,Argentina,0,1,FIFA World Cup qualification,False
+2015-11-17,Denmark,Sweden,2,2,UEFA Euro qualification,False
+2015-11-17,Timor-Leste,Saudi Arabia,0,10,FIFA World Cup qualification,False
+2015-11-17,Egypt,Chad,4,0,FIFA World Cup qualification,False
+2015-11-17,England,France,2,0,Friendly,False
+2015-11-17,Ghana,Comoros,2,0,FIFA World Cup qualification,False
+2015-11-17,Guam,Iran,0,6,FIFA World Cup qualification,False
+2015-11-17,Honduras,Mexico,0,2,FIFA World Cup qualification,False
+2015-11-17,Italy,Romania,2,2,Friendly,False
+2015-11-17,Ivory Coast,Liberia,3,0,FIFA World Cup qualification,False
+2015-11-17,Kyrgyzstan,Jordan,1,0,FIFA World Cup qualification,False
+2015-11-17,Laos,South Korea,0,5,FIFA World Cup qualification,False
+2015-11-17,Luxembourg,Portugal,0,2,Friendly,False
+2015-11-17,Mali,Botswana,2,0,FIFA World Cup qualification,False
+2015-11-17,Nigeria,Swaziland,2,0,FIFA World Cup qualification,False
+2015-11-17,Paraguay,Bolivia,2,1,FIFA World Cup qualification,False
+2015-11-17,Poland,Czech Republic,3,1,Friendly,False
+2015-11-17,Russia,Croatia,1,3,Friendly,False
+2015-11-17,Senegal,Madagascar,3,0,FIFA World Cup qualification,False
+2015-11-17,Slovenia,Ukraine,1,1,UEFA Euro qualification,False
+2015-11-17,South Africa,Angola,1,0,FIFA World Cup qualification,False
+2015-11-17,Tunisia,Mauritania,2,1,FIFA World Cup qualification,False
+2015-11-17,Turkey,Greece,0,0,Friendly,False
+2015-11-17,Uruguay,Chile,3,0,FIFA World Cup qualification,False
+2015-11-17,Venezuela,Ecuador,1,3,FIFA World Cup qualification,False
+2015-11-17,Yemen,Uzbekistan,1,3,FIFA World Cup qualification,True
+2015-11-17,Haiti,Jamaica,0,1,FIFA World Cup qualification,False
+2015-11-17,Panama,Costa Rica,1,2,FIFA World Cup qualification,False
+2015-11-17,Taiwan,Iraq,0,2,FIFA World Cup qualification,False
+2015-12-16,Honduras,Cuba,2,0,Friendly,False
+2016-01-06,Rwanda,Cameroon,1,1,Friendly,False
+2016-01-06,Sweden,Estonia,1,1,Friendly,True
+2016-01-08,Trinidad and Tobago,Haiti,0,1,Copa América qualification,True
+2016-01-08,Panama,Cuba,4,0,Copa América qualification,False
+2016-01-10,Rwanda,DR Congo,1,0,Friendly,False
+2016-01-10,Sweden,Finland,3,0,Friendly,True
+2016-01-13,Uganda,Cameroon,0,0,Friendly,False
+2016-01-27,Egypt,Jordan,0,1,Friendly,False
+2016-01-29,Egypt,Libya,2,0,Friendly,False
+2016-01-31,USA,Iceland,3,2,Friendly,False
+2016-02-14,Uzbekistan,Lebanon,2,0,Friendly,True
+2016-02-27,Egypt,Burkina Faso,2,0,Friendly,False
+2016-03-18,Iraq,Syria,0,1,Friendly,True
+2016-03-23,Barbados,Curaçao,1,0,CFU Caribbean Cup qualification,False
+2016-03-23,Croatia,Israel,2,0,Friendly,False
+2016-03-23,Poland,Serbia,1,0,Friendly,False
+2016-03-23,Slovenia,North Macedonia,1,0,Friendly,False
+2016-03-24,Australia,Tajikistan,7,0,FIFA World Cup qualification,False
+2016-03-24,Bolivia,Colombia,2,3,FIFA World Cup qualification,False
+2016-03-24,Chile,Argentina,1,2,FIFA World Cup qualification,False
+2016-03-24,Czech Republic,Scotland,0,1,Friendly,False
+2016-03-24,Denmark,Iceland,2,1,Friendly,False
+2016-03-24,Ecuador,Paraguay,2,2,FIFA World Cup qualification,False
+2016-03-24,Estonia,Norway,0,0,Friendly,False
+2016-03-24,Ghana,Mozambique,3,1,African Cup of Nations qualification,False
+2016-03-24,Iran,India,4,0,FIFA World Cup qualification,False
+2016-03-24,Iraq,Thailand,2,2,FIFA World Cup qualification,True
+2016-03-24,Italy,Spain,1,1,Friendly,False
+2016-03-24,Japan,Afghanistan,5,0,FIFA World Cup qualification,False
+2016-03-24,Jordan,Bangladesh,8,0,FIFA World Cup qualification,False
+2016-03-24,South Korea,Lebanon,1,0,FIFA World Cup qualification,False
+2016-03-24,Peru,Venezuela,2,2,FIFA World Cup qualification,False
+2016-03-24,Qatar,Hong Kong,2,0,FIFA World Cup qualification,False
+2016-03-24,Saudi Arabia,Malaysia,2,0,FIFA World Cup qualification,False
+2016-03-24,Turkey,Sweden,2,1,Friendly,False
+2016-03-24,Uzbekistan,Philippines,1,0,FIFA World Cup qualification,False
+2016-03-25,Algeria,Ethiopia,7,1,African Cup of Nations qualification,False
+2016-03-25,Brazil,Uruguay,2,2,FIFA World Cup qualification,False
+2016-03-25,Canada,Mexico,0,3,FIFA World Cup qualification,False
+2016-03-25,El Salvador,Honduras,2,2,FIFA World Cup qualification,False
+2016-03-25,Guatemala,USA,2,0,FIFA World Cup qualification,False
+2016-03-25,Haiti,Panama,0,0,FIFA World Cup qualification,False
+2016-03-25,Republic of Ireland,Switzerland,1,0,Friendly,False
+2016-03-25,Ivory Coast,Sudan,1,0,African Cup of Nations qualification,False
+2016-03-25,Jamaica,Costa Rica,1,1,FIFA World Cup qualification,False
+2016-03-25,Luxembourg,Bosnia,0,3,Friendly,False
+2016-03-25,Mali,Equatorial Guinea,1,0,African Cup of Nations qualification,False
+2016-03-25,Netherlands,France,2,3,Friendly,False
+2016-03-25,Nigeria,Egypt,1,1,African Cup of Nations qualification,False
+2016-03-25,Portugal,Bulgaria,0,1,Friendly,False
+2016-03-25,Tunisia,Togo,1,0,African Cup of Nations qualification,False
+2016-03-26,Austria,Albania,2,1,Friendly,False
+2016-03-26,Cameroon,South Africa,2,2,African Cup of Nations qualification,False
+2016-03-26,Cape Verde,Morocco,0,1,African Cup of Nations qualification,False
+2016-03-26,DR Congo,Angola,2,1,African Cup of Nations qualification,False
+2016-03-26,Curaçao,Dominican Republic,2,1,CFU Caribbean Cup qualification,False
+2016-03-26,Germany,England,2,3,Friendly,False
+2016-03-26,Hungary,Croatia,1,1,Friendly,False
+2016-03-26,Senegal,Niger,2,0,African Cup of Nations qualification,False
+2016-03-27,Mozambique,Ghana,0,0,African Cup of Nations qualification,False
+2016-03-27,Romania,Spain,0,0,Friendly,False
+2016-03-27,Thailand,South Korea,0,1,Friendly,False
+2016-03-28,Equatorial Guinea,Mali,0,1,African Cup of Nations qualification,False
+2016-03-28,Northern Ireland,Slovenia,1,0,Friendly,False
+2016-03-29,Angola,DR Congo,0,2,African Cup of Nations qualification,False
+2016-03-29,Argentina,Bolivia,2,0,FIFA World Cup qualification,False
+2016-03-29,Australia,Jordan,5,1,FIFA World Cup qualification,False
+2016-03-29,Austria,Turkey,1,2,Friendly,False
+2016-03-29,China,Qatar,2,0,FIFA World Cup qualification,False
+2016-03-29,Colombia,Ecuador,3,1,FIFA World Cup qualification,False
+2016-03-29,Costa Rica,Jamaica,3,0,FIFA World Cup qualification,False
+2016-03-29,Egypt,Nigeria,1,0,African Cup of Nations qualification,False
+2016-03-29,England,Netherlands,1,2,Friendly,False
+2016-03-29,Estonia,Serbia,0,1,Friendly,False
+2016-03-29,Ethiopia,Algeria,3,3,African Cup of Nations qualification,False
+2016-03-29,France,Russia,4,2,Friendly,False
+2016-03-29,Germany,Italy,4,1,Friendly,False
+2016-03-29,Honduras,El Salvador,2,0,FIFA World Cup qualification,False
+2016-03-29,Iran,Oman,2,0,FIFA World Cup qualification,False
+2016-03-29,Iraq,Vietnam,1,0,FIFA World Cup qualification,True
+2016-03-29,Japan,Syria,5,0,FIFA World Cup qualification,False
+2016-03-29,Luxembourg,Albania,0,2,Friendly,False
+2016-03-29,Mexico,Canada,2,0,FIFA World Cup qualification,False
+2016-03-29,Morocco,Cape Verde,2,0,African Cup of Nations qualification,False
+2016-03-29,Niger,Senegal,1,2,African Cup of Nations qualification,False
+2016-03-29,Norway,Finland,2,0,Friendly,False
+2016-03-29,Panama,Haiti,1,0,FIFA World Cup qualification,False
+2016-03-29,Paraguay,Brazil,2,2,FIFA World Cup qualification,False
+2016-03-29,Portugal,Belgium,2,1,Friendly,False
+2016-03-29,Scotland,Denmark,1,0,Friendly,False
+2016-03-29,South Africa,Cameroon,0,0,African Cup of Nations qualification,False
+2016-03-29,Sudan,Ivory Coast,1,1,African Cup of Nations qualification,False
+2016-03-29,Sweden,Czech Republic,1,1,Friendly,False
+2016-03-29,Switzerland,Bosnia,0,2,Friendly,False
+2016-03-29,Togo,Tunisia,0,0,African Cup of Nations qualification,False
+2016-03-29,United Arab Emirates,Saudi Arabia,1,1,FIFA World Cup qualification,False
+2016-03-29,Uruguay,Peru,1,0,FIFA World Cup qualification,False
+2016-03-29,USA,Guatemala,4,0,FIFA World Cup qualification,False
+2016-03-29,Uzbekistan,Bahrain,1,0,FIFA World Cup qualification,False
+2016-03-29,Venezuela,Chile,1,4,FIFA World Cup qualification,False
+2016-04-27,Martinique,Panama,0,2,Friendly,False
+2016-05-20,Hungary,Ivory Coast,0,0,Friendly,False
+2016-05-20,Galicia,Venezuela,1,1,Friendly,False
+2016-05-22,England,Turkey,2,1,Friendly,False
+2016-05-22,Puerto Rico,USA,1,3,Friendly,False
+2016-05-23,Peru,Trinidad and Tobago,4,0,Friendly,False
+2016-05-25,Romania,DR Congo,1,1,Friendly,True
+2016-05-25,Serbia,Cyprus,2,1,Friendly,False
+2016-05-27,Croatia,Moldova,1,0,Friendly,False
+2016-05-27,Czech Republic,Malta,6,0,Friendly,True
+2016-05-27,England,Australia,2,1,Friendly,False
+2016-05-27,Republic of Ireland,Netherlands,1,1,Friendly,False
+2016-05-27,Morocco,Congo,2,0,Friendly,False
+2016-05-27,Nigeria,Mali,1,0,Friendly,True
+2016-05-27,Uruguay,Trinidad and Tobago,3,1,Friendly,False
+2016-05-28,Costa Rica,Venezuela,2,1,Friendly,False
+2016-05-28,El Salvador,Peru,1,3,Friendly,True
+2016-05-28,Mexico,Paraguay,1,0,Friendly,True
+2016-05-28,New Zealand,Fiji,3,1,Oceania Nations Cup,True
+2016-05-28,Rwanda,Senegal,0,2,Friendly,False
+2016-05-28,Switzerland,Belgium,1,2,Friendly,False
+2016-05-29,Albania,Qatar,3,1,Friendly,True
+2016-05-29,Bosnia,Spain,1,3,Friendly,True
+2016-05-29,Germany,Slovakia,1,3,Friendly,False
+2016-05-29,Italy,Scotland,1,0,Friendly,True
+2016-05-29,Portugal,Norway,3,0,Friendly,False
+2016-05-29,Turkey,Montenegro,1,0,Friendly,False
+2016-05-30,France,Cameroon,3,2,Friendly,False
+2016-05-30,Sweden,Slovenia,0,0,Friendly,False
+2016-05-31,Austria,Malta,2,1,Friendly,False
+2016-05-31,Luxembourg,Nigeria,1,3,Friendly,False
+2016-05-31,Serbia,Israel,3,1,Friendly,False
+2016-05-31,Vanuatu,New Zealand,0,5,Oceania Nations Cup,True
+2016-06-01,Belgium,Finland,1,1,Friendly,False
+2016-06-01,Curaçao,Guyana,5,2,CFU Caribbean Cup qualification,False
+2016-06-01,Czech Republic,Russia,2,1,Friendly,True
+2016-06-01,Norway,Iceland,3,2,Friendly,False
+2016-06-01,Poland,Netherlands,1,2,Friendly,False
+2016-06-01,Spain,South Korea,6,1,Friendly,True
+2016-06-02,England,Portugal,1,0,Friendly,False
+2016-06-02,North Macedonia,Iran,1,3,Friendly,False
+2016-06-02,Seychelles,Algeria,0,2,African Cup of Nations qualification,False
+2016-06-03,Albania,Ukraine,1,3,Friendly,True
+2016-06-03,Azerbaijan,Canada,1,1,Friendly,True
+2016-06-03,Bosnia,Denmark,2,2,Kirin Cup,True
+2016-06-03,Djibouti,Tunisia,0,3,African Cup of Nations qualification,False
+2016-06-03,Japan,Bulgaria,7,2,Kirin Cup,False
+2016-06-03,Libya,Morocco,1,1,African Cup of Nations qualification,True
+2016-06-03,Mauritania,Cameroon,0,1,African Cup of Nations qualification,False
+2016-06-03,Switzerland,Moldova,2,1,Friendly,False
+2016-06-03,United Arab Emirates,Jordan,1,3,King's Cup,True
+2016-06-03,USA,Colombia,0,2,Copa América,False
+2016-06-04,Australia,Greece,1,0,Friendly,False
+2016-06-04,Austria,Netherlands,0,2,Friendly,False
+2016-06-04,Burundi,Senegal,0,2,African Cup of Nations qualification,False
+2016-06-04,Brazil,Ecuador,0,0,Copa América,True
+2016-06-04,Costa Rica,Paraguay,0,0,Copa América,True
+2016-06-04,Croatia,San Marino,10,0,Friendly,False
+2016-06-04,France,Scotland,3,0,Friendly,False
+2016-06-04,Gambia,South Africa,0,4,African Cup of Nations qualification,False
+2016-06-04,Germany,Hungary,2,0,Friendly,False
+2016-06-04,Haiti,Peru,0,1,Copa América,True
+2016-06-04,Ivory Coast,Gabon,2,1,Friendly,False
+2016-06-04,New Zealand,Solomon Islands,1,0,Oceania Nations Cup,True
+2016-06-04,São Tomé and Príncipe,Cape Verde,1,2,African Cup of Nations qualification,False
+2016-06-04,South Sudan,Mali,0,3,African Cup of Nations qualification,False
+2016-06-04,Tanzania,Egypt,0,2,African Cup of Nations qualification,False
+2016-06-05,Belgium,Norway,3,2,Friendly,False
+2016-06-05,Czech Republic,South Korea,1,2,Friendly,False
+2016-06-05,Jamaica,Venezuela,0,1,Copa América,True
+2016-06-05,Madagascar,DR Congo,1,6,African Cup of Nations qualification,False
+2016-06-05,Mauritius,Ghana,0,2,African Cup of Nations qualification,False
+2016-06-05,Mexico,Uruguay,3,1,Copa América,True
+2016-06-05,Russia,Serbia,1,1,Friendly,True
+2016-06-05,Slovenia,Turkey,0,1,Friendly,False
+2016-06-05,Sweden,Wales,3,0,Friendly,False
+2016-06-05,Thailand,Jordan,2,0,King's Cup,False
+2016-06-06,Argentina,Chile,2,1,Copa América,True
+2016-06-06,Italy,Finland,2,0,Friendly,False
+2016-06-06,Panama,Bolivia,2,1,Copa América,True
+2016-06-07,Australia,Greece,1,2,Friendly,False
+2016-06-07,Bulgaria,Denmark,0,4,Kirin Cup,True
+2016-06-07,Canada,Uzbekistan,2,1,Friendly,True
+2016-06-07,Colombia,Paraguay,2,1,Copa América,True
+2016-06-07,Curaçao,United States Virgin Islands,7,0,CFU Caribbean Cup qualification,False
+2016-06-07,Iran,Kyrgyzstan,6,0,Friendly,False
+2016-06-07,Japan,Bosnia,1,2,Kirin Cup,False
+2016-06-07,Spain,Georgia,0,1,Friendly,False
+2016-06-07,USA,Costa Rica,4,0,Copa América,False
+2016-06-08,Brazil,Haiti,7,1,Copa América,True
+2016-06-08,Ecuador,Peru,2,2,Copa América,True
+2016-06-08,New Zealand,New Caledonia,1,0,Oceania Nations Cup,True
+2016-06-08,Portugal,Estonia,7,0,Friendly,False
+2016-06-09,Mexico,Jamaica,2,0,Copa América,True
+2016-06-09,Uruguay,Venezuela,0,1,Copa América,True
+2016-06-10,Argentina,Panama,5,0,Copa América,True
+2016-06-10,Chile,Bolivia,2,1,Copa América,True
+2016-06-10,France,Romania,2,1,UEFA Euro,False
+2016-06-11,Albania,Switzerland,0,1,UEFA Euro,True
+2016-06-11,Colombia,Costa Rica,2,3,Copa América,True
+2016-06-11,England,Russia,1,1,UEFA Euro,True
+2016-06-11,Papua New Guinea,New Zealand,0,0,Oceania Nations Cup,False
+2016-06-11,USA,Paraguay,1,0,Copa América,False
+2016-06-12,Brazil,Peru,0,1,Copa América,True
+2016-06-12,Ecuador,Haiti,4,0,Copa América,True
+2016-06-12,Germany,Ukraine,2,0,UEFA Euro,True
+2016-06-12,Turkey,Croatia,0,1,UEFA Euro,True
+2016-06-13,Belgium,Italy,0,2,UEFA Euro,True
+2016-06-13,Republic of Ireland,Sweden,1,1,UEFA Euro,True
+2016-06-13,Mexico,Venezuela,1,1,Copa América,True
+2016-06-13,Spain,Czech Republic,1,0,UEFA Euro,True
+2016-06-13,Uruguay,Jamaica,3,0,Copa América,True
+2016-06-14,Argentina,Bolivia,3,0,Copa América,True
+2016-06-14,Austria,Hungary,0,2,UEFA Euro,True
+2016-06-14,Chile,Panama,4,2,Copa América,True
+2016-06-14,Portugal,Iceland,1,1,UEFA Euro,True
+2016-06-15,France,Albania,2,0,UEFA Euro,False
+2016-06-15,Romania,Switzerland,1,1,UEFA Euro,True
+2016-06-16,England,Wales,2,1,UEFA Euro,True
+2016-06-16,Germany,Poland,0,0,UEFA Euro,True
+2016-06-16,USA,Ecuador,2,1,Copa América,False
+2016-06-17,Czech Republic,Croatia,2,2,UEFA Euro,True
+2016-06-17,Italy,Sweden,1,0,UEFA Euro,True
+2016-06-17,Peru,Colombia,0,0,Copa América,True
+2016-06-17,Spain,Turkey,3,0,UEFA Euro,True
+2016-06-18,Argentina,Venezuela,4,1,Copa América,True
+2016-06-18,Belgium,Republic of Ireland,3,0,UEFA Euro,True
+2016-06-18,Mexico,Chile,0,7,Copa América,True
+2016-06-18,Portugal,Austria,0,0,UEFA Euro,True
+2016-06-18,South Africa,Lesotho,1,1,COSAFA Cup,True
+2016-06-19,DR Congo,Mozambique,1,0,COSAFA Cup,True
+2016-06-19,France,Switzerland,0,0,UEFA Euro,False
+2016-06-19,Romania,Albania,0,1,UEFA Euro,True
+2016-06-20,Slovakia,England,0,0,UEFA Euro,True
+2016-06-21,Croatia,Spain,2,1,UEFA Euro,True
+2016-06-21,Czech Republic,Turkey,0,2,UEFA Euro,True
+2016-06-21,Northern Ireland,Germany,0,1,UEFA Euro,True
+2016-06-21,USA,Argentina,0,4,Copa América,False
+2016-06-22,Botswana,DR Congo,0,0,COSAFA Cup,True
+2016-06-22,Colombia,Chile,0,2,Copa América,True
+2016-06-22,Hungary,Portugal,3,3,UEFA Euro,True
+2016-06-22,Iceland,Austria,2,1,UEFA Euro,True
+2016-06-22,Italy,Republic of Ireland,0,1,UEFA Euro,True
+2016-06-22,South Africa,Swaziland,5,1,COSAFA Cup,True
+2016-06-22,Sweden,Belgium,0,1,UEFA Euro,True
+2016-06-25,Croatia,Portugal,0,1,UEFA Euro,True
+2016-06-25,South Africa,Botswana,3,2,COSAFA Cup,True
+2016-06-25,Swaziland,DR Congo,1,0,COSAFA Cup,True
+2016-06-25,Switzerland,Poland,1,1,UEFA Euro,True
+2016-06-25,USA,Colombia,0,1,Copa América,False
+2016-06-26,Argentina,Chile,0,0,Copa América,True
+2016-06-26,France,Republic of Ireland,2,1,UEFA Euro,False
+2016-06-26,Germany,Slovakia,3,0,UEFA Euro,True
+2016-06-26,Hungary,Belgium,0,4,UEFA Euro,True
+2016-06-27,England,Iceland,1,2,UEFA Euro,True
+2016-06-27,Italy,Spain,2,0,UEFA Euro,True
+2016-06-30,Poland,Portugal,1,1,UEFA Euro,True
+2016-07-01,Wales,Belgium,3,1,UEFA Euro,True
+2016-07-02,Germany,Italy,1,1,UEFA Euro,True
+2016-07-03,France,Iceland,5,2,UEFA Euro,False
+2016-07-06,Portugal,Wales,2,0,UEFA Euro,True
+2016-07-07,France,Germany,2,0,UEFA Euro,False
+2016-07-10,France,Portugal,0,1,UEFA Euro,False
+2016-07-24,Uzbekistan,Iraq,2,1,Friendly,False
+2016-08-08,Qatar,Iraq,2,1,Friendly,False
+2016-08-18,Jordan,Qatar,2,3,Friendly,True
+2016-08-21,Iraq,North Korea,1,1,Friendly,True
+2016-08-24,Honduras,Nicaragua,1,0,Friendly,False
+2016-08-24,Saudi Arabia,Laos,4,0,Friendly,True
+2016-08-24,Uzbekistan,Burkina Faso,1,0,Friendly,False
+2016-08-30,Egypt,Guinea,1,1,Friendly,False
+2016-08-31,Albania,Morocco,0,0,Friendly,False
+2016-08-31,Czech Republic,Armenia,3,0,Friendly,False
+2016-08-31,Denmark,Liechtenstein,5,0,Friendly,False
+2016-08-31,Germany,Finland,2,0,Friendly,False
+2016-08-31,Lebanon,Jordan,1,1,Friendly,False
+2016-08-31,Norway,Belarus,0,1,Friendly,False
+2016-08-31,Turkey,Russia,0,0,Friendly,False
+2016-09-01,Argentina,Uruguay,1,0,FIFA World Cup qualification,False
+2016-09-01,Australia,Iraq,2,0,FIFA World Cup qualification,False
+2016-09-01,Belgium,Spain,0,2,Friendly,False
+2016-09-01,Bolivia,Peru,0,3,FIFA World Cup qualification,False
+2016-09-01,Colombia,Venezuela,2,0,FIFA World Cup qualification,False
+2016-09-01,Ecuador,Brazil,0,3,FIFA World Cup qualification,False
+2016-09-01,Iran,Qatar,2,0,FIFA World Cup qualification,False
+2016-09-01,Italy,France,1,3,Friendly,False
+2016-09-01,Japan,United Arab Emirates,1,2,FIFA World Cup qualification,False
+2016-09-01,South Korea,China,3,2,FIFA World Cup qualification,False
+2016-09-01,Netherlands,Greece,1,2,Friendly,False
+2016-09-01,Paraguay,Chile,2,1,FIFA World Cup qualification,False
+2016-09-01,Portugal,Gibraltar,5,0,Friendly,False
+2016-09-01,Saudi Arabia,Thailand,1,0,FIFA World Cup qualification,False
+2016-09-01,Uzbekistan,Syria,1,0,FIFA World Cup qualification,False
+2016-09-02,El Salvador,Mexico,1,3,FIFA World Cup qualification,False
+2016-09-02,Haiti,Costa Rica,0,1,FIFA World Cup qualification,False
+2016-09-02,Honduras,Canada,2,1,FIFA World Cup qualification,False
+2016-09-02,Panama,Jamaica,2,0,FIFA World Cup qualification,False
+2016-09-02,South Africa,Mauritania,1,1,African Cup of Nations qualification,False
+2016-09-02,Saint Vincent and the Grenadines,USA,0,6,FIFA World Cup qualification,False
+2016-09-03,Cameroon,Gambia,2,0,African Cup of Nations qualification,False
+2016-09-03,Cape Verde,Libya,0,1,African Cup of Nations qualification,False
+2016-09-03,Ghana,Rwanda,1,1,African Cup of Nations qualification,False
+2016-09-03,Ivory Coast,Sierra Leone,1,1,African Cup of Nations qualification,False
+2016-09-03,Nigeria,Tanzania,1,0,African Cup of Nations qualification,False
+2016-09-03,Senegal,Namibia,2,0,African Cup of Nations qualification,False
+2016-09-04,Algeria,Lesotho,6,0,African Cup of Nations qualification,False
+2016-09-04,Bahrain,Jordan,0,0,Friendly,False
+2016-09-04,DR Congo,Central African Republic,4,1,African Cup of Nations qualification,False
+2016-09-04,Czech Republic,Northern Ireland,0,0,FIFA World Cup qualification,False
+2016-09-04,Denmark,Armenia,1,0,FIFA World Cup qualification,False
+2016-09-04,Lithuania,Slovenia,2,2,FIFA World Cup qualification,False
+2016-09-04,Mali,Benin,5,2,African Cup of Nations qualification,False
+2016-09-04,Morocco,São Tomé and Príncipe,2,0,African Cup of Nations qualification,False
+2016-09-04,Malta,Scotland,1,5,FIFA World Cup qualification,False
+2016-09-04,Norway,Germany,0,3,FIFA World Cup qualification,False
+2016-09-04,Slovakia,England,0,1,FIFA World Cup qualification,False
+2016-09-04,Tunisia,Liberia,4,1,African Cup of Nations qualification,False
+2016-09-05,Albania,North Macedonia,2,1,FIFA World Cup qualification,False
+2016-09-05,Croatia,Turkey,1,1,FIFA World Cup qualification,False
+2016-09-05,Georgia,Austria,1,2,FIFA World Cup qualification,False
+2016-09-05,Israel,Italy,1,3,FIFA World Cup qualification,False
+2016-09-05,Serbia,Republic of Ireland,2,2,FIFA World Cup qualification,False
+2016-09-05,Spain,Liechtenstein,8,0,FIFA World Cup qualification,False
+2016-09-06,Belarus,France,0,0,FIFA World Cup qualification,False
+2016-09-06,Bosnia,Estonia,5,0,FIFA World Cup qualification,False
+2016-09-06,Brazil,Colombia,2,1,FIFA World Cup qualification,False
+2016-09-06,Cameroon,Gabon,2,1,Friendly,False
+2016-09-06,Canada,El Salvador,3,1,FIFA World Cup qualification,False
+2016-09-06,Chile,Bolivia,3,0,FIFA World Cup qualification,False
+2016-09-06,China,Iran,0,0,FIFA World Cup qualification,False
+2016-09-06,Costa Rica,Panama,3,1,FIFA World Cup qualification,False
+2016-09-06,Cyprus,Belgium,0,3,FIFA World Cup qualification,False
+2016-09-06,Indonesia,Malaysia,3,0,Friendly,False
+2016-09-06,Iraq,Saudi Arabia,1,2,FIFA World Cup qualification,True
+2016-09-06,Jamaica,Haiti,0,2,FIFA World Cup qualification,False
+2016-09-06,Mexico,Honduras,0,0,FIFA World Cup qualification,False
+2016-09-06,Peru,Ecuador,2,1,FIFA World Cup qualification,False
+2016-09-06,Qatar,Uzbekistan,0,1,FIFA World Cup qualification,False
+2016-09-06,Russia,Ghana,1,0,Friendly,False
+2016-09-06,South Africa,Egypt,1,0,Friendly,False
+2016-09-06,Sweden,Netherlands,1,1,FIFA World Cup qualification,False
+2016-09-06,Switzerland,Portugal,2,0,FIFA World Cup qualification,False
+2016-09-06,Syria,South Korea,0,0,FIFA World Cup qualification,True
+2016-09-06,Thailand,Japan,0,2,FIFA World Cup qualification,False
+2016-09-06,United Arab Emirates,Australia,0,1,FIFA World Cup qualification,False
+2016-09-06,Uruguay,Paraguay,4,0,FIFA World Cup qualification,False
+2016-09-06,USA,Trinidad and Tobago,4,0,FIFA World Cup qualification,False
+2016-09-06,Venezuela,Argentina,2,2,FIFA World Cup qualification,False
+2016-09-29,Qatar,Serbia,3,0,Friendly,False
+2016-10-04,DR Congo,Kenya,0,1,Friendly,False
+2016-10-05,Curaçao,Antigua and Barbuda,3,0,CFU Caribbean Cup qualification,False
+2016-10-06,Austria,Wales,2,2,FIFA World Cup qualification,False
+2016-10-06,Brazil,Bolivia,5,0,FIFA World Cup qualification,False
+2016-10-06,Ecuador,Chile,3,0,FIFA World Cup qualification,False
+2016-10-06,Italy,Spain,1,1,FIFA World Cup qualification,False
+2016-10-06,Japan,Iraq,2,1,FIFA World Cup qualification,False
+2016-10-06,South Korea,Qatar,3,2,FIFA World Cup qualification,False
+2016-10-06,Kosovo,Croatia,0,6,FIFA World Cup qualification,True
+2016-10-06,Liechtenstein,Albania,0,2,FIFA World Cup qualification,False
+2016-10-06,Mauritania,Canada,0,4,Friendly,True
+2016-10-06,Moldova,Serbia,0,3,FIFA World Cup qualification,False
+2016-10-06,Paraguay,Colombia,0,1,FIFA World Cup qualification,False
+2016-10-06,Peru,Argentina,2,2,FIFA World Cup qualification,False
+2016-10-06,Saudi Arabia,Australia,2,2,FIFA World Cup qualification,False
+2016-10-06,Turkey,Ukraine,2,2,FIFA World Cup qualification,False
+2016-10-06,Uruguay,Venezuela,3,0,FIFA World Cup qualification,False
+2016-10-06,Uzbekistan,Iran,0,1,FIFA World Cup qualification,False
+2016-10-07,Belgium,Bosnia,4,0,FIFA World Cup qualification,False
+2016-10-07,Cuba,USA,0,2,Friendly,False
+2016-10-07,France,Bulgaria,4,1,FIFA World Cup qualification,False
+2016-10-07,Ghana,Uganda,0,0,FIFA World Cup qualification,False
+2016-10-07,Hungary,Switzerland,2,3,FIFA World Cup qualification,False
+2016-10-07,Luxembourg,Sweden,0,1,FIFA World Cup qualification,False
+2016-10-07,Netherlands,Belarus,4,1,FIFA World Cup qualification,False
+2016-10-07,Oman,Jordan,1,1,Friendly,False
+2016-10-07,Portugal,Andorra,6,0,FIFA World Cup qualification,False
+2016-10-08,Azerbaijan,Norway,1,0,FIFA World Cup qualification,False
+2016-10-08,Belize,Honduras,1,2,Friendly,False
+2016-10-08,Burkina Faso,South Africa,1,1,FIFA World Cup qualification,False
+2016-10-08,DR Congo,Libya,4,0,FIFA World Cup qualification,False
+2016-10-08,England,Malta,2,0,FIFA World Cup qualification,False
+2016-10-08,Gabon,Morocco,0,0,FIFA World Cup qualification,False
+2016-10-08,Germany,Czech Republic,3,0,FIFA World Cup qualification,False
+2016-10-08,Ivory Coast,Mali,3,1,FIFA World Cup qualification,False
+2016-10-08,Mexico,New Zealand,2,1,Friendly,True
+2016-10-08,Poland,Denmark,3,2,FIFA World Cup qualification,False
+2016-10-08,Scotland,Lithuania,1,1,FIFA World Cup qualification,False
+2016-10-08,Senegal,Cape Verde,2,0,FIFA World Cup qualification,False
+2016-10-08,Slovenia,Slovakia,1,0,FIFA World Cup qualification,False
+2016-10-09,Albania,Spain,0,2,FIFA World Cup qualification,False
+2016-10-09,Algeria,Cameroon,1,1,FIFA World Cup qualification,False
+2016-10-09,Congo,Egypt,1,2,FIFA World Cup qualification,False
+2016-10-09,Finland,Croatia,0,1,FIFA World Cup qualification,False
+2016-10-09,Iceland,Turkey,2,0,FIFA World Cup qualification,False
+2016-10-09,Indonesia,Vietnam,2,2,Friendly,False
+2016-10-09,North Macedonia,Italy,2,3,FIFA World Cup qualification,False
+2016-10-09,Russia,Costa Rica,3,4,Friendly,False
+2016-10-09,Serbia,Austria,3,2,FIFA World Cup qualification,False
+2016-10-09,Tunisia,Guinea,2,0,FIFA World Cup qualification,False
+2016-10-09,Zambia,Nigeria,1,2,FIFA World Cup qualification,False
+2016-10-10,Andorra,Switzerland,1,2,FIFA World Cup qualification,False
+2016-10-10,Bosnia,Cyprus,2,0,FIFA World Cup qualification,False
+2016-10-10,Faroe Islands,Portugal,0,6,FIFA World Cup qualification,False
+2016-10-10,Gibraltar,Belgium,0,6,FIFA World Cup qualification,True
+2016-10-10,Netherlands,France,0,1,FIFA World Cup qualification,False
+2016-10-10,Sweden,Bulgaria,3,0,FIFA World Cup qualification,False
+2016-10-11,Argentina,Paraguay,0,1,FIFA World Cup qualification,False
+2016-10-11,Australia,Japan,1,1,FIFA World Cup qualification,False
+2016-10-11,Bolivia,Ecuador,2,2,FIFA World Cup qualification,False
+2016-10-11,Chile,Peru,2,1,FIFA World Cup qualification,False
+2016-10-11,Colombia,Uruguay,2,2,FIFA World Cup qualification,False
+2016-10-11,Czech Republic,Azerbaijan,0,0,FIFA World Cup qualification,False
+2016-10-11,Denmark,Montenegro,0,1,FIFA World Cup qualification,False
+2016-10-11,Germany,Northern Ireland,2,0,FIFA World Cup qualification,False
+2016-10-11,Iran,South Korea,1,0,FIFA World Cup qualification,False
+2016-10-11,Iraq,Thailand,4,0,FIFA World Cup qualification,True
+2016-10-11,Mexico,Panama,1,0,Friendly,True
+2016-10-11,Morocco,Canada,4,0,Friendly,False
+2016-10-11,Norway,San Marino,4,1,FIFA World Cup qualification,False
+2016-10-11,Puerto Rico,Curaçao,2,4,CFU Caribbean Cup qualification,False
+2016-10-11,Qatar,Syria,1,0,FIFA World Cup qualification,False
+2016-10-11,Saudi Arabia,United Arab Emirates,3,0,FIFA World Cup qualification,False
+2016-10-11,Slovakia,Scotland,3,0,FIFA World Cup qualification,False
+2016-10-11,Slovenia,England,0,0,FIFA World Cup qualification,False
+2016-10-11,South Africa,Ghana,1,1,Friendly,False
+2016-10-11,Uzbekistan,China,2,0,FIFA World Cup qualification,False
+2016-10-11,Venezuela,Brazil,0,2,FIFA World Cup qualification,False
+2016-11-04,Myanmar,Indonesia,0,0,Friendly,False
+2016-11-06,Jordan,Iraq,0,0,Friendly,False
+2016-11-08,Vietnam,Indonesia,3,2,Friendly,False
+2016-11-09,Haiti,French Guiana,2,5,CFU Caribbean Cup qualification,False
+2016-11-09,Netherlands,Belgium,1,1,Friendly,False
+2016-11-10,Brazil,Argentina,3,0,FIFA World Cup qualification,False
+2016-11-10,Colombia,Chile,0,0,FIFA World Cup qualification,False
+2016-11-10,Iran,Papua New Guinea,8,1,Friendly,True
+2016-11-10,Paraguay,Peru,1,4,FIFA World Cup qualification,False
+2016-11-10,Qatar,Russia,2,1,Friendly,False
+2016-11-10,Uruguay,Ecuador,2,1,FIFA World Cup qualification,False
+2016-11-10,Uzbekistan,Jordan,1,0,Friendly,False
+2016-11-10,Venezuela,Bolivia,5,0,FIFA World Cup qualification,False
+2016-11-11,Czech Republic,Norway,2,1,FIFA World Cup qualification,False
+2016-11-11,Denmark,Kazakhstan,4,1,FIFA World Cup qualification,False
+2016-11-11,England,Scotland,3,0,FIFA World Cup qualification,False
+2016-11-11,France,Sweden,2,1,FIFA World Cup qualification,False
+2016-11-11,Honduras,Panama,0,1,FIFA World Cup qualification,False
+2016-11-11,Japan,Oman,4,0,Kirin Challenge Cup,False
+2016-11-11,South Korea,Canada,2,0,Friendly,False
+2016-11-11,Libya,Tunisia,0,1,FIFA World Cup qualification,True
+2016-11-11,Malta,Slovenia,0,1,FIFA World Cup qualification,False
+2016-11-11,San Marino,Germany,0,8,FIFA World Cup qualification,False
+2016-11-11,Trinidad and Tobago,Costa Rica,0,2,FIFA World Cup qualification,False
+2016-11-11,USA,Mexico,1,2,FIFA World Cup qualification,False
+2016-11-12,Albania,Israel,0,3,FIFA World Cup qualification,False
+2016-11-12,Austria,Republic of Ireland,0,1,FIFA World Cup qualification,False
+2016-11-12,Cameroon,Zambia,1,1,FIFA World Cup qualification,False
+2016-11-12,Cape Verde,Burkina Faso,0,2,FIFA World Cup qualification,False
+2016-11-12,Croatia,Iceland,2,0,FIFA World Cup qualification,False
+2016-11-12,Liechtenstein,Italy,0,4,FIFA World Cup qualification,False
+2016-11-12,Mali,Gabon,0,0,FIFA World Cup qualification,False
+2016-11-12,Morocco,Ivory Coast,0,0,FIFA World Cup qualification,False
+2016-11-12,New Zealand,New Caledonia,2,0,FIFA World Cup qualification,False
+2016-11-12,Nigeria,Algeria,3,1,FIFA World Cup qualification,False
+2016-11-12,Spain,North Macedonia,4,0,FIFA World Cup qualification,False
+2016-11-12,Turkey,Kosovo,2,0,FIFA World Cup qualification,False
+2016-11-12,Wales,Serbia,1,1,FIFA World Cup qualification,False
+2016-11-13,Belgium,Estonia,8,1,FIFA World Cup qualification,False
+2016-11-13,Egypt,Ghana,2,0,FIFA World Cup qualification,False
+2016-11-13,Greece,Bosnia,1,1,FIFA World Cup qualification,False
+2016-11-13,Guinea,DR Congo,1,2,FIFA World Cup qualification,False
+2016-11-13,Jamaica,Suriname,1,0,CFU Caribbean Cup qualification,False
+2016-11-13,Luxembourg,Netherlands,1,3,FIFA World Cup qualification,False
+2016-11-13,Portugal,Latvia,4,1,FIFA World Cup qualification,False
+2016-11-13,Saint Kitts and Nevis,Haiti,0,2,CFU Caribbean Cup qualification,False
+2016-11-13,Switzerland,Faroe Islands,2,0,FIFA World Cup qualification,False
+2016-11-14,Poland,Slovenia,1,1,Friendly,False
+2016-11-15,Argentina,Colombia,3,0,FIFA World Cup qualification,False
+2016-11-15,Austria,Slovakia,0,0,Friendly,False
+2016-11-15,Bolivia,Paraguay,1,0,FIFA World Cup qualification,False
+2016-11-15,Chile,Uruguay,3,1,FIFA World Cup qualification,False
+2016-11-15,China,Qatar,0,0,FIFA World Cup qualification,False
+2016-11-15,Costa Rica,USA,4,0,FIFA World Cup qualification,False
+2016-11-15,Czech Republic,Denmark,1,1,Friendly,False
+2016-11-15,Ecuador,Venezuela,3,0,FIFA World Cup qualification,False
+2016-11-15,England,Spain,2,2,Friendly,False
+2016-11-15,France,Ivory Coast,0,0,Friendly,False
+2016-11-15,Honduras,Trinidad and Tobago,3,1,FIFA World Cup qualification,False
+2016-11-15,Italy,Germany,0,0,Friendly,False
+2016-11-15,Japan,Saudi Arabia,2,1,FIFA World Cup qualification,False
+2016-11-15,Jordan,Lebanon,0,0,Friendly,False
+2016-11-15,South Korea,Uzbekistan,2,1,FIFA World Cup qualification,False
+2016-11-15,Morocco,Togo,2,1,Friendly,False
+2016-11-15,Mozambique,South Africa,1,1,Friendly,False
+2016-11-15,New Caledonia,New Zealand,0,0,FIFA World Cup qualification,False
+2016-11-15,Northern Ireland,Croatia,0,3,Friendly,False
+2016-11-15,Panama,Mexico,0,0,FIFA World Cup qualification,False
+2016-11-15,Peru,Brazil,0,2,FIFA World Cup qualification,False
+2016-11-15,Syria,Iran,0,0,FIFA World Cup qualification,True
+2016-11-15,Thailand,Australia,2,2,FIFA World Cup qualification,False
+2016-11-15,Tunisia,Mauritania,0,0,Friendly,False
+2016-11-15,Ukraine,Serbia,2,0,Friendly,False
+2016-11-15,United Arab Emirates,Iraq,2,0,FIFA World Cup qualification,False
+2016-11-19,Thailand,Indonesia,4,2,AFF Championship,True
+2016-11-22,Philippines,Indonesia,2,2,AFF Championship,False
+2016-11-25,Singapore,Indonesia,1,2,AFF Championship,True
+2016-12-03,Indonesia,Vietnam,2,1,AFF Championship,False
+2016-12-07,Vietnam,Indonesia,2,2,AFF Championship,False
+2016-12-14,Indonesia,Thailand,2,1,AFF Championship,False
+2016-12-17,Thailand,Indonesia,2,0,AFF Championship,False
+2016-12-26,Ivory Coast,Zimbabwe,0,0,Friendly,False
+2016-12-28,Catalonia,Tunisia,3,3,Friendly,False
+2016-12-30,Basque Country,Tunisia,3,1,Friendly,False
+2017-01-04,Tunisia,Uganda,2,0,Friendly,False
+2017-01-05,Cameroon,DR Congo,2,0,Friendly,False
+2017-01-06,Suriname,Haiti,2,4,CFU Caribbean Cup qualification,True
+2017-01-07,Algeria,Mauritania,3,1,Friendly,False
+2017-01-07,Burkina Faso,Mali,2,1,Friendly,True
+2017-01-08,Egypt,Tunisia,1,0,Friendly,False
+2017-01-08,Ivory Coast,Sweden,2,1,Friendly,True
+2017-01-08,Libya,Senegal,1,2,Friendly,True
+2017-01-08,Trinidad and Tobago,Haiti,3,4,CFU Caribbean Cup qualification,False
+2017-01-09,Morocco,Finland,0,1,Friendly,True
+2017-01-10,Algeria,Mauritania,6,0,Friendly,False
+2017-01-10,Cameroon,Zimbabwe,1,1,Friendly,False
+2017-01-11,Chile,Croatia,1,1,Friendly,True
+2017-01-11,Congo,Senegal,0,2,Friendly,False
+2017-01-11,Ivory Coast,Uganda,3,0,Friendly,True
+2017-01-13,Honduras,Nicaragua,2,1,UNCAF Cup,True
+2017-01-14,Burkina Faso,Cameroon,1,1,African Cup of Nations,True
+2017-01-14,Cambodia,Saudi Arabia,2,7,Friendly,True
+2017-01-14,China,Croatia,1,1,Friendly,False
+2017-01-15,Algeria,Zimbabwe,2,2,African Cup of Nations,True
+2017-01-15,Belize,Costa Rica,0,3,UNCAF Cup,True
+2017-01-15,El Salvador,Honduras,1,2,UNCAF Cup,True
+2017-01-15,Iceland,Chile,0,1,Friendly,True
+2017-01-15,Tunisia,Senegal,0,2,African Cup of Nations,True
+2017-01-16,DR Congo,Morocco,1,0,African Cup of Nations,True
+2017-01-16,Ivory Coast,Togo,0,0,African Cup of Nations,True
+2017-01-17,Ghana,Uganda,1,0,African Cup of Nations,True
+2017-01-17,Mali,Egypt,0,0,African Cup of Nations,True
+2017-01-17,Qatar,Moldova,1,1,Friendly,False
+2017-01-18,Cameroon,Guinea-Bissau,2,1,African Cup of Nations,True
+2017-01-19,Algeria,Tunisia,1,2,African Cup of Nations,True
+2017-01-19,Senegal,Zimbabwe,2,0,African Cup of Nations,True
+2017-01-20,Ivory Coast,DR Congo,2,2,African Cup of Nations,True
+2017-01-20,Morocco,Togo,3,1,African Cup of Nations,True
+2017-01-21,Egypt,Uganda,1,0,African Cup of Nations,True
+2017-01-21,Ghana,Mali,1,0,African Cup of Nations,True
+2017-01-22,Belize,Honduras,0,1,UNCAF Cup,True
+2017-01-22,Bermuda,Canada,2,4,Friendly,False
+2017-01-22,Gabon,Cameroon,0,0,African Cup of Nations,False
+2017-01-22,Panama,Costa Rica,1,0,UNCAF Cup,False
+2017-01-23,Senegal,Algeria,2,2,African Cup of Nations,True
+2017-01-23,Uzbekistan,Georgia,2,2,Friendly,True
+2017-01-23,Zimbabwe,Tunisia,2,4,African Cup of Nations,True
+2017-01-24,Morocco,Ivory Coast,1,0,African Cup of Nations,True
+2017-01-24,Togo,DR Congo,1,3,African Cup of Nations,True
+2017-01-25,Egypt,Ghana,1,0,African Cup of Nations,True
+2017-01-25,Jordan,Georgia,1,0,Friendly,True
+2017-01-25,Uganda,Mali,1,1,African Cup of Nations,True
+2017-01-26,Brazil,Colombia,1,0,Friendly,False
+2017-01-28,Burkina Faso,Tunisia,2,0,African Cup of Nations,True
+2017-01-28,Senegal,Cameroon,0,0,African Cup of Nations,True
+2017-01-29,DR Congo,Ghana,1,2,African Cup of Nations,True
+2017-01-29,Egypt,Morocco,1,0,African Cup of Nations,True
+2017-01-29,USA,Serbia,0,0,Friendly,False
+2017-02-01,Burkina Faso,Egypt,1,1,African Cup of Nations,True
+2017-02-02,Cameroon,Ghana,2,0,African Cup of Nations,True
+2017-02-04,Burkina Faso,Ghana,1,0,African Cup of Nations,True
+2017-02-05,Egypt,Cameroon,1,2,African Cup of Nations,True
+2017-02-08,Mexico,Iceland,1,0,Friendly,True
+2017-02-22,Ecuador,Honduras,3,1,Friendly,False
+2017-03-09,Qatar,Azerbaijan,1,2,Friendly,False
+2017-03-16,Honduras,Nicaragua,2,0,Friendly,False
+2017-03-18,Iran,Iraq,0,1,Friendly,False
+2017-03-21,Indonesia,Myanmar,1,3,Friendly,False
+2017-03-22,Curaçao,El Salvador,1,1,Friendly,False
+2017-03-22,Czech Republic,Lithuania,3,0,Friendly,False
+2017-03-22,Germany,England,1,0,Friendly,False
+2017-03-22,Scotland,Canada,1,1,Friendly,False
+2017-03-23,Argentina,Chile,1,0,FIFA World Cup qualification,False
+2017-03-23,China,South Korea,1,0,FIFA World Cup qualification,False
+2017-03-23,Colombia,Bolivia,1,0,FIFA World Cup qualification,False
+2017-03-23,Iraq,Australia,1,1,FIFA World Cup qualification,True
+2017-03-23,Jordan,Hong Kong,4,0,Friendly,False
+2017-03-23,Nigeria,Senegal,1,1,Friendly,True
+2017-03-23,Paraguay,Ecuador,2,1,FIFA World Cup qualification,False
+2017-03-23,Qatar,Iran,0,1,FIFA World Cup qualification,False
+2017-03-23,Syria,Uzbekistan,1,0,FIFA World Cup qualification,True
+2017-03-23,Thailand,Saudi Arabia,0,3,FIFA World Cup qualification,False
+2017-03-23,United Arab Emirates,Japan,0,2,FIFA World Cup qualification,False
+2017-03-23,Uruguay,Brazil,1,4,FIFA World Cup qualification,False
+2017-03-23,Venezuela,Peru,2,2,FIFA World Cup qualification,False
+2017-03-24,Austria,Moldova,2,0,FIFA World Cup qualification,False
+2017-03-24,Croatia,Ukraine,1,0,FIFA World Cup qualification,False
+2017-03-24,Georgia,Serbia,1,3,FIFA World Cup qualification,False
+2017-03-24,Italy,Albania,2,0,FIFA World Cup qualification,False
+2017-03-24,Mexico,Costa Rica,2,0,FIFA World Cup qualification,False
+2017-03-24,Morocco,Burkina Faso,2,0,Friendly,False
+2017-03-24,Russia,Ivory Coast,0,2,Friendly,False
+2017-03-24,Spain,Israel,4,1,FIFA World Cup qualification,False
+2017-03-24,Trinidad and Tobago,Panama,1,0,FIFA World Cup qualification,False
+2017-03-24,Tunisia,Cameroon,0,1,Friendly,False
+2017-03-24,Turkey,Finland,2,0,FIFA World Cup qualification,False
+2017-03-24,USA,Honduras,6,0,FIFA World Cup qualification,False
+2017-03-25,Belgium,Greece,1,1,FIFA World Cup qualification,False
+2017-03-25,Bosnia,Gibraltar,5,0,FIFA World Cup qualification,False
+2017-03-25,Bulgaria,Netherlands,2,0,FIFA World Cup qualification,False
+2017-03-25,Fiji,New Zealand,0,2,FIFA World Cup qualification,False
+2017-03-25,Luxembourg,France,1,3,FIFA World Cup qualification,False
+2017-03-25,Portugal,Hungary,3,0,FIFA World Cup qualification,False
+2017-03-25,South Africa,Guinea-Bissau,3,1,Friendly,False
+2017-03-25,Sweden,Belarus,4,0,FIFA World Cup qualification,False
+2017-03-25,Switzerland,Latvia,1,0,FIFA World Cup qualification,False
+2017-03-26,Azerbaijan,Germany,1,4,FIFA World Cup qualification,False
+2017-03-26,England,Lithuania,2,0,FIFA World Cup qualification,False
+2017-03-26,Kenya,DR Congo,2,1,Friendly,False
+2017-03-26,Northern Ireland,Norway,2,0,FIFA World Cup qualification,False
+2017-03-26,Romania,Denmark,0,0,FIFA World Cup qualification,False
+2017-03-26,San Marino,Czech Republic,0,6,FIFA World Cup qualification,False
+2017-03-26,Scotland,Slovenia,1,0,FIFA World Cup qualification,False
+2017-03-27,Ivory Coast,Senegal,1,1,Friendly,True
+2017-03-27,Turkey,Moldova,3,1,Friendly,False
+2017-03-28,Albania,Bosnia,1,2,Friendly,False
+2017-03-28,Australia,United Arab Emirates,2,0,FIFA World Cup qualification,False
+2017-03-28,Austria,Finland,1,1,Friendly,False
+2017-03-28,Bolivia,Argentina,2,0,FIFA World Cup qualification,False
+2017-03-28,Brazil,Paraguay,3,0,FIFA World Cup qualification,False
+2017-03-28,Cameroon,Guinea,1,2,Friendly,True
+2017-03-28,Chile,Venezuela,3,1,FIFA World Cup qualification,False
+2017-03-28,Ecuador,Colombia,0,2,FIFA World Cup qualification,False
+2017-03-28,Egypt,Togo,3,0,Friendly,False
+2017-03-28,Estonia,Croatia,3,0,Friendly,False
+2017-03-28,France,Spain,0,2,Friendly,False
+2017-03-28,Honduras,Costa Rica,1,1,FIFA World Cup qualification,False
+2017-03-28,Iran,China,1,0,FIFA World Cup qualification,False
+2017-03-28,Japan,Thailand,4,0,FIFA World Cup qualification,False
+2017-03-28,Jordan,Cambodia,7,0,AFC Asian Cup qualification,False
+2017-03-28,South Korea,Syria,1,0,FIFA World Cup qualification,False
+2017-03-28,Luxembourg,Cape Verde,0,2,Friendly,False
+2017-03-28,Morocco,Tunisia,1,0,Friendly,False
+2017-03-28,Netherlands,Italy,1,2,Friendly,False
+2017-03-28,New Zealand,Fiji,2,0,FIFA World Cup qualification,False
+2017-03-28,Panama,USA,1,1,FIFA World Cup qualification,False
+2017-03-28,Peru,Uruguay,2,1,FIFA World Cup qualification,False
+2017-03-28,Portugal,Sweden,2,3,Friendly,False
+2017-03-28,Russia,Belgium,3,3,Friendly,False
+2017-03-28,Saudi Arabia,Iraq,1,0,FIFA World Cup qualification,False
+2017-03-28,South Africa,Angola,0,0,Friendly,False
+2017-03-28,Trinidad and Tobago,Mexico,0,1,FIFA World Cup qualification,False
+2017-03-28,Uzbekistan,Qatar,1,0,FIFA World Cup qualification,False
+2017-05-11,Senegal,Mauritania,2,0,Friendly,False
+2017-05-13,Egypt,Libya,1,0,Friendly,False
+2017-05-25,Ghana,Benin,1,1,Friendly,False
+2017-05-26,Corsica,Nigeria,1,1,Friendly,False
+2017-05-28,El Salvador,Honduras,2,2,Friendly,True
+2017-05-28,Mexico,Croatia,1,2,Friendly,True
+2017-05-31,Italy,San Marino,8,0,Friendly,False
+2017-05-31,Ivory Coast,Benin,1,1,Friendly,False
+2017-05-31,Morocco,Netherlands,1,2,Friendly,False
+2017-06-01,Iraq,Jordan,1,0,Friendly,False
+2017-06-01,Mexico,Republic of Ireland,3,1,Friendly,True
+2017-06-01,Nigeria,Togo,3,0,Friendly,True
+2017-06-01,Switzerland,Belarus,1,0,Friendly,False
+2017-06-02,Chile,Burkina Faso,3,0,Friendly,False
+2017-06-02,France,Paraguay,5,0,Friendly,False
+2017-06-02,Nicaragua,Bolivia,0,1,Friendly,False
+2017-06-02,Northern Ireland,New Zealand,1,0,Friendly,False
+2017-06-03,Portugal,Cyprus,4,0,Friendly,False
+2017-06-03,USA,Venezuela,1,1,Friendly,False
+2017-06-04,Republic of Ireland,Uruguay,3,1,Friendly,False
+2017-06-04,Luxembourg,Albania,2,1,Friendly,False
+2017-06-04,Montenegro,Iran,1,2,Friendly,False
+2017-06-04,Netherlands,Ivory Coast,5,0,Friendly,False
+2017-06-05,Belgium,Czech Republic,2,1,Friendly,False
+2017-06-05,DR Congo,Botswana,2,0,Friendly,True
+2017-06-05,Egypt,Libya,1,0,Friendly,False
+2017-06-05,North Macedonia,Turkey,0,0,Friendly,False
+2017-06-05,Senegal,Uganda,0,0,Friendly,False
+2017-06-06,Algeria,Guinea,2,1,Friendly,False
+2017-06-06,Denmark,Germany,1,1,Friendly,False
+2017-06-06,Qatar,North Korea,2,2,Friendly,False
+2017-06-06,Uzbekistan,Thailand,2,0,Friendly,False
+2017-06-07,Bolivia,Nicaragua,3,2,Friendly,False
+2017-06-07,Hong Kong,Jordan,0,0,Friendly,False
+2017-06-07,Iraq,South Korea,0,0,Friendly,True
+2017-06-07,Italy,Uruguay,3,0,Friendly,True
+2017-06-07,Japan,Syria,1,1,Kirin Challenge Cup,False
+2017-06-07,Spain,Colombia,2,2,Friendly,False
+2017-06-08,Australia,Saudi Arabia,3,2,FIFA World Cup qualification,False
+2017-06-08,Cambodia,Indonesia,0,2,Friendly,False
+2017-06-08,Costa Rica,Panama,0,0,FIFA World Cup qualification,False
+2017-06-08,Ecuador,Venezuela,1,1,Friendly,True
+2017-06-08,Mexico,Honduras,3,0,FIFA World Cup qualification,False
+2017-06-08,Peru,Paraguay,1,0,Friendly,False
+2017-06-08,USA,Trinidad and Tobago,2,0,FIFA World Cup qualification,False
+2017-06-09,Argentina,Brazil,1,0,Superclásico de las Américas,True
+2017-06-09,Bosnia,Greece,0,0,FIFA World Cup qualification,False
+2017-06-09,Estonia,Belgium,0,2,FIFA World Cup qualification,False
+2017-06-09,Faroe Islands,Switzerland,0,2,FIFA World Cup qualification,False
+2017-06-09,Latvia,Portugal,0,3,FIFA World Cup qualification,False
+2017-06-09,Netherlands,Luxembourg,5,0,FIFA World Cup qualification,False
+2017-06-09,Russia,Chile,1,1,Friendly,False
+2017-06-09,Sweden,France,2,1,FIFA World Cup qualification,False
+2017-06-10,Cameroon,Morocco,1,0,African Cup of Nations qualification,False
+2017-06-10,DR Congo,Congo,3,1,African Cup of Nations qualification,False
+2017-06-10,Germany,San Marino,7,0,FIFA World Cup qualification,False
+2017-06-10,Ivory Coast,Guinea,2,3,African Cup of Nations qualification,False
+2017-06-10,Kazakhstan,Denmark,1,3,FIFA World Cup qualification,False
+2017-06-10,Mali,Gabon,2,1,African Cup of Nations qualification,False
+2017-06-10,Nigeria,South Africa,0,2,African Cup of Nations qualification,False
+2017-06-10,Norway,Czech Republic,1,1,FIFA World Cup qualification,False
+2017-06-10,Scotland,England,2,2,FIFA World Cup qualification,False
+2017-06-10,Senegal,Equatorial Guinea,3,0,African Cup of Nations qualification,False
+2017-06-10,Slovenia,Malta,2,0,FIFA World Cup qualification,False
+2017-06-11,Algeria,Togo,1,0,African Cup of Nations qualification,False
+2017-06-11,Cape Verde,Uganda,0,1,African Cup of Nations qualification,False
+2017-06-11,Ghana,Ethiopia,5,0,African Cup of Nations qualification,False
+2017-06-11,Iceland,Croatia,1,0,FIFA World Cup qualification,False
+2017-06-11,Republic of Ireland,Austria,1,1,FIFA World Cup qualification,False
+2017-06-11,Israel,Albania,0,3,FIFA World Cup qualification,False
+2017-06-11,Italy,Liechtenstein,5,0,FIFA World Cup qualification,False
+2017-06-11,Kosovo,Turkey,1,4,FIFA World Cup qualification,True
+2017-06-11,North Macedonia,Spain,1,2,FIFA World Cup qualification,False
+2017-06-11,Mexico,USA,1,1,FIFA World Cup qualification,False
+2017-06-11,Serbia,Wales,1,1,FIFA World Cup qualification,False
+2017-06-11,Tunisia,Egypt,1,0,African Cup of Nations qualification,False
+2017-06-12,Belarus,New Zealand,1,0,Friendly,False
+2017-06-12,Iran,Uzbekistan,2,0,FIFA World Cup qualification,False
+2017-06-13,Australia,Brazil,0,4,Friendly,False
+2017-06-13,Cameroon,Colombia,0,4,Friendly,True
+2017-06-13,Canada,Curaçao,2,1,Friendly,False
+2017-06-13,Costa Rica,Trinidad and Tobago,2,1,FIFA World Cup qualification,False
+2017-06-13,El Salvador,Ecuador,0,3,Friendly,True
+2017-06-13,France,England,3,2,Friendly,False
+2017-06-13,Indonesia,Puerto Rico,0,0,Friendly,False
+2017-06-13,Iraq,Japan,1,1,FIFA World Cup qualification,True
+2017-06-13,Norway,Sweden,1,1,Friendly,False
+2017-06-13,Panama,Honduras,2,2,FIFA World Cup qualification,False
+2017-06-13,Qatar,South Korea,3,2,FIFA World Cup qualification,False
+2017-06-13,Romania,Chile,3,2,Friendly,False
+2017-06-13,Singapore,Argentina,0,6,Friendly,False
+2017-06-13,South Africa,Zambia,1,2,Friendly,False
+2017-06-13,Vietnam,Jordan,0,0,AFC Asian Cup qualification,False
+2017-06-13,Peru,Jamaica,3,1,Friendly,False
+2017-06-17,Curaçao,Nicaragua,0,0,Friendly,False
+2017-06-17,Russia,New Zealand,2,0,Confederations Cup,False
+2017-06-18,Cameroon,Chile,0,2,Confederations Cup,True
+2017-06-18,Portugal,Mexico,2,2,Confederations Cup,True
+2017-06-19,Australia,Germany,2,3,Confederations Cup,True
+2017-06-21,Mexico,New Zealand,2,1,Confederations Cup,True
+2017-06-21,Russia,Portugal,0,1,Confederations Cup,False
+2017-06-22,Cameroon,Australia,1,1,Confederations Cup,True
+2017-06-22,Germany,Chile,1,1,Confederations Cup,True
+2017-06-22,Jamaica,French Guiana,1,1,CFU Caribbean Cup,True
+2017-06-22,Martinique,Curaçao,1,2,CFU Caribbean Cup,False
+2017-06-24,New Zealand,Portugal,0,4,Confederations Cup,True
+2017-06-24,Russia,Mexico,1,2,Confederations Cup,False
+2017-06-25,Chile,Australia,1,1,Confederations Cup,True
+2017-06-25,Germany,Cameroon,3,1,Confederations Cup,True
+2017-06-25,Jamaica,Curaçao,1,2,CFU Caribbean Cup,True
+2017-06-28,Portugal,Chile,0,0,Confederations Cup,True
+2017-06-29,Germany,Mexico,4,1,Confederations Cup,True
+2017-07-01,Mexico,Paraguay,2,1,Friendly,True
+2017-07-01,USA,Ghana,2,1,Friendly,False
+2017-07-02,Chile,Germany,0,1,Confederations Cup,True
+2017-07-02,Portugal,Mexico,2,1,Confederations Cup,True
+2017-07-02,South Africa,Tanzania,0,1,COSAFA Cup,False
+2017-07-04,South Africa,Botswana,2,0,COSAFA Cup,False
+2017-07-07,French Guiana,Canada,2,4,Gold Cup,True
+2017-07-07,Honduras,Costa Rica,0,1,Gold Cup,True
+2017-07-07,South Africa,Namibia,1,0,COSAFA Cup,False
+2017-07-08,USA,Panama,1,1,Gold Cup,False
+2017-07-09,Curaçao,Jamaica,0,2,Gold Cup,True
+2017-07-09,Mexico,El Salvador,3,1,Gold Cup,True
+2017-07-11,Costa Rica,Canada,1,1,Gold Cup,True
+2017-07-11,Honduras,French Guiana,0,0,Gold Cup,True
+2017-07-12,Panama,Nicaragua,2,1,Gold Cup,True
+2017-07-12,USA,Martinique,3,2,Gold Cup,False
+2017-07-13,El Salvador,Curaçao,2,0,Gold Cup,True
+2017-07-13,Mexico,Jamaica,0,0,Gold Cup,True
+2017-07-14,Canada,Honduras,0,0,Gold Cup,True
+2017-07-14,Costa Rica,French Guiana,3,0,Gold Cup,True
+2017-07-15,Panama,Martinique,3,0,Gold Cup,True
+2017-07-15,USA,Nicaragua,3,0,Gold Cup,False
+2017-07-16,Curaçao,Mexico,0,2,Gold Cup,True
+2017-07-16,Jamaica,El Salvador,1,1,Gold Cup,True
+2017-07-19,Costa Rica,Panama,1,0,Gold Cup,True
+2017-07-19,USA,El Salvador,2,0,Gold Cup,False
+2017-07-20,Jamaica,Canada,2,1,Gold Cup,True
+2017-07-20,Mexico,Honduras,1,0,Gold Cup,True
+2017-07-22,USA,Costa Rica,2,0,Gold Cup,False
+2017-07-23,Mexico,Jamaica,0,1,Gold Cup,True
+2017-07-26,Ecuador,Trinidad and Tobago,3,1,Friendly,False
+2017-07-26,USA,Jamaica,2,1,Gold Cup,False
+2017-08-16,Andorra,Qatar,0,1,Friendly,True
+2017-08-23,Qatar,Turkmenistan,2,1,Friendly,False
+2017-08-24,Trinidad and Tobago,Jamaica,1,2,Friendly,False
+2017-08-26,Iraq,Syria,1,1,Friendly,True
+2017-08-29,Bahrain,Jordan,0,0,Friendly,False
+2017-08-29,United Arab Emirates,Saudi Arabia,2,1,FIFA World Cup qualification,False
+2017-08-31,Belgium,Gibraltar,9,0,FIFA World Cup qualification,False
+2017-08-31,Brazil,Ecuador,2,0,FIFA World Cup qualification,False
+2017-08-31,Bulgaria,Sweden,3,2,FIFA World Cup qualification,False
+2017-08-31,Chile,Paraguay,0,3,FIFA World Cup qualification,False
+2017-08-31,China,Uzbekistan,1,0,FIFA World Cup qualification,False
+2017-08-31,Cyprus,Bosnia,3,2,FIFA World Cup qualification,False
+2017-08-31,France,Netherlands,4,0,FIFA World Cup qualification,False
+2017-08-31,Japan,Australia,2,0,FIFA World Cup qualification,False
+2017-08-31,South Korea,Iran,0,0,FIFA World Cup qualification,False
+2017-08-31,Peru,Bolivia,2,1,FIFA World Cup qualification,False
+2017-08-31,Portugal,Faroe Islands,5,1,FIFA World Cup qualification,False
+2017-08-31,Switzerland,Andorra,3,0,FIFA World Cup qualification,False
+2017-08-31,Syria,Qatar,3,1,FIFA World Cup qualification,True
+2017-08-31,Thailand,Iraq,1,2,FIFA World Cup qualification,False
+2017-08-31,Uganda,Egypt,1,0,FIFA World Cup qualification,False
+2017-08-31,Uruguay,Argentina,0,0,FIFA World Cup qualification,False
+2017-08-31,Venezuela,Colombia,0,0,FIFA World Cup qualification,False
+2017-09-01,Cape Verde,South Africa,2,1,FIFA World Cup qualification,False
+2017-09-01,Czech Republic,Germany,1,2,FIFA World Cup qualification,False
+2017-09-01,Denmark,Poland,4,0,FIFA World Cup qualification,False
+2017-09-01,Ghana,Congo,1,1,FIFA World Cup qualification,False
+2017-09-01,Lithuania,Scotland,0,3,FIFA World Cup qualification,False
+2017-09-01,Malta,England,0,4,FIFA World Cup qualification,False
+2017-09-01,Mexico,Panama,1,0,FIFA World Cup qualification,False
+2017-09-01,Morocco,Mali,6,0,FIFA World Cup qualification,False
+2017-09-01,New Zealand,Solomon Islands,6,1,FIFA World Cup qualification,False
+2017-09-01,Nigeria,Cameroon,4,0,FIFA World Cup qualification,False
+2017-09-01,Norway,Azerbaijan,2,0,FIFA World Cup qualification,False
+2017-09-01,Slovakia,Slovenia,1,0,FIFA World Cup qualification,False
+2017-09-01,Trinidad and Tobago,Honduras,1,2,FIFA World Cup qualification,False
+2017-09-01,Tunisia,DR Congo,2,1,FIFA World Cup qualification,False
+2017-09-01,USA,Costa Rica,0,2,FIFA World Cup qualification,False
+2017-09-02,Albania,Liechtenstein,2,0,FIFA World Cup qualification,False
+2017-09-02,Canada,Jamaica,2,0,Friendly,False
+2017-09-02,Croatia,Kosovo,1,0,FIFA World Cup qualification,False
+2017-09-02,Gabon,Ivory Coast,0,3,FIFA World Cup qualification,False
+2017-09-02,Indonesia,Fiji,0,0,Friendly,False
+2017-09-02,Senegal,Burkina Faso,0,0,FIFA World Cup qualification,False
+2017-09-02,Serbia,Moldova,3,0,FIFA World Cup qualification,False
+2017-09-02,Spain,Italy,3,0,FIFA World Cup qualification,False
+2017-09-02,Ukraine,Turkey,2,0,FIFA World Cup qualification,False
+2017-09-02,Wales,Austria,1,0,FIFA World Cup qualification,False
+2017-09-02,Zambia,Algeria,3,1,FIFA World Cup qualification,False
+2017-09-03,Belarus,Sweden,0,4,FIFA World Cup qualification,False
+2017-09-03,France,Luxembourg,0,0,FIFA World Cup qualification,False
+2017-09-03,Gibraltar,Bosnia,0,4,FIFA World Cup qualification,True
+2017-09-03,Greece,Belgium,1,2,FIFA World Cup qualification,False
+2017-09-03,Hungary,Portugal,0,1,FIFA World Cup qualification,False
+2017-09-03,Latvia,Switzerland,0,3,FIFA World Cup qualification,False
+2017-09-03,Netherlands,Bulgaria,3,1,FIFA World Cup qualification,False
+2017-09-04,Armenia,Denmark,1,4,FIFA World Cup qualification,False
+2017-09-04,Cameroon,Nigeria,1,1,FIFA World Cup qualification,False
+2017-09-04,England,Slovakia,2,1,FIFA World Cup qualification,False
+2017-09-04,Germany,Norway,6,0,FIFA World Cup qualification,False
+2017-09-04,Northern Ireland,Czech Republic,2,0,FIFA World Cup qualification,False
+2017-09-04,Scotland,Malta,2,0,FIFA World Cup qualification,False
+2017-09-04,Slovenia,Lithuania,4,0,FIFA World Cup qualification,False
+2017-09-05,Algeria,Zambia,0,1,FIFA World Cup qualification,False
+2017-09-05,Argentina,Venezuela,1,1,FIFA World Cup qualification,False
+2017-09-05,Australia,Thailand,2,1,FIFA World Cup qualification,False
+2017-09-05,Austria,Georgia,1,1,FIFA World Cup qualification,False
+2017-09-05,Bolivia,Chile,1,0,FIFA World Cup qualification,False
+2017-09-05,Burkina Faso,Senegal,2,2,FIFA World Cup qualification,False
+2017-09-05,Colombia,Brazil,1,1,FIFA World Cup qualification,False
+2017-09-05,Congo,Ghana,1,5,FIFA World Cup qualification,False
+2017-09-05,DR Congo,Tunisia,2,2,FIFA World Cup qualification,False
+2017-09-05,Costa Rica,Mexico,1,1,FIFA World Cup qualification,False
+2017-09-05,Ecuador,Peru,1,2,FIFA World Cup qualification,False
+2017-09-05,Egypt,Uganda,1,0,FIFA World Cup qualification,False
+2017-09-05,Honduras,USA,1,1,FIFA World Cup qualification,False
+2017-09-05,Iran,Syria,2,2,FIFA World Cup qualification,False
+2017-09-05,Iraq,United Arab Emirates,1,0,FIFA World Cup qualification,True
+2017-09-05,Republic of Ireland,Serbia,0,1,FIFA World Cup qualification,False
+2017-09-05,Italy,Israel,1,0,FIFA World Cup qualification,False
+2017-09-05,Ivory Coast,Gabon,1,2,FIFA World Cup qualification,False
+2017-09-05,Jordan,Afghanistan,4,1,AFC Asian Cup qualification,False
+2017-09-05,Liechtenstein,Spain,0,8,FIFA World Cup qualification,False
+2017-09-05,North Macedonia,Albania,1,1,FIFA World Cup qualification,False
+2017-09-05,Mali,Morocco,0,0,FIFA World Cup qualification,False
+2017-09-05,Panama,Trinidad and Tobago,3,0,FIFA World Cup qualification,False
+2017-09-05,Paraguay,Uruguay,1,2,FIFA World Cup qualification,False
+2017-09-05,Qatar,China,1,2,FIFA World Cup qualification,False
+2017-09-05,Saudi Arabia,Japan,1,0,FIFA World Cup qualification,False
+2017-09-05,Solomon Islands,New Zealand,2,2,FIFA World Cup qualification,False
+2017-09-05,South Africa,Cape Verde,1,2,FIFA World Cup qualification,False
+2017-09-05,Turkey,Croatia,1,0,FIFA World Cup qualification,False
+2017-09-05,Uzbekistan,South Korea,0,0,FIFA World Cup qualification,False
+2017-10-05,Argentina,Peru,0,0,FIFA World Cup qualification,False
+2017-10-05,Azerbaijan,Czech Republic,1,2,FIFA World Cup qualification,False
+2017-10-05,Bolivia,Brazil,0,0,FIFA World Cup qualification,False
+2017-10-05,Chile,Ecuador,2,1,FIFA World Cup qualification,False
+2017-10-05,Colombia,Paraguay,1,2,FIFA World Cup qualification,False
+2017-10-05,England,Slovenia,1,0,FIFA World Cup qualification,False
+2017-10-05,Iran,Togo,2,0,Friendly,False
+2017-10-05,Iraq,Kenya,2,1,Friendly,False
+2017-10-05,Montenegro,Denmark,0,1,FIFA World Cup qualification,False
+2017-10-05,Northern Ireland,Germany,1,3,FIFA World Cup qualification,False
+2017-10-05,Qatar,Singapore,3,1,Friendly,False
+2017-10-05,San Marino,Norway,0,8,FIFA World Cup qualification,False
+2017-10-05,Scotland,Slovakia,1,0,FIFA World Cup qualification,False
+2017-10-05,Syria,Australia,1,1,FIFA World Cup qualification,True
+2017-10-05,Venezuela,Uruguay,0,0,FIFA World Cup qualification,False
+2017-10-06,Austria,Serbia,3,2,FIFA World Cup qualification,False
+2017-10-06,Croatia,Finland,1,1,FIFA World Cup qualification,False
+2017-10-06,Italy,North Macedonia,1,1,FIFA World Cup qualification,False
+2017-10-06,Japan,New Zealand,2,1,Kirin Challenge Cup,False
+2017-10-06,Mali,Ivory Coast,0,0,FIFA World Cup qualification,False
+2017-10-06,Mexico,Trinidad and Tobago,3,1,FIFA World Cup qualification,False
+2017-10-06,Spain,Albania,3,0,FIFA World Cup qualification,False
+2017-10-06,Turkey,Iceland,0,3,FIFA World Cup qualification,False
+2017-10-06,USA,Panama,4,0,FIFA World Cup qualification,False
+2017-10-07,Andorra,Portugal,0,2,FIFA World Cup qualification,False
+2017-10-07,Belarus,Netherlands,1,3,FIFA World Cup qualification,False
+2017-10-07,Bosnia,Belgium,3,4,FIFA World Cup qualification,False
+2017-10-07,Bulgaria,France,0,1,FIFA World Cup qualification,False
+2017-10-07,Cameroon,Algeria,2,0,FIFA World Cup qualification,False
+2017-10-07,Cape Verde,Senegal,0,2,FIFA World Cup qualification,False
+2017-10-07,Costa Rica,Honduras,1,1,FIFA World Cup qualification,False
+2017-10-07,Guinea,Tunisia,1,4,FIFA World Cup qualification,False
+2017-10-07,Libya,DR Congo,1,2,FIFA World Cup qualification,True
+2017-10-07,Morocco,Gabon,3,0,FIFA World Cup qualification,False
+2017-10-07,Nigeria,Zambia,1,0,FIFA World Cup qualification,False
+2017-10-07,Russia,South Korea,4,2,Friendly,False
+2017-10-07,Saudi Arabia,Jamaica,5,2,Friendly,False
+2017-10-07,South Africa,Burkina Faso,3,1,FIFA World Cup qualification,False
+2017-10-07,Sweden,Luxembourg,8,0,FIFA World Cup qualification,False
+2017-10-07,Switzerland,Hungary,5,2,FIFA World Cup qualification,False
+2017-10-07,Uganda,Ghana,0,0,FIFA World Cup qualification,False
+2017-10-08,Czech Republic,San Marino,5,0,FIFA World Cup qualification,False
+2017-10-08,Denmark,Romania,1,1,FIFA World Cup qualification,False
+2017-10-08,Egypt,Congo,2,1,FIFA World Cup qualification,False
+2017-10-08,El Salvador,Canada,1,0,Friendly,True
+2017-10-08,Germany,Azerbaijan,5,1,FIFA World Cup qualification,False
+2017-10-08,Lithuania,England,0,1,FIFA World Cup qualification,False
+2017-10-08,Norway,Northern Ireland,1,0,FIFA World Cup qualification,False
+2017-10-08,Slovenia,Scotland,2,2,FIFA World Cup qualification,False
+2017-10-09,Albania,Italy,0,1,FIFA World Cup qualification,False
+2017-10-09,Finland,Turkey,2,2,FIFA World Cup qualification,False
+2017-10-09,Israel,Spain,0,1,FIFA World Cup qualification,False
+2017-10-09,Moldova,Austria,0,1,FIFA World Cup qualification,False
+2017-10-09,Serbia,Georgia,1,0,FIFA World Cup qualification,False
+2017-10-09,Ukraine,Croatia,0,2,FIFA World Cup qualification,False
+2017-10-10,Afghanistan,Jordan,3,3,AFC Asian Cup qualification,True
+2017-10-10,Australia,Syria,2,1,FIFA World Cup qualification,False
+2017-10-10,Belgium,Cyprus,4,0,FIFA World Cup qualification,False
+2017-10-10,Brazil,Chile,3,0,FIFA World Cup qualification,False
+2017-10-10,Ecuador,Argentina,1,3,FIFA World Cup qualification,False
+2017-10-10,Estonia,Bosnia,1,2,FIFA World Cup qualification,False
+2017-10-10,France,Belarus,2,1,FIFA World Cup qualification,False
+2017-10-10,Honduras,Mexico,3,2,FIFA World Cup qualification,False
+2017-10-10,Japan,Haiti,3,3,Kirin Challenge Cup,False
+2017-10-10,South Korea,Morocco,1,3,Friendly,True
+2017-10-10,Netherlands,Sweden,2,0,FIFA World Cup qualification,False
+2017-10-10,Panama,Costa Rica,2,1,FIFA World Cup qualification,False
+2017-10-10,Paraguay,Venezuela,0,1,FIFA World Cup qualification,False
+2017-10-10,Peru,Colombia,1,1,FIFA World Cup qualification,False
+2017-10-10,Portugal,Switzerland,2,0,FIFA World Cup qualification,False
+2017-10-10,Qatar,Curaçao,1,2,Friendly,False
+2017-10-10,Russia,Iran,1,1,Friendly,False
+2017-10-10,Saudi Arabia,Ghana,0,3,Friendly,False
+2017-10-10,Trinidad and Tobago,USA,2,1,FIFA World Cup qualification,False
+2017-10-10,Uruguay,Bolivia,4,2,FIFA World Cup qualification,False
+2017-10-24,Grenada,Panama,0,5,Friendly,False
+2017-11-08,Iceland,Czech Republic,1,2,Friendly,True
+2017-11-09,Croatia,Greece,4,1,FIFA World Cup qualification,False
+2017-11-09,Iran,Panama,2,1,Friendly,True
+2017-11-09,Northern Ireland,Switzerland,0,1,FIFA World Cup qualification,False
+2017-11-09,Romania,Turkey,2,0,Friendly,False
+2017-11-09,Scotland,Netherlands,0,1,Friendly,False
+2017-11-10,Algeria,Nigeria,3,0,FIFA World Cup qualification,False
+2017-11-10,Belgium,Mexico,3,3,Friendly,False
+2017-11-10,China,Serbia,0,2,Friendly,False
+2017-11-10,England,Germany,0,0,Friendly,False
+2017-11-10,France,Wales,2,0,Friendly,False
+2017-11-10,Honduras,Australia,0,0,FIFA World Cup qualification,False
+2017-11-10,Japan,Brazil,1,3,Friendly,True
+2017-11-10,South Korea,Colombia,2,1,Friendly,False
+2017-11-10,Poland,Uruguay,0,0,Friendly,False
+2017-11-10,Portugal,Saudi Arabia,3,0,Friendly,False
+2017-11-10,South Africa,Senegal,0,2,FIFA World Cup qualification,False
+2017-11-10,Sweden,Italy,1,0,FIFA World Cup qualification,False
+2017-11-11,DR Congo,Guinea,3,1,FIFA World Cup qualification,False
+2017-11-11,Denmark,Republic of Ireland,0,0,FIFA World Cup qualification,False
+2017-11-11,Gabon,Mali,0,0,FIFA World Cup qualification,False
+2017-11-11,Ivory Coast,Morocco,0,2,FIFA World Cup qualification,False
+2017-11-11,North Macedonia,Norway,2,0,Friendly,False
+2017-11-11,New Zealand,Peru,0,0,FIFA World Cup qualification,False
+2017-11-11,Qatar,Czech Republic,0,1,Friendly,False
+2017-11-11,Russia,Argentina,0,1,Friendly,False
+2017-11-11,Spain,Costa Rica,5,0,Friendly,False
+2017-11-11,Tunisia,Libya,0,0,FIFA World Cup qualification,False
+2017-11-11,Zambia,Cameroon,2,2,FIFA World Cup qualification,False
+2017-11-12,Ghana,Egypt,1,1,FIFA World Cup qualification,False
+2017-11-12,Greece,Croatia,0,0,FIFA World Cup qualification,False
+2017-11-12,Switzerland,Northern Ireland,0,0,FIFA World Cup qualification,False
+2017-11-13,Bulgaria,Saudi Arabia,1,0,Friendly,True
+2017-11-13,Iran,Venezuela,1,0,Friendly,True
+2017-11-13,Iraq,Syria,1,1,Friendly,False
+2017-11-13,Italy,Sweden,0,0,FIFA World Cup qualification,False
+2017-11-13,Poland,Mexico,0,1,Friendly,False
+2017-11-13,Turkey,Albania,2,3,Friendly,False
+2017-11-14,Algeria,Central African Republic,3,0,Friendly,False
+2017-11-14,Argentina,Nigeria,2,4,Friendly,True
+2017-11-14,Austria,Uruguay,2,1,Friendly,False
+2017-11-14,Belgium,Japan,1,0,Friendly,False
+2017-11-14,Burkina Faso,Cape Verde,4,0,FIFA World Cup qualification,False
+2017-11-14,Cambodia,Jordan,0,1,AFC Asian Cup qualification,False
+2017-11-14,China,Colombia,0,4,Friendly,False
+2017-11-14,England,Brazil,0,0,Friendly,False
+2017-11-14,Germany,France,2,2,Friendly,False
+2017-11-14,Hungary,Costa Rica,1,0,Friendly,False
+2017-11-14,Republic of Ireland,Denmark,1,5,FIFA World Cup qualification,False
+2017-11-14,South Korea,Serbia,1,1,Friendly,False
+2017-11-14,Portugal,USA,1,1,Friendly,False
+2017-11-14,Qatar,Iceland,1,1,Friendly,False
+2017-11-14,Romania,Netherlands,0,3,Friendly,False
+2017-11-14,Russia,Spain,3,3,Friendly,False
+2017-11-14,Senegal,South Africa,2,1,FIFA World Cup qualification,False
+2017-11-14,Slovakia,Norway,1,0,Friendly,False
+2017-11-14,United Arab Emirates,Uzbekistan,1,0,Friendly,False
+2017-11-14,Wales,Panama,1,1,Friendly,False
+2017-11-15,Australia,Honduras,3,1,FIFA World Cup qualification,False
+2017-11-15,Peru,New Zealand,2,0,FIFA World Cup qualification,False
+2017-11-25,Indonesia,Guyana,2,1,Friendly,False
+2017-12-02,Indonesia,Brunei,4,0,Friendly,False
+2017-12-04,Indonesia,Mongolia,3,2,Friendly,False
+2017-12-06,Indonesia,Kyrgyzstan,0,1,Friendly,False
+2017-12-09,Japan,North Korea,1,0,EAFF Championship,False
+2017-12-09,South Korea,China,2,2,EAFF Championship,True
+2017-12-12,Japan,China,2,1,EAFF Championship,False
+2017-12-12,North Korea,South Korea,0,1,EAFF Championship,True
+2017-12-14,Qatar,Liechtenstein,1,2,Friendly,False
+2017-12-16,Japan,South Korea,1,4,EAFF Championship,False
+2017-12-22,Kuwait,Saudi Arabia,1,2,Gulf Cup,False
+2017-12-23,Bahrain,Iraq,1,1,Gulf Cup,True
+2017-12-23,Qatar,Yemen,4,0,Gulf Cup,True
+2017-12-25,Jordan,Libya,1,1,Friendly,False
+2017-12-25,United Arab Emirates,Saudi Arabia,0,0,Gulf Cup,True
+2017-12-26,Iraq,Qatar,2,1,Gulf Cup,True
+2017-12-28,Saudi Arabia,Oman,0,2,Gulf Cup,True
+2017-12-29,Iraq,Yemen,3,0,Gulf Cup,True
+2017-12-29,Qatar,Bahrain,1,1,Gulf Cup,True
 2018-01-02,Iraq,United Arab Emirates,0,0,Gulf Cup,True
 2018-01-07,Estonia,Sweden,1,1,Friendly,True
 2018-01-11,Denmark,Sweden,0,1,Friendly,True
@@ -4600,3 +6649,7 @@ date,home_team,away_team,home_score,away_score,tournament,neutral_venue
 2026-06-10,Bolivia,Algeria,0,4,Friendly,True
 2026-06-10,England,Costa Rica,3,0,Friendly,True
 2026-06-10,Portugal,Nigeria,2,1,Friendly,False
+2026-06-11,Mexico,South Africa,2,0,FIFA World Cup,False
+2026-06-11,South Korea,Czech Republic,2,1,FIFA World Cup,True
+2026-06-12,Canada,Bosnia,1,1,FIFA World Cup,False
+2026-06-12,USA,Paraguay,4,1,FIFA World Cup,False
