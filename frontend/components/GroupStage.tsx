@@ -1,6 +1,6 @@
 "use client";
 
-import GroupCard from "./GroupCard";
+import GroupCard, { LiveMatchResult } from "./GroupCard";
 import { GROUPS, GroupStanding } from "@/lib/wc2026";
 
 interface MatchResult {
@@ -12,6 +12,7 @@ interface MatchResult {
 interface GroupStageProps {
   standings: Record<string, GroupStanding[]>;
   matchResults: Record<string, Record<string, MatchResult>>;
+  liveResults?: Record<string, Record<string, LiveMatchResult>>;
   onStandingsUpdate: (groupName: string, standings: GroupStanding[]) => void;
   onMatchResultsUpdate: (groupName: string, results: Record<string, MatchResult>) => void;
   onSimulateAll: () => void;
@@ -22,6 +23,7 @@ interface GroupStageProps {
 export default function GroupStage({
   standings,
   matchResults,
+  liveResults = {},
   onStandingsUpdate,
   onMatchResultsUpdate,
   onSimulateAll,
@@ -66,6 +68,7 @@ export default function GroupStage({
             group={group}
             standings={standings[group.name] || null}
             matchResults={matchResults[group.name] || {}}
+            liveResults={liveResults[group.name] || {}}
             onStandingsUpdate={onStandingsUpdate}
             onMatchResultsUpdate={onMatchResultsUpdate}
           />

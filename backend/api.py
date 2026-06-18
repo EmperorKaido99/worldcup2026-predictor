@@ -123,6 +123,10 @@ def _get_form_string(team: str, n: int = 5) -> str:
 
 HOST_NATIONS = {"USA", "Canada", "Mexico"}
 
+# Cached live WC2026 results
+_wc2026_live_cache = None
+_wc2026_live_cache_time = 0
+
 
 class PredictMatchRequest(BaseModel):
     home: str
@@ -283,6 +287,217 @@ def predict_match(req: PredictMatchRequest):
             "form_home": _get_form_string(home_name),
             "form_away": _get_form_string(away_name),
         },
+    }
+
+
+# --- Live WC2026 Results ---
+
+
+def _fetch_wc2026_live_results() -> list:
+    """Fetch completed WC2026 match results from all available APIs.
+    Results are cached for 5 minutes."""
+    import time as _time
+    global _wc2026_live_cache, _wc2026_live_cache_time
+
+    now = _time.time()
+    if _wc2026_live_cache is not None and (now - _wc2026_live_cache_time) < 300:
+        return _wc2026_live_cache
+
+    from src.ingest import (
+        API_KEY, SPORTMONKS_KEY,
+        normalize_team_name, TEAM_IDS,
+    )
+
+    completed = []
+    seen = set()
+
+    # Source 1: API-Football — WC2026 fixtures (league_id=1, season=2026)
+    if API_KEY:
+        try:
+            from src.ingest import fetch_fixtures, parse_fixtures
+            fixtures = fetch_fixtures(1, 2026, "World Cup 2026 (live)")
+            parsed = parse_fixtures(fixtures)
+            for m in parsed:
+                key = (m["date"], m["home_team"], m["away_team"])
+                if key not in seen:
+                    seen.add(key)
+                    completed.append(m)
+        except Exception as e:
+            print(f"  Live WC2026 API-Football error: {e}")
+
+    # Source 2: SportMonks — WC2026 fixtures
+    if SPORTMONKS_KEY:
+        try:
+            from src.ingest import fetch_sportmonks_wc2026_live, parse_sportmonks_fixtures
+            raw = fetch_sportmonks_wc2026_live()
+            parsed = parse_sportmonks_fixtures(raw)
+            for m in parsed:
+                key = (m["date"], m["home_team"], m["away_team"])
+                if key not in seen:
+                    seen.add(key)
+                    completed.append(m)
+        except Exception as e:
+            print(f"  Live WC2026 SportMonks error: {e}")
+
+    # Map team names to IDs
+    name_to_id = {}
+    for name, tid in TEAM_IDS.items():
+        name_to_id[name] = tid
+
+    results = []
+    for m in completed:
+        home_id = name_to_id.get(m["home_team"], m["home_team"][:3].upper())
+        away_id = name_to_id.get(m["away_team"], m["away_team"][:3].upper())
+        results.append({
+            "date": m["date"],
+            "home_team": m["home_team"],
+            "away_team": m["away_team"],
+            "home_id": home_id,
+            "away_id": away_id,
+            "home_score": m["home_score"],
+            "away_score": m["away_score"],
+            "tournament": m.get("tournament", "World Cup 2026"),
+        })
+
+    results.sort(key=lambda x: x["date"])
+    _wc2026_live_cache = results
+    _wc2026_live_cache_time = now
+    return results
+
+
+@app.get("/wc2026/live-results")
+def get_wc2026_live_results():
+    """Get completed WC2026 match results from live APIs."""
+    results = _fetch_wc2026_live_results()
+    return {
+        "matches": results,
+        "count": len(results),
+        "source": "live" if results else "none",
+    }
+
+
+@app.get("/wc2026/elimination-risk")
+def get_elimination_risk():
+    """Calculate elimination risk for each team based on current WC2026 results.
+    A team is at risk if they cannot mathematically qualify or are unlikely to."""
+    results = _fetch_wc2026_live_results()
+
+    # WC2026 groups (must match frontend)
+    groups_def = {
+        "A": ["Mexico", "South Africa", "South Korea", "Czech Republic"],
+        "B": ["Canada", "Bosnia", "Qatar", "Switzerland"],
+        "C": ["Brazil", "Morocco", "Haiti", "Scotland"],
+        "D": ["USA", "Paraguay", "Australia", "Turkey"],
+        "E": ["Germany", "Curaçao", "Ivory Coast", "Ecuador"],
+        "F": ["Netherlands", "Japan", "Sweden", "Tunisia"],
+        "G": ["Belgium", "Egypt", "Iran", "New Zealand"],
+        "H": ["Spain", "Cape Verde", "Saudi Arabia", "Uruguay"],
+        "I": ["France", "Senegal", "Iraq", "Norway"],
+        "J": ["Argentina", "Algeria", "Austria", "Jordan"],
+        "K": ["Portugal", "DR Congo", "Uzbekistan", "Colombia"],
+        "L": ["England", "Croatia", "Ghana", "Panama"],
+    }
+
+    from src.ingest import TEAM_IDS
+
+    group_standings = {}
+    for group_name, teams in groups_def.items():
+        standings = {}
+        for t in teams:
+            tid = TEAM_IDS.get(t, t[:3].upper())
+            standings[t] = {
+                "team": t,
+                "team_id": tid,
+                "played": 0, "won": 0, "drawn": 0, "lost": 0,
+                "gf": 0, "ga": 0, "gd": 0, "points": 0,
+            }
+
+        # Apply completed results to standings
+        for m in results:
+            home = m["home_team"]
+            away = m["away_team"]
+            if home in standings and away in standings:
+                standings[home]["played"] += 1
+                standings[away]["played"] += 1
+                standings[home]["gf"] += m["home_score"]
+                standings[home]["ga"] += m["away_score"]
+                standings[away]["gf"] += m["away_score"]
+                standings[away]["ga"] += m["home_score"]
+
+                if m["home_score"] > m["away_score"]:
+                    standings[home]["won"] += 1
+                    standings[home]["points"] += 3
+                    standings[away]["lost"] += 1
+                elif m["home_score"] == m["away_score"]:
+                    standings[home]["drawn"] += 1
+                    standings[home]["points"] += 1
+                    standings[away]["drawn"] += 1
+                    standings[away]["points"] += 1
+                else:
+                    standings[away]["won"] += 1
+                    standings[away]["points"] += 3
+                    standings[home]["lost"] += 1
+
+        for s in standings.values():
+            s["gd"] = s["gf"] - s["ga"]
+
+        # Sort by points, GD, GF
+        sorted_standings = sorted(
+            standings.values(),
+            key=lambda x: (x["points"], x["gd"], x["gf"]),
+            reverse=True,
+        )
+
+        # Calculate elimination risk
+        max_remaining_points = lambda played: (3 - played) * 3
+        for i, team in enumerate(sorted_standings):
+            remaining = max_remaining_points(team["played"])
+            max_possible = team["points"] + remaining
+            # Check if leader's current points are unreachable
+            leader_points = sorted_standings[0]["points"] if sorted_standings else 0
+
+            # Risk levels
+            if team["played"] == 0:
+                risk = "not_started"
+                risk_pct = 0
+            elif remaining == 0:
+                # All games played — position is final
+                risk = "safe" if i < 2 else ("contention" if i == 2 else "eliminated")
+                risk_pct = 0 if i < 2 else (50 if i == 2 else 100)
+            elif max_possible < leader_points and i >= 2:
+                risk = "eliminated"
+                risk_pct = 100
+            elif team["points"] == 0 and team["played"] >= 2:
+                risk = "critical"
+                risk_pct = 90
+            elif team["points"] == 0 and team["played"] == 1:
+                risk = "high"
+                risk_pct = 65
+            elif team["played"] >= 2 and team["points"] <= 1 and i >= 2:
+                risk = "high"
+                risk_pct = 70
+            elif i < 2 and team["points"] >= 4:
+                risk = "safe"
+                risk_pct = 5
+            elif i < 2:
+                risk = "likely_safe"
+                risk_pct = 15
+            elif i == 2:
+                risk = "contention"
+                risk_pct = 50
+            else:
+                risk = "at_risk"
+                risk_pct = 40 + (i * 10)
+
+            team["position"] = i + 1
+            team["risk"] = risk
+            team["risk_pct"] = min(100, risk_pct)
+
+        group_standings[group_name] = sorted_standings
+
+    return {
+        "groups": group_standings,
+        "matches_played": len(results),
     }
 
 

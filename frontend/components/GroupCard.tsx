@@ -18,10 +18,16 @@ interface MatchResult {
   probs: { home_win: number; draw: number; away_win: number };
 }
 
+export interface LiveMatchResult {
+  homeGoals: number;
+  awayGoals: number;
+}
+
 interface GroupCardProps {
   group: Group;
   standings: GroupStanding[] | null;
   matchResults: Record<string, MatchResult>;
+  liveResults?: Record<string, LiveMatchResult>;
   onStandingsUpdate: (groupName: string, standings: GroupStanding[]) => void;
   onMatchResultsUpdate: (groupName: string, results: Record<string, MatchResult>) => void;
 }
@@ -30,6 +36,7 @@ export default function GroupCard({
   group,
   standings,
   matchResults,
+  liveResults = {},
   onStandingsUpdate,
   onMatchResultsUpdate,
 }: GroupCardProps) {
@@ -181,6 +188,43 @@ export default function GroupCard({
           {matches.map((match) => {
             const key = `${match.home.id}-${match.away.id}`;
             const result = matchResults[key];
+            const liveResult = liveResults[key];
+            const isCompleted = !!liveResult;
+
+            if (isCompleted) {
+              // Completed match — greyed out, not clickable
+              return (
+                <div
+                  key={key}
+                  className="w-full rounded-lg px-3 py-2 text-sm bg-zinc-800/20 border border-zinc-800/40 opacity-60"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      <TeamBadge teamId={match.home.id} teamName={match.home.name} size="sm" />
+                    </div>
+                    <div className="flex items-center gap-2 px-2 shrink-0">
+                      <span className={`font-bold text-base tabular-nums ${
+                        liveResult.homeGoals > liveResult.awayGoals ? "text-emerald-400" : "text-zinc-500"
+                      }`}>
+                        {liveResult.homeGoals}
+                      </span>
+                      <span className="text-zinc-700 text-xs">-</span>
+                      <span className={`font-bold text-base tabular-nums ${
+                        liveResult.awayGoals > liveResult.homeGoals ? "text-emerald-400" : "text-zinc-500"
+                      }`}>
+                        {liveResult.awayGoals}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
+                      <TeamBadge teamId={match.away.id} teamName={match.away.name} size="sm" />
+                    </div>
+                  </div>
+                  <div className="text-[9px] text-zinc-600 text-center mt-1 uppercase tracking-wider">
+                    Final
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <button

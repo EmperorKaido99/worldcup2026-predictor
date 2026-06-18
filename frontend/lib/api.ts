@@ -69,6 +69,54 @@ export async function predictMatch(
   });
 }
 
+// --- Live WC2026 Results ---
+
+export interface LiveMatch {
+  date: string;
+  home_team: string;
+  away_team: string;
+  home_id: string;
+  away_id: string;
+  home_score: number;
+  away_score: number;
+  tournament: string;
+}
+
+export interface LiveResultsResponse {
+  matches: LiveMatch[];
+  count: number;
+  source: string;
+}
+
+export async function getWc2026LiveResults(): Promise<LiveResultsResponse> {
+  return fetchWithTimeout(`${API_URL}/wc2026/live-results`);
+}
+
+export interface TeamRisk {
+  team: string;
+  team_id: string;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  gf: number;
+  ga: number;
+  gd: number;
+  points: number;
+  position: number;
+  risk: string;
+  risk_pct: number;
+}
+
+export interface EliminationRiskResponse {
+  groups: Record<string, TeamRisk[]>;
+  matches_played: number;
+}
+
+export async function getEliminationRisk(): Promise<EliminationRiskResponse> {
+  return fetchWithTimeout(`${API_URL}/wc2026/elimination-risk`);
+}
+
 // --- xG API (P1) ---
 
 export interface XgStats {

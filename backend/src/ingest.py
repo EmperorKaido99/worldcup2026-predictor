@@ -3,7 +3,8 @@ Data ingestion for World Cup 2026 Match Predictor.
 Pulls real match data from multiple sources:
   1. API-Football (primary, requires key)
   2. football-data.org (free tier, requires key)
-  3. Open international results dataset (no key needed)
+  3. SportMonks API v3 (requires key)
+  4. Open international results dataset (no key needed)
 """
 
 import csv
@@ -24,6 +25,8 @@ API_KEY = os.getenv("API_FOOTBALL_KEY", "")
 API_BASE = "https://v3.football.api-sports.io"
 FOOTBALLDATA_KEY = os.getenv("FOOTBALLDATA_KEY", "")
 FOOTBALLDATA_BASE = "https://api.football-data.org/v4"
+SPORTMONKS_KEY = os.getenv("SPORTMONKS_KEY", "")
+SPORTMONKS_BASE = "https://api.sportmonks.com/v3/football"
 
 # Team name normalization (API-Football names → our standard names)
 TEAM_NAME_MAP = {
@@ -345,6 +348,266 @@ def parse_footballdata_matches(matches_raw: list) -> list:
     return matches
 
 
+# ---- SportMonks API v3 integration ----
+
+# SportMonks league IDs for international competitions
+SPORTMONKS_COMPETITIONS = [
+    (732, "2018/2019", "World Cup 2018"),
+    (732, "2022/2023", "World Cup 2022"),
+    (732, "2025/2026", "World Cup 2026"),
+    (2, "2020/2021", "Euro 2020"),
+    (2, "2023/2024", "Euro 2024"),
+    (390, "2018/2019", "Copa America 2019"),
+    (390, "2020/2021", "Copa America 2021"),
+    (390, "2023/2024", "Copa America 2024"),
+    (1300, "2023/2024", "AFCON 2023"),
+    (572, "2024/2025", "UEFA Nations League 2024-25"),
+    (572, "2022/2023", "UEFA Nations League 2022-23"),
+]
+
+# SportMonks team name normalization
+SPORTMONKS_TEAM_MAP = {
+    "United States": "USA",
+    "USA": "USA",
+    "Korea Republic": "South Korea",
+    "Türkiye": "Turkey",
+    "IR Iran": "Iran",
+    "Côte d'Ivoire": "Ivory Coast",
+    "Ivory Coast": "Ivory Coast",
+    "Czechia": "Czech Republic",
+    "Czech Republic": "Czech Republic",
+    "Bosnia and Herzegovina": "Bosnia",
+    "Bosnia-Herzegovina": "Bosnia",
+    "Trinidad and Tobago": "Trinidad and Tobago",
+    "Curaçao": "Curaçao",
+    "Curacao": "Curaçao",
+    "DR Congo": "DR Congo",
+    "Congo DR": "DR Congo",
+    "Democratic Republic of Congo": "DR Congo",
+    "Cabo Verde": "Cape Verde",
+    "Cape Verde Islands": "Cape Verde",
+    "North Macedonia": "North Macedonia",
+}
+
+
+def sportmonks_fetch(endpoint: str, params: dict = None) -> dict:
+    """Fetch from SportMonks API v3 with rate limiting."""
+    if params is None:
+        params = {}
+    params["api_token"] = SPORTMONKS_KEY
+    url = f"{SPORTMONKS_BASE}/{endpoint}"
+    resp = requests.get(url, params=params, timeout=30)
+    if resp.status_code == 429:
+        print("  SportMonks rate limited, waiting 60s...")
+        time.sleep(60)
+        resp = requests.get(url, params=params, timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def sportmonks_fetch_all_pages(endpoint: str, params: dict = None) -> list:
+    """Fetch all pages from a SportMonks paginated endpoint."""
+    if params is None:
+        params = {}
+    all_data = []
+    page = 1
+    while True:
+        params["page"] = page
+        data = sportmonks_fetch(endpoint, params)
+        items = data.get("data", [])
+        if not items:
+            break
+        all_data.extend(items)
+        pagination = data.get("pagination", {})
+        if not pagination.get("has_more", False):
+            break
+        page += 1
+        time.sleep(1)  # Be nice to rate limits
+    return all_data
+
+
+def fetch_sportmonks_season_id(league_id: int, season_name: str) -> int | None:
+    """Find the SportMonks season ID for a given league and season name."""
+    cache_file = RAW_DIR / f"sportmonks_seasons_{league_id}.json"
+
+    if cache_file.exists():
+        age_hours = (time.time() - cache_file.stat().st_mtime) / 3600
+        if age_hours < 168:  # cache for a week
+            with open(cache_file) as f:
+                seasons = json.load(f)
+            for s in seasons:
+                if s.get("name") == season_name:
+                    return s.get("id")
+            return None
+
+    try:
+        data = sportmonks_fetch(f"leagues/{league_id}", {"include": "seasons"})
+        league_data = data.get("data", {})
+        seasons = league_data.get("seasons", [])
+        with open(cache_file, "w") as f:
+            json.dump(seasons, f)
+        time.sleep(1)
+        for s in seasons:
+            if s.get("name") == season_name:
+                return s.get("id")
+    except Exception as e:
+        print(f"  ERROR fetching SportMonks seasons for league {league_id}: {e}")
+    return None
+
+
+def fetch_sportmonks_fixtures(league_id: int, season_name: str, description: str) -> list:
+    """Fetch fixtures from SportMonks for a competition/season."""
+    cache_file = RAW_DIR / f"sportmonks_{league_id}_{season_name.replace('/', '-')}.json"
+
+    if cache_file.exists():
+        age_hours = (time.time() - cache_file.stat().st_mtime) / 3600
+        if age_hours < 24:
+            print(f"  Using cached SportMonks data for {description}")
+            with open(cache_file) as f:
+                return json.load(f)
+
+    season_id = fetch_sportmonks_season_id(league_id, season_name)
+    if not season_id:
+        print(f"  Could not find SportMonks season for {description} ({season_name})")
+        return []
+
+    print(f"  Fetching from SportMonks: {description} (league={league_id}, season={season_id})")
+    try:
+        fixtures = sportmonks_fetch_all_pages(
+            f"fixtures",
+            {"filters": f"fixtureLeagues:{league_id};fixtureSeason:{season_id}",
+             "include": "participants;scores;state"}
+        )
+        with open(cache_file, "w") as f:
+            json.dump(fixtures, f)
+        return fixtures
+    except Exception as e:
+        print(f"  ERROR fetching {description} from SportMonks: {e}")
+        if cache_file.exists():
+            with open(cache_file) as f:
+                return json.load(f)
+        return []
+
+
+def parse_sportmonks_fixtures(fixtures: list) -> list:
+    """Parse SportMonks fixtures into our standard match format."""
+    matches = []
+    for fix in fixtures:
+        # Check match is finished (state_id 5 = FT)
+        state = fix.get("state", {})
+        state_name = ""
+        if isinstance(state, dict):
+            state_name = state.get("short_name", "") or state.get("developer_name", "")
+        state_id = fix.get("state_id", 0)
+        # Accept finished states: FT (5), AET (after extra time), PEN (penalties)
+        if state_id not in (5,) and state_name not in ("FT", "AET", "PEN"):
+            continue
+
+        # Get participants (home/away teams)
+        participants = fix.get("participants", [])
+        if len(participants) < 2:
+            continue
+
+        home_team = None
+        away_team = None
+        for p in participants:
+            meta = p.get("meta", {})
+            location = meta.get("location", "")
+            name = p.get("name", "")
+            if location == "home":
+                home_team = SPORTMONKS_TEAM_MAP.get(name, name)
+            elif location == "away":
+                away_team = SPORTMONKS_TEAM_MAP.get(name, name)
+
+        if not home_team or not away_team:
+            continue
+
+        # Get scores
+        scores = fix.get("scores", [])
+        home_score = None
+        away_score = None
+
+        # Try to get scores from the scores include
+        for sc in scores if isinstance(scores, list) else []:
+            desc = sc.get("description", "")
+            score_info = sc.get("score", {})
+            if desc in ("CURRENT", "2ND_HALF"):
+                participant_id = score_info.get("participant_id") or sc.get("participant_id")
+                goals = score_info.get("goals", sc.get("goals"))
+                if goals is not None:
+                    # Match participant to home/away
+                    for p in participants:
+                        if p.get("id") == participant_id:
+                            loc = p.get("meta", {}).get("location", "")
+                            if loc == "home":
+                                home_score = int(goals)
+                            elif loc == "away":
+                                away_score = int(goals)
+
+        # Fallback: try result_info or name parsing
+        if home_score is None or away_score is None:
+            result_info = fix.get("result_info", "") or ""
+            name = fix.get("name", "")
+            # Try parsing "Team1 vs Team2" with scores from result
+            # Skip if we can't determine scores
+            continue
+
+        # Determine venue neutrality from league type
+        league_id = fix.get("league_id", 0)
+        # Major tournaments are neutral, qualifiers/NL are not
+        is_neutral = league_id in (732,)  # World Cup
+        if league_id in (2,):  # Euro - group/knockout stages are neutral
+            is_neutral = True
+
+        date_str = (fix.get("starting_at", "") or "")[:10]
+        if not date_str:
+            continue
+
+        matches.append({
+            "date": date_str,
+            "home_team": home_team,
+            "away_team": away_team,
+            "home_score": home_score,
+            "away_score": away_score,
+            "tournament": fix.get("league", {}).get("name", "Unknown") if isinstance(fix.get("league"), dict) else "Unknown",
+            "neutral_venue": is_neutral,
+        })
+
+    return matches
+
+
+def fetch_sportmonks_wc2026_live() -> list:
+    """Fetch live/completed WC2026 fixtures from SportMonks.
+    Returns parsed match data for the current World Cup."""
+    cache_file = RAW_DIR / "sportmonks_wc2026_live.json"
+
+    # Short cache: 5 minutes for live data
+    if cache_file.exists():
+        age_minutes = (time.time() - cache_file.stat().st_mtime) / 60
+        if age_minutes < 5:
+            with open(cache_file) as f:
+                return json.load(f)
+
+    print("  Fetching live WC2026 results from SportMonks...")
+    try:
+        fixtures = sportmonks_fetch_all_pages(
+            "fixtures",
+            {"filters": "fixtureLeagues:732",
+             "include": "participants;scores;state"}
+        )
+        # Filter to 2026 fixtures only
+        wc2026 = [f for f in fixtures if (f.get("starting_at", "") or "").startswith("2026")]
+        with open(cache_file, "w") as f:
+            json.dump(wc2026, f)
+        return wc2026
+    except Exception as e:
+        print(f"  ERROR fetching live WC2026 from SportMonks: {e}")
+        if cache_file.exists():
+            with open(cache_file) as f:
+                return json.load(f)
+        return []
+
+
 # ---- Open international results (CSV from GitHub) ----
 
 OPEN_RESULTS_URL = "https://raw.githubusercontent.com/martj42/international_results/master/results.csv"
@@ -566,9 +829,28 @@ def main():
     else:
         print("\nNo FOOTBALLDATA_KEY — skipping football-data.org")
 
-    # ---- Source 3: Open international results (always available, no key) ----
+    # ---- Source 3: SportMonks (requires SPORTMONKS_KEY) ----
+    if SPORTMONKS_KEY:
+        print("\n" + "=" * 50)
+        print("SOURCE 3: SPORTMONKS")
+        print("=" * 50)
+
+        sm_count = 0
+        for league_id, season_name, desc in SPORTMONKS_COMPETITIONS:
+            raw = fetch_sportmonks_fixtures(league_id, season_name, desc)
+            parsed = parse_sportmonks_fixtures(raw)
+            all_matches.extend(parsed)
+            sm_count += len(parsed)
+            print(f"  {desc}: {len(parsed)} matches")
+
+        print(f"  SportMonks total: {sm_count} matches")
+        sources_used.append(f"SportMonks ({sm_count} matches)")
+    else:
+        print("\nNo SPORTMONKS_KEY — skipping SportMonks")
+
+    # ---- Source 4: Open international results (always available, no key) ----
     print("\n" + "=" * 50)
-    print("SOURCE 3: OPEN INTERNATIONAL RESULTS")
+    print("SOURCE 4: OPEN INTERNATIONAL RESULTS")
     print("=" * 50)
 
     open_matches = fetch_open_results()

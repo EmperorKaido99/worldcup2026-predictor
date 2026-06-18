@@ -12,7 +12,8 @@ import {
   computeStandings,
   estimateGoals,
 } from "@/lib/wc2026";
-import { predictMatch } from "@/lib/api";
+import { predictMatch, getWc2026LiveResults } from "@/lib/api";
+import type { LiveMatchResult } from "@/components/GroupCard";
 
 const STORAGE_KEY = "wc2026-tournament-state";
 
@@ -54,6 +55,7 @@ export default function TournamentPage() {
   const [matchResults, setMatchResults] = useState<Record<string, Record<string, MatchResult>>>({});
   const [simulatingAll, setSimulatingAll] = useState(false);
   const [simulationProgress, setSimulationProgress] = useState(0);
+  const [liveResults, setLiveResults] = useState<Record<string, Record<string, LiveMatchResult>>>({});
 
   // Load saved state on mount
   useEffect(() => {
@@ -63,6 +65,54 @@ export default function TournamentPage() {
       setBracket(saved.bracket);
       if (saved.matchResults) setMatchResults(saved.matchResults);
     }
+  }, []);
+
+  // Fetch live WC2026 results on mount
+  useEffect(() => {
+    async function fetchLive() {
+      try {
+        const data = await getWc2026LiveResults();
+        if (data.matches && data.matches.length > 0) {
+          // Organize by group
+          const byGroup: Record<string, Record<string, LiveMatchResult>> = {};
+          for (const m of data.matches) {
+            // Find which group this match belongs to
+            for (const group of GROUPS) {
+              const teamIds = group.teams.map((t) => t.id);
+              if (teamIds.includes(m.home_id) && teamIds.includes(m.away_id)) {
+                if (!byGroup[group.name]) byGroup[group.name] = {};
+                const key = `${m.home_id}-${m.away_id}`;
+                byGroup[group.name][key] = {
+                  homeGoals: m.home_score,
+                  awayGoals: m.away_score,
+                };
+                break;
+              }
+            }
+          }
+          setLiveResults(byGroup);
+
+          // Auto-compute standings from live results
+          const liveStandings: Record<string, GroupStanding[]> = {};
+          for (const group of GROUPS) {
+            const groupLive = byGroup[group.name];
+            if (groupLive && Object.keys(groupLive).length > 0) {
+              const goalResults: Record<string, { homeGoals: number; awayGoals: number }> = {};
+              for (const [key, val] of Object.entries(groupLive)) {
+                goalResults[key] = { homeGoals: val.homeGoals, awayGoals: val.awayGoals };
+              }
+              liveStandings[group.name] = computeStandings(group, goalResults);
+            }
+          }
+          if (Object.keys(liveStandings).length > 0) {
+            setStandings((prev) => ({ ...liveStandings, ...prev }));
+          }
+        }
+      } catch {
+        // Silently fail — live results are optional
+      }
+    }
+    fetchLive();
   }, []);
 
   // Save state on change
@@ -190,6 +240,7 @@ export default function TournamentPage() {
         <GroupStage
           standings={standings}
           matchResults={matchResults}
+          liveResults={liveResults}
           onStandingsUpdate={handleStandingsUpdate}
           onMatchResultsUpdate={handleMatchResultsUpdate}
           onSimulateAll={handleSimulateAll}
