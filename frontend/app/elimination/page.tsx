@@ -8,6 +8,12 @@ const RISK_CONFIG: Record<
   string,
   { label: string; color: string; bg: string; border: string }
 > = {
+  qualified: {
+    label: "Qualified",
+    color: "text-emerald-300",
+    bg: "bg-emerald-950/40",
+    border: "border-emerald-700/50",
+  },
   eliminated: {
     label: "Eliminated",
     color: "text-red-400",
@@ -319,7 +325,7 @@ export default function EliminationPage() {
                       const config =
                         RISK_CONFIG[team.risk] || RISK_CONFIG.not_started;
                       const rowColor =
-                        team.risk === "safe" || team.risk === "likely_safe"
+                        team.risk === "safe" || team.risk === "likely_safe" || team.risk === "qualified"
                           ? "bg-emerald-950/20 border-l-2 border-l-emerald-500"
                           : team.risk === "eliminated" || team.risk === "critical"
                             ? "bg-red-950/10 border-l-2 border-l-red-500"

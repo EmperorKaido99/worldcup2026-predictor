@@ -127,6 +127,41 @@ HOST_NATIONS = {"USA", "Canada", "Mexico"}
 _wc2026_live_cache = None
 _wc2026_live_cache_time = 0
 
+# Seed data: WC2026 results from before the API's rolling date window.
+# These are real results that the free-tier API can no longer serve.
+WC2026_SEED_RESULTS = [
+    # June 11
+    {"date": "2026-06-11", "home_team": "Mexico", "away_team": "South Africa", "home_score": 2, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-11", "home_team": "South Korea", "away_team": "Czech Republic", "home_score": 2, "away_score": 1, "tournament": "World Cup 2026"},
+    # June 12
+    {"date": "2026-06-12", "home_team": "USA", "away_team": "Paraguay", "home_score": 4, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-12", "home_team": "Canada", "away_team": "Bosnia", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
+    # June 13
+    {"date": "2026-06-13", "home_team": "Australia", "away_team": "Turkey", "home_score": 2, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-13", "home_team": "Brazil", "away_team": "Morocco", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-13", "home_team": "Scotland", "away_team": "Haiti", "home_score": 1, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-13", "home_team": "Switzerland", "away_team": "Qatar", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
+    # June 14
+    {"date": "2026-06-14", "home_team": "Germany", "away_team": "Curaçao", "home_score": 7, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-14", "home_team": "Ivory Coast", "away_team": "Ecuador", "home_score": 1, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-14", "home_team": "Netherlands", "away_team": "Japan", "home_score": 2, "away_score": 2, "tournament": "World Cup 2026"},
+    {"date": "2026-06-14", "home_team": "Sweden", "away_team": "Tunisia", "home_score": 5, "away_score": 1, "tournament": "World Cup 2026"},
+    # June 15
+    {"date": "2026-06-15", "home_team": "Belgium", "away_team": "Egypt", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-15", "home_team": "Iran", "away_team": "New Zealand", "home_score": 2, "away_score": 2, "tournament": "World Cup 2026"},
+    {"date": "2026-06-15", "home_team": "Spain", "away_team": "Cape Verde", "home_score": 0, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-15", "home_team": "Saudi Arabia", "away_team": "Uruguay", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
+    # June 16
+    {"date": "2026-06-16", "home_team": "France", "away_team": "Senegal", "home_score": 3, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-16", "home_team": "Argentina", "away_team": "Algeria", "home_score": 3, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-16", "home_team": "Norway", "away_team": "Iraq", "home_score": 4, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-16", "home_team": "Austria", "away_team": "Jordan", "home_score": 3, "away_score": 1, "tournament": "World Cup 2026"},
+    # June 17
+    {"date": "2026-06-17", "home_team": "Portugal", "away_team": "DR Congo", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-17", "home_team": "England", "away_team": "Croatia", "home_score": 4, "away_score": 2, "tournament": "World Cup 2026"},
+    {"date": "2026-06-17", "home_team": "Ghana", "away_team": "Panama", "home_score": 1, "away_score": 0, "tournament": "World Cup 2026"},
+]
+
 
 class PredictMatchRequest(BaseModel):
     home: str
@@ -295,8 +330,13 @@ def predict_match(req: PredictMatchRequest):
 
 def _fetch_wc2026_live_results() -> list:
     """Fetch completed WC2026 match results from all available APIs.
-    Results are cached for 5 minutes."""
+    Uses date-based fetching (works on free tier) + persistent cache file
+    so results accumulate even beyond the API's rolling date window.
+    In-memory cache refreshes every 5 minutes."""
     import time as _time
+    import json as _json
+    import requests as _requests
+    from datetime import datetime, timedelta
     global _wc2026_live_cache, _wc2026_live_cache_time
 
     now = _time.time()
@@ -304,40 +344,103 @@ def _fetch_wc2026_live_results() -> list:
         return _wc2026_live_cache
 
     from src.ingest import (
-        API_KEY, SPORTMONKS_KEY,
-        normalize_team_name, TEAM_IDS,
+        API_KEY, normalize_team_name, TEAM_IDS,
     )
 
-    completed = []
+    # Load persistent cache of all WC2026 results we've seen
+    cache_file = Path(__file__).parent / "data" / "raw" / "wc2026_live_results.json"
+    cache_file.parent.mkdir(parents=True, exist_ok=True)
+    cached_matches = []
+    if cache_file.exists():
+        try:
+            with open(cache_file) as f:
+                cached_matches = _json.load(f)
+        except Exception:
+            cached_matches = []
+
+    # Merge seed results (matches from before API window)
     seen = set()
+    for m in cached_matches:
+        seen.add((m["date"], m["home_team"], m["away_team"]))
+    for m in WC2026_SEED_RESULTS:
+        key = (m["date"], m["home_team"], m["away_team"])
+        if key not in seen:
+            seen.add(key)
+            cached_matches.append(dict(m))
 
-    # Source 1: API-Football — WC2026 fixtures (league_id=1, season=2026)
+    new_matches_found = False
+
+    # API-Football: fetch by date (free plan gives ~3-day rolling window)
     if API_KEY:
-        try:
-            from src.ingest import fetch_fixtures, parse_fixtures
-            fixtures = fetch_fixtures(1, 2026, "World Cup 2026 (live)")
-            parsed = parse_fixtures(fixtures)
-            for m in parsed:
-                key = (m["date"], m["home_team"], m["away_team"])
-                if key not in seen:
-                    seen.add(key)
-                    completed.append(m)
-        except Exception as e:
-            print(f"  Live WC2026 API-Football error: {e}")
+        today = datetime.utcnow().date()
+        # Check today and previous 2 days (the rolling window)
+        dates_to_check = [today - timedelta(days=i) for i in range(3)]
+        for check_date in dates_to_check:
+            date_str = check_date.strftime("%Y-%m-%d")
+            try:
+                resp = _requests.get(
+                    "https://v3.football.api-sports.io/fixtures",
+                    headers={"x-apisports-key": API_KEY},
+                    params={"date": date_str},
+                    timeout=30,
+                )
+                resp.raise_for_status()
+                data = resp.json()
+                if data.get("errors"):
+                    print(f"  API-Football date {date_str}: {data['errors']}")
+                    continue
 
-    # Source 2: SportMonks — WC2026 fixtures
-    if SPORTMONKS_KEY:
+                for fix in data.get("response", []):
+                    league = fix.get("league", {})
+                    # Only World Cup matches (league_id=1)
+                    if league.get("id") != 1:
+                        continue
+
+                    fixture = fix.get("fixture", {})
+                    status = fixture.get("status", {}).get("short", "")
+                    if status not in ("FT", "AET", "PEN"):
+                        continue
+
+                    teams = fix.get("teams", {})
+                    goals = fix.get("goals", {})
+                    home_name = normalize_team_name(
+                        teams.get("home", {}).get("name", "")
+                    )
+                    away_name = normalize_team_name(
+                        teams.get("away", {}).get("name", "")
+                    )
+                    home_score = goals.get("home")
+                    away_score = goals.get("away")
+                    if home_score is None or away_score is None:
+                        continue
+
+                    match_date = fixture.get("date", "")[:10]
+                    key = (match_date, home_name, away_name)
+                    if key not in seen:
+                        seen.add(key)
+                        cached_matches.append({
+                            "date": match_date,
+                            "home_team": home_name,
+                            "away_team": away_name,
+                            "home_score": int(home_score),
+                            "away_score": int(away_score),
+                            "tournament": "World Cup 2026",
+                        })
+                        new_matches_found = True
+                        print(f"  New WC2026 result: {home_name} {home_score}-{away_score} {away_name}")
+
+                _time.sleep(6.5)  # Rate limit
+            except Exception as e:
+                print(f"  API-Football date {date_str} error: {e}")
+
+    # Save updated cache if new matches found
+    if new_matches_found:
         try:
-            from src.ingest import fetch_sportmonks_wc2026_live, parse_sportmonks_fixtures
-            raw = fetch_sportmonks_wc2026_live()
-            parsed = parse_sportmonks_fixtures(raw)
-            for m in parsed:
-                key = (m["date"], m["home_team"], m["away_team"])
-                if key not in seen:
-                    seen.add(key)
-                    completed.append(m)
+            with open(cache_file, "w") as f:
+                _json.dump(cached_matches, f)
+            print(f"  Saved {len(cached_matches)} total WC2026 results to cache")
         except Exception as e:
-            print(f"  Live WC2026 SportMonks error: {e}")
+            print(f"  Error saving WC2026 cache: {e}")
 
     # Map team names to IDs
     name_to_id = {}
@@ -345,7 +448,7 @@ def _fetch_wc2026_live_results() -> list:
         name_to_id[name] = tid
 
     results = []
-    for m in completed:
+    for m in cached_matches:
         home_id = name_to_id.get(m["home_team"], m["home_team"][:3].upper())
         away_id = name_to_id.get(m["away_team"], m["away_team"][:3].upper())
         results.append({
@@ -449,12 +552,15 @@ def get_elimination_risk():
         )
 
         # Calculate elimination risk
+        # In WC2026: top 2 qualify, best 8 of 12 third-place teams also qualify
+        # So 3rd place still has a realistic path (8/12 = 67% chance)
         max_remaining_points = lambda played: (3 - played) * 3
+        # Second-place team's current points (to check if 3rd/4th can overtake)
+        second_place_pts = sorted_standings[1]["points"] if len(sorted_standings) > 1 else 0
+
         for i, team in enumerate(sorted_standings):
             remaining = max_remaining_points(team["played"])
             max_possible = team["points"] + remaining
-            # Check if leader's current points are unreachable
-            leader_points = sorted_standings[0]["points"] if sorted_standings else 0
 
             # Risk levels
             if team["played"] == 0:
@@ -462,20 +568,36 @@ def get_elimination_risk():
                 risk_pct = 0
             elif remaining == 0:
                 # All games played — position is final
-                risk = "safe" if i < 2 else ("contention" if i == 2 else "eliminated")
-                risk_pct = 0 if i < 2 else (50 if i == 2 else 100)
-            elif max_possible < leader_points and i >= 2:
-                risk = "eliminated"
-                risk_pct = 100
+                if i < 2:
+                    risk = "safe"
+                    risk_pct = 0
+                elif i == 2:
+                    # 3rd place: 8/12 best third-place teams qualify
+                    risk = "contention" if team["points"] >= 3 else "at_risk"
+                    risk_pct = 30 if team["points"] >= 3 else 60
+                else:
+                    risk = "eliminated"
+                    risk_pct = 100
+            elif max_possible < second_place_pts and i >= 3:
+                # Can't even reach 2nd place — likely out (but 3rd still possible)
+                if max_possible < sorted_standings[2]["points"] if len(sorted_standings) > 2 else 0:
+                    risk = "eliminated"
+                    risk_pct = 95
+                else:
+                    risk = "critical"
+                    risk_pct = 85
             elif team["points"] == 0 and team["played"] >= 2:
                 risk = "critical"
                 risk_pct = 90
             elif team["points"] == 0 and team["played"] == 1:
                 risk = "high"
-                risk_pct = 65
+                risk_pct = 60
             elif team["played"] >= 2 and team["points"] <= 1 and i >= 2:
                 risk = "high"
                 risk_pct = 70
+            elif i < 2 and team["points"] >= 6:
+                risk = "qualified"
+                risk_pct = 0
             elif i < 2 and team["points"] >= 4:
                 risk = "safe"
                 risk_pct = 5
@@ -484,7 +606,7 @@ def get_elimination_risk():
                 risk_pct = 15
             elif i == 2:
                 risk = "contention"
-                risk_pct = 50
+                risk_pct = 40
             else:
                 risk = "at_risk"
                 risk_pct = 40 + (i * 10)

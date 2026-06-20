@@ -42,6 +42,7 @@ TEAM_NAME_MAP = {
     "Czechia": "Czech Republic", "Czech Republic": "Czech Republic",
     "Türkiye": "Turkey", "Turkey": "Turkey",
     "Bosnia and Herzegovina": "Bosnia",
+    "Bosnia & Herzegovina": "Bosnia",
     "North Macedonia": "North Macedonia",
     "Trinidad And Tobago": "Trinidad and Tobago",
     "Curacao": "Curaçao", "Curaçao": "Curaçao",
