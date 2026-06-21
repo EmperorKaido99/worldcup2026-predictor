@@ -144,26 +144,46 @@ export default function TournamentPage() {
     const newMatchResults: Record<string, Record<string, MatchResult>> = {};
     let progress = 0;
 
+    // Count only simulatable matches for progress bar
+    const totalSimulatable = GROUPS.reduce((acc, group) => {
+      const groupLive = liveResults[group.name] || {};
+      const matches = getGroupMatches(group);
+      return acc + matches.filter((m) => !groupLive[`${m.home.id}-${m.away.id}`]).length;
+    }, 0);
+
     for (const group of GROUPS) {
       const matches = getGroupMatches(group);
+      const groupLive = liveResults[group.name] || {};
       const results: Record<string, { homeGoals: number; awayGoals: number }> = {};
       const groupResults: Record<string, MatchResult> = {};
 
-      const predictions = await Promise.all(
-        matches.map((m) =>
-          predictMatch({ home: m.home.id, away: m.away.id, neutral: true })
-        )
+      // Include live results in standings
+      for (const [key, val] of Object.entries(groupLive)) {
+        results[key] = { homeGoals: val.homeGoals, awayGoals: val.awayGoals };
+      }
+
+      // Only simulate matches that haven't been played
+      const unplayedMatches = matches.filter(
+        (m) => !groupLive[`${m.home.id}-${m.away.id}`]
       );
 
-      predictions.forEach((pred, i) => {
-        const match = matches[i];
-        const goals = estimateGoals(pred.probabilities, pred.expected_goals);
-        const key = `${match.home.id}-${match.away.id}`;
-        results[key] = goals;
-        groupResults[key] = { ...goals, probs: pred.probabilities };
-        progress++;
-        setSimulationProgress(progress);
-      });
+      if (unplayedMatches.length > 0) {
+        const predictions = await Promise.all(
+          unplayedMatches.map((m) =>
+            predictMatch({ home: m.home.id, away: m.away.id, neutral: true })
+          )
+        );
+
+        predictions.forEach((pred, i) => {
+          const match = unplayedMatches[i];
+          const goals = estimateGoals(pred.probabilities, pred.expected_goals);
+          const key = `${match.home.id}-${match.away.id}`;
+          results[key] = goals;
+          groupResults[key] = { ...goals, probs: pred.probabilities };
+          progress++;
+          setSimulationProgress(progress);
+        });
+      }
 
       newStandings[group.name] = computeStandings(group, results);
       newMatchResults[group.name] = groupResults;
@@ -172,7 +192,7 @@ export default function TournamentPage() {
     setStandings(newStandings);
     setMatchResults(newMatchResults);
     setSimulatingAll(false);
-  }, []);
+  }, [liveResults]);
 
   const handleBracketUpdate = useCallback((updated: BracketMatch[]) => {
     setBracket(updated);

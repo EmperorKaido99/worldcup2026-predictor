@@ -33,11 +33,22 @@ export default function GroupStage({
   const completedGroups = Object.keys(standings).length;
   const allGroupsSimulated = completedGroups === 12;
 
+  // Count live matches across all groups
+  const totalLiveMatches = Object.values(liveResults).reduce(
+    (acc, group) => acc + Object.keys(group).length, 0
+  );
+  const totalSimulatable = 72 - totalLiveMatches;
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="text-sm text-zinc-400">
           <span className="font-bold text-white">{completedGroups}</span>/12 groups completed
+          {totalLiveMatches > 0 && (
+            <span className="ml-2 text-zinc-500">
+              ({totalLiveMatches} matches played)
+            </span>
+          )}
         </div>
         <button
           onClick={onSimulateAll}
@@ -45,10 +56,12 @@ export default function GroupStage({
           className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-600/20 hover:shadow-emerald-500/30"
         >
           {simulatingAll
-            ? `Simulating... ${simulationProgress}/72`
+            ? `Simulating... ${simulationProgress}/${totalSimulatable}`
             : allGroupsSimulated
-              ? "Re-simulate All"
-              : "Simulate All Groups"}
+              ? "Re-simulate Remaining"
+              : totalLiveMatches > 0
+                ? "Simulate Remaining"
+                : "Simulate All Groups"}
         </button>
       </div>
 
@@ -56,7 +69,7 @@ export default function GroupStage({
         <div className="w-full bg-zinc-800 rounded-full h-2 overflow-hidden">
           <div
             className="bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${(simulationProgress / 72) * 100}%` }}
+            style={{ width: `${totalSimulatable > 0 ? (simulationProgress / totalSimulatable) * 100 : 100}%` }}
           />
         </div>
       )}

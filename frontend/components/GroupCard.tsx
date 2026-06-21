@@ -48,9 +48,18 @@ export default function GroupCard({
   } | null>(null);
 
   const matches = getGroupMatches(group);
+  const liveCount = Object.keys(liveResults).length;
+  const simulatableMatches = matches.filter(
+    (m) => !liveResults[`${m.home.id}-${m.away.id}`]
+  );
 
   function recomputeStandings(results: Record<string, MatchResult>) {
     const goalResults: Record<string, { homeGoals: number; awayGoals: number }> = {};
+    // Include live results first
+    for (const [key, val] of Object.entries(liveResults)) {
+      goalResults[key] = { homeGoals: val.homeGoals, awayGoals: val.awayGoals };
+    }
+    // Then add simulated results
     for (const [key, val] of Object.entries(results)) {
       goalResults[key] = { homeGoals: val.homeGoals, awayGoals: val.awayGoals };
     }
@@ -79,7 +88,8 @@ export default function GroupCard({
     setSimulating(true);
     try {
       const newResults: Record<string, MatchResult> = {};
-      for (const match of matches) {
+      // Only simulate matches that haven't been played yet
+      for (const match of simulatableMatches) {
         const key = `${match.home.id}-${match.away.id}`;
         const pred = await predictMatch({
           home: match.home.id,
@@ -91,7 +101,11 @@ export default function GroupCard({
       }
       onMatchResultsUpdate(group.name, newResults);
 
+      // Combine live + simulated for standings
       const goalResults: Record<string, { homeGoals: number; awayGoals: number }> = {};
+      for (const [key, val] of Object.entries(liveResults)) {
+        goalResults[key] = { homeGoals: val.homeGoals, awayGoals: val.awayGoals };
+      }
       for (const [key, val] of Object.entries(newResults)) {
         goalResults[key] = { homeGoals: val.homeGoals, awayGoals: val.awayGoals };
       }
@@ -105,7 +119,8 @@ export default function GroupCard({
   }
 
   const simulatedCount = Object.keys(matchResults).length;
-  const allSimulated = simulatedCount === matches.length;
+  const allSimulated = simulatedCount >= simulatableMatches.length;
+  const allDone = liveCount === matches.length; // All 6 matches played live
 
   return (
     <div className="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden">
@@ -115,25 +130,38 @@ export default function GroupCard({
           Group <span className="text-emerald-400">{group.name}</span>
         </h3>
         <div className="flex items-center gap-2">
-          {simulatedCount > 0 && !allSimulated && (
+          {liveCount > 0 && (
+            <span className="text-[10px] text-zinc-500">
+              {liveCount} played{simulatableMatches.length > 0 && simulatedCount > 0 ? ` · ${simulatedCount}/${simulatableMatches.length} sim` : ""}
+            </span>
+          )}
+          {!liveCount && simulatedCount > 0 && !allSimulated && (
             <span className="text-[10px] text-zinc-500">{simulatedCount}/6</span>
           )}
-          <button
-            onClick={simulateAll}
-            disabled={simulating}
-            className="text-xs px-3 py-1.5 rounded-lg bg-emerald-600/20 border border-emerald-600/40 hover:bg-emerald-600/30 text-emerald-400 hover:text-emerald-300 transition-all disabled:opacity-50"
-          >
-            {simulating ? (
-              <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin" />
-                Simulating...
-              </span>
-            ) : allSimulated ? (
-              "Re-simulate"
-            ) : (
-              "Simulate All"
-            )}
-          </button>
+          {allDone ? (
+            <span className="text-xs px-3 py-1.5 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-500">
+              All Played
+            </span>
+          ) : (
+            <button
+              onClick={simulateAll}
+              disabled={simulating}
+              className="text-xs px-3 py-1.5 rounded-lg bg-emerald-600/20 border border-emerald-600/40 hover:bg-emerald-600/30 text-emerald-400 hover:text-emerald-300 transition-all disabled:opacity-50"
+            >
+              {simulating ? (
+                <span className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin" />
+                  Simulating...
+                </span>
+              ) : allSimulated ? (
+                "Re-simulate"
+              ) : simulatableMatches.length < matches.length ? (
+                `Simulate Remaining`
+              ) : (
+                "Simulate All"
+              )}
+            </button>
+          )}
         </div>
       </div>
 
