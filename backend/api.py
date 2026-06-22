@@ -160,6 +160,11 @@ WC2026_SEED_RESULTS = [
     {"date": "2026-06-17", "home_team": "Portugal", "away_team": "DR Congo", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
     {"date": "2026-06-17", "home_team": "England", "away_team": "Croatia", "home_score": 4, "away_score": 2, "tournament": "World Cup 2026"},
     {"date": "2026-06-17", "home_team": "Ghana", "away_team": "Panama", "home_score": 1, "away_score": 0, "tournament": "World Cup 2026"},
+    # June 18
+    {"date": "2026-06-18", "home_team": "Czech Republic", "away_team": "South Africa", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-18", "home_team": "Switzerland", "away_team": "Bosnia", "home_score": 4, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-18", "home_team": "Canada", "away_team": "Qatar", "home_score": 6, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-18", "home_team": "Uzbekistan", "away_team": "Colombia", "home_score": 1, "away_score": 3, "tournament": "World Cup 2026"},
     # June 19
     {"date": "2026-06-19", "home_team": "Mexico", "away_team": "South Korea", "home_score": 1, "away_score": 0, "tournament": "World Cup 2026"},
     {"date": "2026-06-19", "home_team": "USA", "away_team": "Australia", "home_score": 2, "away_score": 0, "tournament": "World Cup 2026"},
