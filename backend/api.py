@@ -160,6 +160,22 @@ WC2026_SEED_RESULTS = [
     {"date": "2026-06-17", "home_team": "Portugal", "away_team": "DR Congo", "home_score": 1, "away_score": 1, "tournament": "World Cup 2026"},
     {"date": "2026-06-17", "home_team": "England", "away_team": "Croatia", "home_score": 4, "away_score": 2, "tournament": "World Cup 2026"},
     {"date": "2026-06-17", "home_team": "Ghana", "away_team": "Panama", "home_score": 1, "away_score": 0, "tournament": "World Cup 2026"},
+    # June 19
+    {"date": "2026-06-19", "home_team": "Mexico", "away_team": "South Korea", "home_score": 1, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-19", "home_team": "USA", "away_team": "Australia", "home_score": 2, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-19", "home_team": "Scotland", "away_team": "Morocco", "home_score": 0, "away_score": 1, "tournament": "World Cup 2026"},
+    # June 20
+    {"date": "2026-06-20", "home_team": "Brazil", "away_team": "Haiti", "home_score": 3, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-20", "home_team": "Turkey", "away_team": "Paraguay", "home_score": 0, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-20", "home_team": "Netherlands", "away_team": "Sweden", "home_score": 5, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-20", "home_team": "Germany", "away_team": "Ivory Coast", "home_score": 2, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-20", "home_team": "Ecuador", "away_team": "Curaçao", "home_score": 0, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-20", "home_team": "Japan", "away_team": "Tunisia", "home_score": 4, "away_score": 0, "tournament": "World Cup 2026"},
+    # June 21
+    {"date": "2026-06-21", "home_team": "Belgium", "away_team": "Iran", "home_score": 0, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-21", "home_team": "Egypt", "away_team": "New Zealand", "home_score": 3, "away_score": 1, "tournament": "World Cup 2026"},
+    {"date": "2026-06-21", "home_team": "Spain", "away_team": "Saudi Arabia", "home_score": 4, "away_score": 0, "tournament": "World Cup 2026"},
+    {"date": "2026-06-21", "home_team": "Uruguay", "away_team": "Cape Verde", "home_score": 2, "away_score": 2, "tournament": "World Cup 2026"},
 ]
 
 
