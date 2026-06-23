@@ -20,7 +20,7 @@ load_dotenv()
 app = FastAPI(title="World Cup 2026 Predictor API", version="1.0.0")
 
 # CORS
-cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,https://frontend-lake-pi-60.vercel.app").split(",")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
